@@ -5,6 +5,7 @@ public class Opponent {
     private int atk;
     private int def;
     private int spd;
+    private float atkMult;
 
     public Opponent(String name, int hp, int atk, int def, int spd) {
         this.name = name;
@@ -34,6 +35,10 @@ public class Opponent {
         return this.spd;
     }
 
+    public float getAtkMult() {
+        return this.atkMult;
+    }
+
 
 
     public void setHp(int hp) {
@@ -50,6 +55,10 @@ public class Opponent {
 
     public void setSpd(int spd) {
         this.spd = spd;
+    }
+
+    public void setAtkMult(float atkMult) {
+        this.atkMult = atkMult;
     }
 
 
@@ -75,14 +84,14 @@ public class Opponent {
 
 
     public void attack(Player player) {
-        
+        player.loseHp((int)(atk * atkMult - player.getDef()));
     }
 
-    public void defend() {
-
+    public void defend(Player player) {
+        player.setAtkMult(0.5f);
     }
 
     public void charge() {
-        
+        atk *= 3;
     }        
 }
