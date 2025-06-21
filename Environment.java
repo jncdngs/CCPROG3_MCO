@@ -4,14 +4,14 @@ public class Environment {
     private int playerAtk;
     private int playerDmg;
     private int oppAtk;
-    private int oppDmg;
+    private int oppDef;
 
-    public Environment(String name, int playerAtk, int playerDmg, int oppAtk, int oppDmg) {
+    public Environment(String name, int playerAtk, int playerDmg, int oppAtk, int oppDef) {
         this.name = name;
         this.playerAtk = playerAtk;
         this.playerDmg = playerDmg;
         this.oppAtk = oppAtk;
-        this.oppDmg = oppDmg;
+        this.oppDef = oppDef;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class Environment {
         return this.oppAtk;
     }
 
-    public int getOppDmg() {
-        return this.oppDmg;
+    public int getOppDef() {
+        return this.oppDef;
     }
-    
+
 }
