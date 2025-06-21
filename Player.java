@@ -1,4 +1,4 @@
-public class Warrior {
+public class Player {
     
     private String name;
     private Armor armor;
@@ -8,7 +8,7 @@ public class Warrior {
     private int def;
     private int spd;
 
-    public Warrior(String name, int hp, int atk, int def, int spd) {
+    public Player(String name, int hp, int atk, int def, int spd) {
         this.name = name;
         this.hp = hp;
         this.atk = atk;
@@ -81,7 +81,7 @@ public class Warrior {
     }
 
     public void charge() {
-        
+
     }
 
 

@@ -54,7 +54,7 @@ public class Opponent {
 
 
 
-    public void attack(Warrior player) {
+    public void attack(Player player) {
         
     }
 
