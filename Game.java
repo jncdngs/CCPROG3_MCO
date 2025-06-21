@@ -1,24 +1,12 @@
-public class Game {
+import java.util.Scanner;
 
-    private String playerName;
-    private int armorOpt;
-    private int weaponOpt;
-    private int envOpt;
-    private int oppOpt;
+public class Game {
 
     private Player player;
     private Armor armor;
     private Weapon weapon;
     private Environment env;
     private Opponent opp;
-
-    // public Game(String playerName, int armorOpt, int weaponOpt, int envOpt, int oppOpt) {
-    //     this.playerName = playerName;
-    //     this.armorOpt = armorOpt;
-    //     this.weaponOpt = weaponOpt;
-    //     this.envOpt = envOpt;
-    //     this.oppOpt = oppOpt;
-    // }
 
     // public Player getPlayer() {
     //     return this.player;
@@ -39,8 +27,6 @@ public class Game {
     // public Opponent getOpp() {
     //     return this.opp;
     // }
-
-
     
     public void displayPlayerStats() {
         System.out.println("\nPlayer");
@@ -62,7 +48,76 @@ public class Game {
         System.out.println("Speed:   " + opp.getSpd());
     }
 
-    public void setup(String playerName, int armorOpt, int weaponOpt, int envOpt, int oppOpt) {
+    public boolean isGameOver() {
+        if(player.getHp() == 0 || opp.getHp() == 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void applyEnvEffects(Environment env) {
+        player.loseHp(env.getPlayerDmg());
+        player.gainAtk(env.getPlayerAtk());
+        opp.gainAtk(env.getOppAtk());
+        opp.loseDef(env.getOppDef());
+    }   
+
+    public void setup() {
+        String playerName;
+        int armorOpt;
+        int weaponOpt;
+        int envOpt;
+        int oppOpt;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.printf("\033[H\033[J\033[3J");
+        System.out.print("Enter name of player: ");
+        playerName = sc.nextLine();
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            System.out.println("\nName\t\t\tDefense\t\tSpeed");
+            System.out.println("[1] Light Armor\t\t+20\t\t-5");
+            System.out.println("[2] Medium Armor\t+30\t\t-15");
+            System.out.println("[3] Heavy Armor\t\t+40\t\t-25\n");
+            System.out.print("Choose an armor: ");
+            armorOpt = sc.nextInt();
+        }
+        while(armorOpt < 1 || armorOpt > 3);
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            System.out.println("\nName\t\t\tDefense\t\tSpeed");
+            System.out.println("[1] Dagger\t\t+20\t\t0");
+            System.out.println("[2] Sword\t\t+30\t\t-10");
+            System.out.println("[3] Battle Axe\t\t+40\t\t-20\n");
+            System.out.print("Choose a weapon: ");
+            weaponOpt = sc.nextInt();
+        }
+        while(weaponOpt < 1 || weaponOpt > 3);
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            System.out.println("\nName\t\t\tPlayer\t\tOpponent");
+            System.out.println("[1] Arena\t\tNone\t\tNone");
+            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
+            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
+            System.out.print("Choose an environment: ");
+            envOpt = sc.nextInt();
+        }
+        while(envOpt < 1 || envOpt > 3);
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            System.out.println("\nName\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
+            System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
+            System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
+            System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
+            System.out.print("Choose an opponent: ");
+            oppOpt = sc.nextInt();
+        }
+        while(oppOpt < 1 || oppOpt > 3);
+        
         player = new Player(playerName, 100, 1, 1, 50);
 
         switch(armorOpt) {
@@ -128,16 +183,9 @@ public class Game {
         displayOppStats();
     }
 
-    // private Armor light = new Armor("Light", 20, 5);
-    // private Armor medium = new Armor("Medium", 30, 15);
-    // private Armor heavy = new Armor("Heavy", 40, 25);
-    
-    // private Weapon dagger = new Weapon("Dagger", 20, 0);
-    // private Weapon sword = new Weapon("Sword", 30, 10);
-    // private Weapon axe = new Weapon("Battle Axe", 40, 20);
-    
-    // private Opponent thief = new Opponent("Thief", 150, 20, 20, 40);
-    // private Opponent viking = new Opponent("Viking", 250, 30, 30, 30);
-    // private Opponent minotaur = new Opponent("Minotaur", 350, 40, 40, 20);
-    
+    public void start() {
+        while(!isGameOver()) {
+            
+        }
+    }    
 }
