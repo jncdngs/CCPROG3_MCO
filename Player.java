@@ -48,10 +48,14 @@ public class Player {
     
     public void setArmor(Armor armor) {
         this.armor = armor;
+        gainDef(armor.getDefBuff());
+        loseSpd(armor.getSpdPen());
     }
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+        gainAtk(weapon.getAtkBuff());
+        loseSpd(weapon.getSpdPen());
     }
 
     public void setHp(int hp) {
@@ -72,6 +76,48 @@ public class Player {
 
 
 
+    public void loseHp(int hp) {
+        if(hp >= this.hp)
+            this.hp = 0;
+        else
+            this.hp -= hp;
+    }
+
+    public void gainAtk(int atk) {
+        this.atk += atk;
+    }
+
+    public void loseAtk(int atk) {
+        if(atk >= this.atk)
+            this.atk = 0;
+        else
+            this.atk -= atk;
+    }
+
+    public void gainDef(int def) {
+        this.def += def;
+    }
+
+    public void loseDef(int def) {
+        if(def >= this.def)
+            this.def = 0;
+        else
+            this.def -= def;
+    }
+    
+    public void gainSpd(int spd) {
+        this.spd += spd;
+    }
+
+    public void loseSpd(int spd) {
+        if(spd >= this.spd)
+            this.spd = 0;
+        else
+            this.spd -= spd;
+    }
+
+
+
     public void attack(Opponent opponent) {
 
     }
@@ -83,27 +129,4 @@ public class Player {
     public void charge() {
 
     }
-
-
-
-    public void loseHp(int hp) {
-        this.hp -= hp;
-    }
-
-    public void gainAtk(int atk) {
-        this.atk += atk;
-    }
-
-    public void loseAtk(int atk) {
-
-    }
-
-    public void gainDef(int def) {
-        this.def += def;
-    }
-
-    public void loseDef(int def) {
-
-    }
-    
 }

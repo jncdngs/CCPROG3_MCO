@@ -54,6 +54,26 @@ public class Opponent {
 
 
 
+    public void loseHp(int hp) {
+        if(hp >= this.hp)
+            this.hp = 0;
+        else
+            this.hp -= hp;
+    }
+
+    public void gainAtk(int atk) {
+        this.atk += atk;
+    }
+
+    public void loseDef(int def) {
+        if(def >= this.def)
+            this.def = 0;
+        else
+            this.def -= def;
+    }
+
+
+
     public void attack(Player player) {
         
     }
@@ -64,20 +84,5 @@ public class Opponent {
 
     public void charge() {
         
-    }
-
-
-
-    public void loseHp(int hp) {
-        this.hp -= hp;
-    }
-
-    public void gainAtk(int atk) {
-        this.atk += atk;
-    }
-
-    public void loseDef(int def) {
-
-    }
-        
+    }        
 }
