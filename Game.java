@@ -8,6 +8,8 @@ public class Game {
     private Environment env;
     private Opponent opp;
 
+    private int currentTurn;
+
     // public Player getPlayer() {
     //     return this.player;
     // }
@@ -29,7 +31,7 @@ public class Game {
     // }
     
     public void displayPlayerStats() {
-        System.out.println("\nPlayer");
+        System.out.println("Player");
         System.out.println("Name:    " + player.getName());
         System.out.println("Armor:   " + player.getArmor().getName());
         System.out.println("Weapon:  " + player.getWeapon().getName());
@@ -40,7 +42,7 @@ public class Game {
     }
 
     public void displayOppStats() {
-        System.out.println("\nOpponent");
+        System.out.println("Opponent");
         System.out.println("Name:    " + opp.getName());
         System.out.println("HP:      " + opp.getHp());
         System.out.println("Attack:  " + opp.getAtk());
@@ -76,7 +78,7 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("\nName\t\t\tDefense\t\tSpeed");
+            System.out.println("Name\t\t\tDefense\t\tSpeed");
             System.out.println("[1] Light Armor\t\t+20\t\t-5");
             System.out.println("[2] Medium Armor\t+30\t\t-15");
             System.out.println("[3] Heavy Armor\t\t+40\t\t-25\n");
@@ -87,7 +89,7 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("\nName\t\t\tDefense\t\tSpeed");
+            System.out.println("Name\t\t\tDefense\t\tSpeed");
             System.out.println("[1] Dagger\t\t+20\t\t0");
             System.out.println("[2] Sword\t\t+30\t\t-10");
             System.out.println("[3] Battle Axe\t\t+40\t\t-20\n");
@@ -98,7 +100,7 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("\nName\t\t\tPlayer\t\tOpponent");
+            System.out.println("Name\t\t\tPlayer\t\tOpponent");
             System.out.println("[1] Arena\t\tNone\t\tNone");
             System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
             System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
@@ -109,7 +111,7 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("\nName\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
+            System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
             System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
             System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
             System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
@@ -185,9 +187,18 @@ public class Game {
         displayOppStats();
     }
 
-    public void start() {
+    public void start() {   
+        currentTurn = 0;
+        
         while(!isGameOver()) {
-            
+            // ask player for action
+            // ask opp for action
+            // check if defend
+            // compare speed
+            // execute actions in order
+            // check if game is over
+                // if over, check winner
+            // move turn
         }
     }    
 }

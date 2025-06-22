@@ -11,7 +11,7 @@ public class Driver {
         System.out.printf("\033[H\033[J\033[3J");
         
         do {
-            System.out.println("\n[1] Play game");
+            System.out.println("[1] Play game");
             System.out.println("[2] Exit game\n");
             System.out.print("Enter option: ");
             menuOpt = sc.nextInt();
