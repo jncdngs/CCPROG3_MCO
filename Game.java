@@ -6,44 +6,26 @@ public class Game {
     private Environment env;
     private Opponent opp;
 
-    // public Player getPlayer() {
-    //     return this.player;
-    // }
-
-    // public Armor getArmor() {
-    //     return this.armor;
-    // }
-
-    // public Weapon getWeapon() {
-    //     return this.weapon;
-    // }
-
-    // public Environment getEnv() {
-    //     return this.env;
-    // }
-
-    // public Opponent getOpp() {
-    //     return this.opp;
-    // }
+    Scanner sc = new Scanner(System.in);
     
     public void displayPlayerStats() {
-        System.out.println("Player");
+        System.out.println("=========== Player ===========");
         System.out.println("Name:    " + player.getName());
         System.out.println("Armor:   " + player.getArmor().getName());
         System.out.println("Weapon:  " + player.getWeapon().getName());
         System.out.println("HP:      " + player.getHp());
         System.out.println("Attack:  " + player.getAtk());
         System.out.println("Defense: " + player.getDef());
-        System.out.println("Speed:   " + player.getSpd());
+        System.out.println("Speed:   " + player.getSpd() + "\n");
     }
 
     public void displayOppStats() {
-        System.out.println("Opponent");
+        System.out.println("========== Opponent ==========");
         System.out.println("Name:    " + opp.getName());
         System.out.println("HP:      " + opp.getHp());
         System.out.println("Attack:  " + opp.getAtk());
         System.out.println("Defense: " + opp.getDef());
-        System.out.println("Speed:   " + opp.getSpd());
+        System.out.println("Speed:   " + opp.getSpd() + "\n");
     }
 
     public boolean isGameOver() {
@@ -53,23 +35,38 @@ public class Game {
             return false;
     }
 
+    public boolean compareSpeed(Player player, Opponent opp) {
+        return player.getSpd() > opp.getSpd();
+    }
+
     public void applyEnvEffects(Environment env) {
         player.loseHp(env.getPlayerDmg());
         player.gainAtk(env.getPlayerAtk());
         opp.gainAtk(env.getOppAtk());
         opp.loseDef(env.getOppDef());
-    }   
+    }
+
+    public int askAction() {
+        int action;
+        
+        // do {
+            System.out.println("[1] Attack");
+            System.out.println("[2] Defend");
+            System.out.println("[3] Charge\n");
+            System.out.println("Choose an action: ");
+            action = sc.nextInt();
+        // }
+        // while(action < 1 || action > 3);
+        
+        return action;
+    }
 
     public void setup() {
         Armor armor = null;
         Weapon weapon = null;
-        Scanner sc = new Scanner(System.in);
 
         String playerName;
-        int armorOpt;
-        int weaponOpt;
-        int envOpt;
-        int oppOpt;
+        int armorOpt, weaponOpt, envOpt, oppOpt;
         
         System.out.printf("\033[H\033[J\033[3J");
         System.out.print("Enter name of player: ");
@@ -181,30 +178,76 @@ public class Game {
         player.setWeapon(weapon);
         player.setAtkMult(1);
         opp.setAtkMult(1);
-
-        displayPlayerStats();
-        displayOppStats();
     }
 
     public void start() {   
-        int isPlayersTurn = 0;
+        boolean isPlayersTurn;
+        int playerAction, oppAction;
         
         while(!isGameOver()) {
-            // Ask player for action
+            // Apply environment effects
+            applyEnvEffects(env);
+            
+            // Compare speed of player and opponent
+            isPlayersTurn = compareSpeed(player, opp);
 
-            // Ask opponent for action
-            
-            // Check if defend
-            
-            // compare speed
-            
-            // execute actions in order
-            
-            // check if game is over
+            // Ask #1 then #2 for action
+            if(isPlayersTurn) {
+                do {
+                    System.out.printf("\033[H\033[J\033[3J");
+                    displayPlayerStats();
+                    displayOppStats();
+
+                    System.out.println("Player's turn!\n");
+                    playerAction = askAction();
+                }
+                while(playerAction < 1 || playerAction > 3);
                 
-                // if over, check winner
+                do {
+                    System.out.printf("\033[H\033[J\033[3J");
+                    displayPlayerStats();
+                    displayOppStats();
+
+                    System.out.println("Opponent's turn!\n");
+                    oppAction = askAction();
+                }
+                while(oppAction < 1 || oppAction > 3);
+            }
+            else {
+                do {
+                    System.out.printf("\033[H\033[J\033[3J");
+                    displayPlayerStats();
+                    displayOppStats();
+                
+                    System.out.println("Opponent's turn!\n");
+                    oppAction = askAction();
+                }
+                while(oppAction < 1 || oppAction > 3);
+
+                do {
+                    System.out.printf("\033[H\033[J\033[3J");
+                    displayPlayerStats();
+                    displayOppStats();
+                
+                    System.out.println("Player's turn!\n");
+                    playerAction = askAction();
+                }
+                while(playerAction < 1 || playerAction > 3);
+            }
             
-            // move turn
+            // Check if someone defended
+            if(playerAction == 2)
+                isPlayersTurn = true;
+            else if(oppAction == 2)
+                isPlayersTurn = false;
+            
+            // Execute actions in order
+            
+            // Check if game is over
+                
+                // If over, check winner
+            
+            // Switch turn
         }
     }    
 }
