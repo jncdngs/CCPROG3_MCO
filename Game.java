@@ -127,11 +127,9 @@ public class Game {
             case 1:
                 armor = new Armor("Light", 20, 5);
                 break;
-        
             case 2:
                 armor = new Armor("Medium", 30, 15);
                 break;
-        
             case 3:
                 armor = new Armor("Heavy", 40, 25);
                 break;        
@@ -141,11 +139,9 @@ public class Game {
             case 1:
                 weapon = new Weapon("Dagger", 20, 0);
                 break;
-        
             case 2:
                 weapon = new Weapon("Sword", 30, 10);
                 break;
-        
             case 3:
                 weapon = new Weapon("Battle Axe", 40, 20);
                 break;        
@@ -155,11 +151,9 @@ public class Game {
             case 1:
                 env = new Environment("Arena", 0, 0, 0, 0);
                 break;
-        
             case 2:
                 env = new Environment("Swamp", 0, 1, 1, 0);
                 break;
-        
             case 3:
                 env = new Environment("Colosseum", 1, 0, 0, 1);
                 break;        
@@ -169,11 +163,9 @@ public class Game {
             case 1:
                 opp = new Opponent("Thief", 150, 20, 20, 40);
                 break;
-        
             case 2:
                 opp = new Opponent("Viking", 250, 30, 30, 30);
                 break;
-        
             case 3:
                 opp = new Opponent("Minotaur", 350, 40, 40, 20);
                 break;        
@@ -210,7 +202,60 @@ public class Game {
                 isPlayersTurn = false;
             
             // Execute actions in order
-            
+            if(isPlayersTurn) {
+                switch(playerAction) {
+                    case 1:
+                        player.attack(opp);
+                        break;
+                    case 2:
+                        player.defend(opp);
+                        break;
+                    case 3:
+                        player.charge();
+                        break;
+                }
+
+                switch(oppAction) {
+                    case 1:
+                        opp.attack(player);
+                        break;
+                    case 2:
+                        opp.defend(player);
+                        break;
+                    case 3:
+                        opp.charge();
+                        break;
+                }
+
+                opp.resetAtkMult();
+            }
+            else {
+                switch(oppAction) {
+                    case 1:
+                        opp.attack(player);
+                        break;
+                    case 2:
+                        opp.defend(player);
+                        break;
+                    case 3:
+                        opp.charge();
+                        break;
+                }
+
+                switch(playerAction) {
+                    case 1:
+                        player.attack(opp);
+                        break;
+                    case 2:
+                        player.defend(opp);
+                        break;
+                    case 3:
+                        player.charge();
+                        break;
+                }
+
+                player.resetAtkMult();
+            }
             
             // Check if game is over
             
@@ -221,5 +266,9 @@ public class Game {
             // Apply environment effects
             applyEnvEffects(env);
         }
+
+        System.out.printf("\033[H\033[J\033[3J");
+        displayPlayerStats();
+        displayOppStats();
     }    
 }
