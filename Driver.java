@@ -34,7 +34,6 @@ public class Driver {
                 case 1:
                     game.setup();
                     game.start();
-                    game = null;
                     break;
 
                 case 2:
@@ -48,6 +47,5 @@ public class Driver {
             }
         }
         while(menuOpt != 2);
-
     }
 }
