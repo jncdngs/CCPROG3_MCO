@@ -28,6 +28,10 @@ public class Game {
         System.out.println("Speed:   " + opp.getSpd() + "\n");
     }
 
+    public void displayWinner(String winner, int moveCounter) {
+        System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
+    }
+
     public boolean isGameOver() {
         if(player.getHp() == 0 || opp.getHp() == 0)
             return true;
@@ -49,11 +53,11 @@ public class Game {
     public int askAction(String currentTurn) {
         int action;
 
-        do {
+        do {   
             System.out.printf("\033[H\033[J\033[3J");
             displayPlayerStats();
             displayOppStats();
-    
+
             System.out.println(currentTurn + "'s turn!\n");
             System.out.println("[1] Attack");
             System.out.println("[2] Defend");
@@ -69,8 +73,7 @@ public class Game {
     public void setup() {
         Armor armor = null;
         Weapon weapon = null;
-
-        String playerName;
+        String playerName = null;
         int armorOpt, weaponOpt, envOpt, oppOpt;
         
         System.out.printf("\033[H\033[J\033[3J");
@@ -82,22 +85,24 @@ public class Game {
             System.out.println("Name\t\t\tDefense\t\tSpeed");
             System.out.println("[1] Light Armor\t\t+20\t\t-5");
             System.out.println("[2] Medium Armor\t+30\t\t-15");
-            System.out.println("[3] Heavy Armor\t\t+40\t\t-25\n");
+            System.out.println("[3] Heavy Armor\t\t+40\t\t-25");
+            System.out.println("[4] None\t\t0\t\t0\n");
             System.out.print("Choose an armor: ");
             armorOpt = sc.nextInt();
         }
-        while(armorOpt < 1 || armorOpt > 3);
+        while(armorOpt < 1 || armorOpt > 4);
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
             System.out.println("Name\t\t\tAttack\t\tSpeed");
             System.out.println("[1] Dagger\t\t+20\t\t0");
             System.out.println("[2] Sword\t\t+30\t\t-10");
-            System.out.println("[3] Battle Axe\t\t+40\t\t-20\n");
+            System.out.println("[3] Battle Axe\t\t+40\t\t-20");
+            System.out.println("[4] None\t\t0\t\t0\n");
             System.out.print("Choose a weapon: ");
             weaponOpt = sc.nextInt();
         }
-        while(weaponOpt < 1 || weaponOpt > 3);
+        while(weaponOpt < 1 || weaponOpt > 4);
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
@@ -133,6 +138,9 @@ public class Game {
             case 3:
                 armor = new Armor("Heavy", 40, 25);
                 break;        
+            case 4:
+                armor = new Armor("None", 0, 0);
+                break;        
         }
 
         switch(weaponOpt) {
@@ -144,6 +152,9 @@ public class Game {
                 break;
             case 3:
                 weapon = new Weapon("Battle Axe", 40, 20);
+                break;        
+            case 4:
+                weapon = new Weapon("None", 0, 0);
                 break;        
         }
 
@@ -178,10 +189,11 @@ public class Game {
     }
 
     public void start() {   
+        int playerAction, oppAction, moveCounter = 1;
         boolean isPlayersTurn;
-        int playerAction, oppAction;
+        String winner = null;
         
-        while(!isGameOver()) {
+        while(!isGameOver()) {                       
             // Compare speed of player and opponent
             isPlayersTurn = compareSpeed(player, opp);
             
@@ -256,19 +268,50 @@ public class Game {
 
                 player.resetAtkMult();
             }
+
+            // If charge selected, set flag to true
+            if(player.getIsAttackCharged()){
+                player.setAtk(player.getAtk() / 3);
+                player.setIsAttackCharged(false);
+            }
+            // If charge selected, set flag to true
+            if(player.getIsNextCharged()) {
+                player.setIsAttackCharged(true);
+                player.setIsNextCharged(false);
+            }
+
+            // If charge selected, set flag to true
+            if(opp.getIsAttackCharged()){
+                opp.setAtk(opp.getAtk() / 3);
+                opp.setIsAttackCharged(false);
+            }
+            // If charge selected, set flag to true
+            if(opp.getIsNextCharged()) {
+                opp.setIsAttackCharged(true);
+                opp.setIsNextCharged(false);
+            }
             
-            // Check if game is over
-            
-            // If over, check winner
-            
-            // Switch turn
+            // If game is over, check winner
+            if(isGameOver()) {
+                if(player.getHp() == 0)
+                    winner = opp.getName();
+                else if(opp.getHp() == 0)
+                    winner = player.getName();
+            }
             
             // Apply environment effects
             applyEnvEffects(env);
+
+            // Increment move counter
+            moveCounter++;
         }
 
+        // Display the final stats and declare winner
         System.out.printf("\033[H\033[J\033[3J");
         displayPlayerStats();
         displayOppStats();
+        displayWinner(winner, moveCounter);
+
+        
     }    
 }
