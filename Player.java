@@ -8,6 +8,8 @@ public class Player {
     private int def;
     private int spd;
     private float atkMult;
+    private boolean isAttackCharged = false;
+    private boolean isNextCharged = false;
 
     public Player(String name, int hp, int atk, int def, int spd) {
         this.name = name;
@@ -49,6 +51,14 @@ public class Player {
         return this.atkMult;
     }
 
+    public boolean getIsAttackCharged() {
+        return this.isAttackCharged;
+    }
+
+    public boolean getIsNextCharged() {
+        return this.isNextCharged;
+    }
+
 
     
     public void setArmor(Armor armor) {
@@ -83,8 +93,12 @@ public class Player {
         this.atkMult = atkMult;
     }
 
-    public void resetAtkMult() {
-        this.atkMult = 1;
+    public void setIsAttackCharged(boolean isAttackCharged) {
+        this.isAttackCharged = isAttackCharged;
+    }
+
+    public void setIsNextCharged(boolean isNextCharged) {
+        this.isNextCharged = isNextCharged;
     }
 
 
@@ -129,6 +143,10 @@ public class Player {
             this.spd -= spd;
     }
 
+    public void resetAtkMult() {
+        this.atkMult = 1;
+    }
+
 
 
     public void attack(Opponent opp) {
@@ -144,6 +162,9 @@ public class Player {
     }
 
     public void charge() {
-        atk *= 3;
+        if(!isAttackCharged) {
+            atk *= 3;
+            isNextCharged = true;
+        }
     }
 }
