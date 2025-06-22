@@ -46,18 +46,22 @@ public class Game {
         opp.loseDef(env.getOppDef());
     }
 
-    public int askAction() {
+    public int askAction(String currentTurn) {
         int action;
-        
-        // do {
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            displayPlayerStats();
+            displayOppStats();
+    
+            System.out.println(currentTurn + "'s turn!\n");
             System.out.println("[1] Attack");
             System.out.println("[2] Defend");
             System.out.println("[3] Charge\n");
-            System.out.println("Choose an action: ");
+            System.out.print("Choose an action: ");
             action = sc.nextInt();
-        // }
-        // while(action < 1 || action > 3);
-        
+        } while (action < 1 || action > 3);
+
         return action;
     }
 
@@ -190,46 +194,12 @@ public class Game {
             
             // Ask #1 then #2 for action
             if(isPlayersTurn) {
-                do {
-                    System.out.printf("\033[H\033[J\033[3J");
-                    displayPlayerStats();
-                    displayOppStats();
-                    
-                    System.out.println("Player's turn!\n");
-                    playerAction = askAction();
-                }
-                while(playerAction < 1 || playerAction > 3);
-                
-                do {
-                    System.out.printf("\033[H\033[J\033[3J");
-                    displayPlayerStats();
-                    displayOppStats();
-                    
-                    System.out.println("Opponent's turn!\n");
-                    oppAction = askAction();
-                }
-                while(oppAction < 1 || oppAction > 3);
+                playerAction = askAction("Player");
+                oppAction = askAction("Opponent");
             }
             else {
-                do {
-                    System.out.printf("\033[H\033[J\033[3J");
-                    displayPlayerStats();
-                    displayOppStats();
-                    
-                    System.out.println("Opponent's turn!\n");
-                    oppAction = askAction();
-                }
-                while(oppAction < 1 || oppAction > 3);
-                
-                do {
-                    System.out.printf("\033[H\033[J\033[3J");
-                    displayPlayerStats();
-                    displayOppStats();
-                    
-                    System.out.println("Player's turn!\n");
-                    playerAction = askAction();
-                }
-                while(playerAction < 1 || playerAction > 3);
+                oppAction = askAction("Opponent");
+                playerAction = askAction("Player");
             }
             
             // Check if someone defended
