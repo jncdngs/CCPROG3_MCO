@@ -60,7 +60,8 @@ public class Game {
             System.out.println("[3] Charge\n");
             System.out.print("Choose an action: ");
             action = sc.nextInt();
-        } while (action < 1 || action > 3);
+        }
+        while(action < 1 || action > 3);
 
         return action;
     }

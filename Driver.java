@@ -43,7 +43,6 @@ public class Driver {
 
                 default:
                     System.out.printf("\033[H\033[J\033[3J");
-                    System.out.println("ERROR: Invalid input!");
             }
         }
         while(menuOpt != 2);
