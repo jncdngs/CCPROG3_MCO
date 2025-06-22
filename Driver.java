@@ -33,6 +33,8 @@ public class Driver {
             switch(menuOpt) {
                 case 1:
                     game.setup();
+                    game.start();
+                    game = null;
                     break;
 
                 case 2:
