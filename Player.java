@@ -83,6 +83,10 @@ public class Player {
         this.atkMult = atkMult;
     }
 
+    public void resetAtkMult() {
+        this.atkMult = 1;
+    }
+
 
 
     public void loseHp(int hp) {
@@ -128,7 +132,11 @@ public class Player {
 
 
     public void attack(Opponent opp) {
-        opp.loseHp((int)(atk * atkMult - opp.getDef()));
+        int dmg = (int)(atk * atkMult - opp.getDef());
+        if(dmg < 0)
+            dmg = 0;
+        
+        opp.loseHp(dmg);
     }
 
     public void defend(Opponent opp) {
