@@ -3,12 +3,8 @@ import java.util.Scanner;
 public class Game {
 
     private Player player;
-    private Armor armor;
-    private Weapon weapon;
     private Environment env;
     private Opponent opp;
-
-    private int currentTurn;
 
     // public Player getPlayer() {
     //     return this.player;
@@ -65,12 +61,15 @@ public class Game {
     }   
 
     public void setup() {
+        Armor armor = null;
+        Weapon weapon = null;
+        Scanner sc = new Scanner(System.in);
+
         String playerName;
         int armorOpt;
         int weaponOpt;
         int envOpt;
         int oppOpt;
-        Scanner sc = new Scanner(System.in);
         
         System.out.printf("\033[H\033[J\033[3J");
         System.out.print("Enter name of player: ");
@@ -89,7 +88,7 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("Name\t\t\tDefense\t\tSpeed");
+            System.out.println("Name\t\t\tAttack\t\tSpeed");
             System.out.println("[1] Dagger\t\t+20\t\t0");
             System.out.println("[2] Sword\t\t+30\t\t-10");
             System.out.println("[3] Battle Axe\t\t+40\t\t-20\n");
@@ -188,16 +187,23 @@ public class Game {
     }
 
     public void start() {   
-        currentTurn = 0;
+        int isPlayersTurn = 0;
         
         while(!isGameOver()) {
-            // ask player for action
-            // ask opp for action
-            // check if defend
+            // Ask player for action
+
+            // Ask opponent for action
+            
+            // Check if defend
+            
             // compare speed
+            
             // execute actions in order
+            
             // check if game is over
+                
                 // if over, check winner
+            
             // move turn
         }
     }    
