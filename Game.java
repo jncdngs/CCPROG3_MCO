@@ -185,19 +185,16 @@ public class Game {
         int playerAction, oppAction;
         
         while(!isGameOver()) {
-            // Apply environment effects
-            applyEnvEffects(env);
-            
             // Compare speed of player and opponent
             isPlayersTurn = compareSpeed(player, opp);
-
+            
             // Ask #1 then #2 for action
             if(isPlayersTurn) {
                 do {
                     System.out.printf("\033[H\033[J\033[3J");
                     displayPlayerStats();
                     displayOppStats();
-
+                    
                     System.out.println("Player's turn!\n");
                     playerAction = askAction();
                 }
@@ -207,7 +204,7 @@ public class Game {
                     System.out.printf("\033[H\033[J\033[3J");
                     displayPlayerStats();
                     displayOppStats();
-
+                    
                     System.out.println("Opponent's turn!\n");
                     oppAction = askAction();
                 }
@@ -218,17 +215,17 @@ public class Game {
                     System.out.printf("\033[H\033[J\033[3J");
                     displayPlayerStats();
                     displayOppStats();
-                
+                    
                     System.out.println("Opponent's turn!\n");
                     oppAction = askAction();
                 }
                 while(oppAction < 1 || oppAction > 3);
-
+                
                 do {
                     System.out.printf("\033[H\033[J\033[3J");
                     displayPlayerStats();
                     displayOppStats();
-                
+                    
                     System.out.println("Player's turn!\n");
                     playerAction = askAction();
                 }
@@ -243,11 +240,15 @@ public class Game {
             
             // Execute actions in order
             
+            
             // Check if game is over
-                
-                // If over, check winner
+            
+            // If over, check winner
             
             // Switch turn
+            
+            // Apply environment effects
+            applyEnvEffects(env);
         }
     }    
 }
