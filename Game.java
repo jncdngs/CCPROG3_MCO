@@ -13,11 +13,13 @@ public class Game {
         
         System.out.printf("\033[H\033[J\033[3J");
 
+        // Display previous actions executed
         if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
             System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
             System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
         }
 
+        // Display player stats
         System.out.println("\n=========== Player ===========");
         System.out.println("Name:    " + player.getName());
         System.out.println("Armor:   " + player.getArmor().getName());
@@ -27,6 +29,7 @@ public class Game {
         System.out.println("Defense: " + player.getDef());
         System.out.println("Speed:   " + player.getSpd() + "\n");
 
+        // Display opponent stats
         System.out.println("========== Opponent ==========");
         System.out.println("Name:    " + opp.getName());
         System.out.println("HP:      " + opp.getHp());
@@ -192,7 +195,6 @@ public class Game {
 
     public void start() {   
         int playerAction, oppAction, moveCounter = 1;
-        int prevPlayerAction = 0, prevOppAction = 0;
         boolean isPlayersTurn;
         String winner = null;
         
