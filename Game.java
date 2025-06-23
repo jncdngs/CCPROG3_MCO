@@ -6,7 +6,7 @@ public class Game {
     private Environment env;
     private Opponent opp;
 
-    Scanner sc = new Scanner(System.in);
+    // Scanner sc = new Scanner(System.in);
     
     public void displayStats() {
         String[] action = new String[] {"attacked", "defended", "charged"};
@@ -60,7 +60,7 @@ public class Game {
         opp.loseDef(env.getOppDef());
     }
 
-    public int askAction(String currentTurn) {
+    public int askAction(String currentTurn, Scanner sc) {
         int action;
 
         do {   
@@ -77,7 +77,7 @@ public class Game {
         return action;
     }
 
-    public void setup() {
+    public void setup(Scanner sc) {
         Armor armor = null;
         Weapon weapon = null;
         String playerName = null;
@@ -193,7 +193,7 @@ public class Game {
         player.setWeapon(weapon);
     }
 
-    public void start() {   
+    public void start(Scanner sc) {   
         int playerAction, oppAction, moveCounter = 1;
         boolean isPlayersTurn;
         String winner = null;
@@ -204,12 +204,12 @@ public class Game {
             
             // Ask #1 then #2 for action
             if(isPlayersTurn) {
-                playerAction = askAction("Player");
+                playerAction = askAction("Player", sc);
                 oppAction = 1;
             }
             else {
                 oppAction = 1;
-                playerAction = askAction("Player");
+                playerAction = askAction("Player", sc);
             }
             
             // Check if someone defended
@@ -317,8 +317,6 @@ public class Game {
 
         // Display the final stats and declare winner
         displayStats();
-        displayWinner(winner, moveCounter);
-
-        
+        displayWinner(winner, moveCounter);        
     }    
 }

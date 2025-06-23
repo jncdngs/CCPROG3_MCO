@@ -32,9 +32,10 @@ public class Driver {
 
             switch(menuOpt) {
                 case 1:
-                    game.setup();
-                    game.start();
+                    game.setup(sc);
+                    game.start(sc);
                     System.out.print("Press enter to quit... ");
+                    sc.nextLine();
                     sc.nextLine();
                     System.out.printf("\033[H\033[J\033[3J");
                     break;
@@ -46,6 +47,6 @@ public class Driver {
                     System.out.printf("\033[H\033[J\033[3J");
             }
         }
-        while(menuOpt != 2 && menuOpt != 1);
+        while(menuOpt != 2);
     }
 }
