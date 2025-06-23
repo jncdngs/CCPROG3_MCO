@@ -10,6 +10,7 @@ public class Player {
     private float atkMult;
     private boolean isAttackCharged = false;
     private boolean isNextCharged = false;
+    private int prevAction = 0;
 
     public Player(String name, int hp, int atk, int def, int spd) {
         this.name = name;
@@ -59,6 +60,9 @@ public class Player {
         return this.isNextCharged;
     }
 
+    public int getPrevAction() {
+        return this.prevAction;
+    }
 
     
     public void setArmor(Armor armor) {
@@ -99,6 +103,10 @@ public class Player {
 
     public void setIsNextCharged(boolean isNextCharged) {
         this.isNextCharged = isNextCharged;
+    }
+
+    public void setPrevAction(int prevAction) {
+        this.prevAction = prevAction;
     }
 
 

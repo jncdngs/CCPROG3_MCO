@@ -8,6 +8,7 @@ public class Opponent {
     private float atkMult;
     private boolean isAttackCharged = false;
     private boolean isNextCharged = false;
+    private int prevAction = 0;
 
     public Opponent(String name, int hp, int atk, int def, int spd) {
         this.name = name;
@@ -49,6 +50,10 @@ public class Opponent {
         return this.isNextCharged;
     }
 
+    public int getPrevAction() {
+        return this.prevAction;
+    }
+
 
 
     public void setHp(int hp) {
@@ -77,6 +82,10 @@ public class Opponent {
 
     public void setIsNextCharged(boolean isNextCharged) {
         this.isNextCharged = isNextCharged;
+    }
+
+    public void setPrevAction(int prevAction) {
+        this.prevAction = prevAction;
     }
 
 
