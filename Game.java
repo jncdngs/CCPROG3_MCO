@@ -16,11 +16,11 @@ public class Game {
         // Display previous actions executed
         if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
             System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
-            System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
+            System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
         }
 
         // Display player stats
-        System.out.println("\n=========== Player ===========");
+        System.out.println("=========== Player ===========");
         System.out.println("Name:    " + player.getName());
         System.out.println("Armor:   " + player.getArmor().getName());
         System.out.println("Weapon:  " + player.getWeapon().getName());
@@ -205,10 +205,10 @@ public class Game {
             // Ask #1 then #2 for action
             if(isPlayersTurn) {
                 playerAction = askAction("Player");
-                oppAction = askAction("Opponent");
+                oppAction = 1;
             }
             else {
-                oppAction = askAction("Opponent");
+                oppAction = 1;
                 playerAction = askAction("Player");
             }
             
