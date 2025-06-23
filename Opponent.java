@@ -5,7 +5,7 @@ public class Opponent {
     private int atk;
     private int def;
     private int spd;
-    private float atkMult;
+    private float atkMult = 1;
     private boolean isAttackCharged = false;
     private boolean isNextCharged = false;
     private int prevAction = 0;

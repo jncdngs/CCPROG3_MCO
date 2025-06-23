@@ -188,8 +188,6 @@ public class Game {
 
         player.setArmor(armor);
         player.setWeapon(weapon);
-        player.setAtkMult(1);
-        opp.setAtkMult(1);
     }
 
     public void start() {   
