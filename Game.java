@@ -8,8 +8,17 @@ public class Game {
 
     Scanner sc = new Scanner(System.in);
     
-    public void displayPlayerStats() {
-        System.out.println("=========== Player ===========");
+    public void displayStats() {
+        String[] action = new String[] {"attacked", "defended", "charged"};
+        
+        System.out.printf("\033[H\033[J\033[3J");
+
+        if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
+            System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
+            System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
+        }
+
+        System.out.println("\n=========== Player ===========");
         System.out.println("Name:    " + player.getName());
         System.out.println("Armor:   " + player.getArmor().getName());
         System.out.println("Weapon:  " + player.getWeapon().getName());
@@ -17,9 +26,7 @@ public class Game {
         System.out.println("Attack:  " + player.getAtk());
         System.out.println("Defense: " + player.getDef());
         System.out.println("Speed:   " + player.getSpd() + "\n");
-    }
 
-    public void displayOppStats() {
         System.out.println("========== Opponent ==========");
         System.out.println("Name:    " + opp.getName());
         System.out.println("HP:      " + opp.getHp());
@@ -54,10 +61,7 @@ public class Game {
         int action;
 
         do {   
-            System.out.printf("\033[H\033[J\033[3J");
-            displayPlayerStats();
-            displayOppStats();
-
+            displayStats();
             System.out.println(currentTurn + "'s turn!\n");
             System.out.println("[1] Attack");
             System.out.println("[2] Defend");
@@ -190,6 +194,7 @@ public class Game {
 
     public void start() {   
         int playerAction, oppAction, moveCounter = 1;
+        int prevPlayerAction = 0, prevOppAction = 0;
         boolean isPlayersTurn;
         String winner = null;
         
@@ -239,6 +244,8 @@ public class Game {
                         break;
                 }
 
+                player.setPrevAction(playerAction);
+                opp.setPrevAction(oppAction);
                 opp.resetAtkMult();
             }
             else {
@@ -266,6 +273,8 @@ public class Game {
                         break;
                 }
 
+                player.setPrevAction(playerAction);
+                opp.setPrevAction(oppAction);
                 player.resetAtkMult();
             }
 
@@ -307,9 +316,7 @@ public class Game {
         }
 
         // Display the final stats and declare winner
-        System.out.printf("\033[H\033[J\033[3J");
-        displayPlayerStats();
-        displayOppStats();
+        displayStats();
         displayWinner(winner, moveCounter);
 
         
