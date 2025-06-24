@@ -6,7 +6,7 @@ public class Game {
     private Environment env;
     private Opponent opp;
     
-    public void displayStats() {
+    private void displayStats() {
         String[] action = new String[] {"attacked", "defended", "charged"};
         
         System.out.printf("\033[H\033[J\033[3J");
@@ -36,29 +36,29 @@ public class Game {
         System.out.println("Speed:   " + opp.getSpd() + "\n");
     }
 
-    public void displayWinner(String winner, int moveCounter) {
+    private void displayWinner(String winner, int moveCounter) {
         System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
     }
 
-    public boolean isGameOver() {
+    private boolean isGameOver() {
         if(player.getHp() == 0 || opp.getHp() == 0)
             return true;
         else
             return false;
     }
 
-    public boolean compareSpeed(Player player, Opponent opp) {
+    private boolean compareSpeed(Player player, Opponent opp) {
         return player.getSpd() > opp.getSpd();
     }
 
-    public void applyEnvEffects(Environment env) {
+    private void applyEnvEffects(Environment env) {
         player.loseHp(env.getPlayerDmg());
         player.gainAtk(env.getPlayerAtk());
         opp.gainAtk(env.getOppAtk());
         opp.loseDef(env.getOppDef());
     }
 
-    public int askAction(String currentTurn, Scanner sc) {
+    private int askAction(String currentTurn, Scanner sc) {
         int action;
 
         do {   
