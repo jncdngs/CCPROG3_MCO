@@ -5,8 +5,6 @@ public class Game {
     private Player player;
     private Environment env;
     private Opponent opp;
-
-    // Scanner sc = new Scanner(System.in);
     
     public void displayStats() {
         String[] action = new String[] {"attacked", "defended", "charged"};
@@ -279,7 +277,7 @@ public class Game {
             }
 
             // If charge selected, set flag to true
-            if(player.getIsAttackCharged()){
+            if(player.getIsAttackCharged()) {
                 player.setAtk(player.getAtk() / 3);
                 player.setIsAttackCharged(false);
             }
@@ -290,7 +288,7 @@ public class Game {
             }
 
             // If charge selected, set flag to true
-            if(opp.getIsAttackCharged()){
+            if(opp.getIsAttackCharged()) {
                 opp.setAtk(opp.getAtk() / 3);
                 opp.setIsAttackCharged(false);
             }
