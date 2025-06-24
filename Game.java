@@ -6,6 +6,12 @@ public class Game {
     private Environment env;
     private Opponent opp;
     
+    /**
+     * Displays the stats for the current turn.
+     * <p>
+     * Displays the actions executed on the previous turn (except during the first turn), 
+     * the current stats of the player, and the current stats of the opponent.
+     */
     private void displayStats() {
         String[] action = new String[] {"attacked", "defended", "charged"};
         
@@ -36,10 +42,22 @@ public class Game {
         System.out.println("Speed:   " + opp.getSpd() + "\n");
     }
 
+    /** 
+     * Displays the name of the winner and the number of moves taken.
+     * 
+     * @param winner        the name of the winner
+     * @param moveCounter   the number of moves taken
+     */
     private void displayWinner(String winner, int moveCounter) {
         System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
     }
 
+    /** 
+     * Checks if the game is over by checking the hit points of the player and opponent.
+     * 
+     * @return true if either player or opponent's hit points are zero,
+     *         false if both player and opponent's hit points are not zero
+     */
     private boolean isGameOver() {
         if(player.getHp() == 0 || opp.getHp() == 0)
             return true;
@@ -47,10 +65,23 @@ public class Game {
             return false;
     }
 
+    /** 
+     * Compares speed of player and opponent to determine whose action executes first.
+     * 
+     * @param player    the player object to compare
+     * @param opp       the opponent object to compare
+     * @return          true if the player's speed is higher than the opponent's,
+     *                  false if the opponent's speed is lower than or equal to the player's
+     */
     private boolean compareSpeed(Player player, Opponent opp) {
         return player.getSpd() > opp.getSpd();
     }
 
+    /** 
+     * Applies buffs and penalties to the player and opponent from the chosen environment.
+     * 
+     * @param env       the current environment in the game
+     */
     private void applyEnvEffects(Environment env) {
         player.loseHp(env.getPlayerDmg());
         player.gainAtk(env.getPlayerAtk());
@@ -58,6 +89,16 @@ public class Game {
         opp.loseDef(env.getOppDef());
     }
 
+    /** 
+     * Asks the player/opponent to choose an action.
+     * 
+     * @param currentTurn   the name of the player/opponent to choose
+     * @param sc            the scanner object for user input
+     * @return              corresponding number for the action:
+     *                      1 for Attack,
+     *                      2 for Defend,
+     *                      3 for Charge,
+     */
     private int askAction(String currentTurn, Scanner sc) {
         int action;
 
@@ -75,6 +116,13 @@ public class Game {
         return action;
     }
 
+    /** 
+     * Sets up the game by asking the player for their name, armor, weapon, environment, and opponent.
+     * <p>
+     * Armor, Weapon, Environment, and Opponent objects are only created after user input.
+     * 
+     * @param sc the scanner object for user input
+     */
     public void setup(Scanner sc) {
         Armor armor = null;
         Weapon weapon = null;
@@ -191,6 +239,20 @@ public class Game {
         player.setWeapon(weapon);
     }
 
+    /** 
+     * Starts the main game loop.
+     * <p>
+     * The game starts by comparing the speeds of the player and the opponent. 
+     * Afterwards, it asks them which action to execute in order. Then the game 
+     * checks if someone chose to defend. If so, the defender will have action 
+     * execution priority. If someone chose charge, their next attack will be 
+     * flagged as charged. If someone currently has a charged attack, the flag 
+     * will be set to uncharged for the next turn. The game then checks if the 
+     * game is over. If so, check for the winner. If not, apply the environmental 
+     * effects and increment move counter by 1. Repeat.
+     * 
+     * @param sc the scanner object for user input
+     */
     public void start(Scanner sc) {   
         int playerAction, oppAction, moveCounter = 1;
         boolean isPlayersTurn;
@@ -317,4 +379,5 @@ public class Game {
         displayStats();
         displayWinner(winner, moveCounter);        
     }    
+    
 }
