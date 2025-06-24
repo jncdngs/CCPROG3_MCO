@@ -10,14 +10,23 @@ public class Weapon {
         this.spdPen = spdPen;
     }
 
+    /** 
+     * @return the name of the weapon
+     */
     public String getName() {
         return this.name;
     }
 
+    /** 
+     * @return the attack points to be added to the player
+     */
     public int getAtkBuff() {
         return this.atkBuff;
     }
 
+    /** 
+     * @return the speed points to be deducted from the player
+     */
     public int getSpdPen() {
         return this.spdPen;
     }
