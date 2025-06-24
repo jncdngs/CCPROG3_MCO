@@ -79,10 +79,8 @@ public class Game {
 
     /** 
      * Applies buffs and penalties to the player and opponent from the chosen environment.
-     * 
-     * @param env       the current environment in the game
      */
-    private void applyEnvEffects(Environment env) {
+    private void applyEnvEffects() {
         player.loseHp(env.getPlayerDmg());
         player.gainAtk(env.getPlayerAtk());
         opp.gainAtk(env.getOppAtk());
@@ -369,7 +367,7 @@ public class Game {
             }
             
             // Apply environment effects
-            applyEnvEffects(env);
+            applyEnvEffects();
 
             // Increment move counter
             moveCounter++;
