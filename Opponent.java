@@ -86,13 +86,6 @@ public class Opponent {
 
 
 
-    // /** 
-    //  * @param hp    
-    //  */
-    // public void setHp(int hp) {
-    //     this.hp = hp;
-    // }
-
     /** 
      * Sets the current attack points of the opponent.
      * 
@@ -101,20 +94,6 @@ public class Opponent {
     public void setAtk(int atk) {
         this.atk = atk;
     }
-
-    // /** 
-    //  * @param def
-    //  */
-    // public void setDef(int def) {
-    //     this.def = def;
-    // }
-
-    // /** 
-    //  * @param spd
-    //  */
-    // public void setSpd(int spd) {
-    //     this.spd = spd;
-    // }
 
     /** 
      * Sets the current attack multiplier of the opponent.

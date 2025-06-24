@@ -124,10 +124,6 @@ public class Player {
         loseSpd(weapon.getSpdPen());
     }
 
-    // public void setHp(int hp) {
-    //     this.hp = hp;
-    // }
-
     /** 
      * Sets the current attack points of the player.
      * 
@@ -136,14 +132,6 @@ public class Player {
     public void setAtk(int atk) {
         this.atk = atk;
     }
-
-    // public void setDef(int def) {
-    //     this.def = def;
-    // }
-
-    // public void setSpd(int spd) {
-    //     this.spd = spd;
-    // }
 
     /** 
      * Sets the current attack multiplier of the player.
