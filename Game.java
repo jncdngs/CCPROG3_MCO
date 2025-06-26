@@ -392,7 +392,7 @@ public class Game {
 
         // Display the final stats and declare winner
         displayStats();
-        displayWinner(winner, moveCounter);
+        displayWinner(winner, moveCounter - 1);
     }
     
 }
