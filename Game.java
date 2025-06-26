@@ -28,8 +28,14 @@ public class Game {
 
         // Display previous actions executed
         if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
-            System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
-            System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
+            if(compareSpeed(player, opp)) {
+                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
+                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
+            }
+            else {
+                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
+                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
+            }
         }
 
         // Display player stats
