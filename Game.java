@@ -99,17 +99,26 @@ public class Game {
      */
     private int askAction(String currentTurn, Scanner sc) {
         int action;
+        int chargeFlag = 0;
+
+        if(this.player.getIsAtkCharged())
+            chargeFlag = 1;
 
         do {
             displayStats();
             System.out.println(currentTurn + "'s turn!\n");
             System.out.println("[1] Attack");
             System.out.println("[2] Defend");
-            System.out.println("[3] Charge\n");
+            
+            if(chargeFlag == 0)
+                System.out.println("[3] Charge\n");
+            else
+                System.out.println();
+            
             System.out.print("Choose an action: ");
             action = sc.nextInt();
         }
-        while(action < 1 || action > 3);
+        while(action < 1 || action > 3 - chargeFlag);
 
         return action;
     }
