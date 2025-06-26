@@ -35,7 +35,7 @@ public class Driver {
                 case 1:
                     game.setup(sc);
                     game.start(sc);
-                    System.out.print("Press enter to quit... ");
+                    System.out.print("Press enter to return to main menu... ");
                     sc.nextLine();
                     sc.nextLine();
                     System.out.printf("\033[H\033[J\033[3J");
