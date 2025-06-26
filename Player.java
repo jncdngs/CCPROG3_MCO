@@ -156,7 +156,7 @@
     /** 
      * Sets the corresponding number for the previously chosen action by the player:
      * 1 for Attack, 2 for Defend, 3 for Charge
-     *         
+     * 
      * @param prevAction the previously chosen action
      */
     public void setPrevAction(int prevAction) {

@@ -94,7 +94,7 @@ public class Game {
     private int askAction(String currentTurn, Scanner sc) {
         int action;
 
-        do {   
+        do {
             displayStats();
             System.out.println(currentTurn + "'s turn!\n");
             System.out.println("[1] Attack");
@@ -245,12 +245,12 @@ public class Game {
      * 
      * @param sc the scanner object for user input
      */
-    public void start(Scanner sc) {   
+    public void start(Scanner sc) {
         int playerAction, oppAction, moveCounter = 1;
         boolean isPlayersTurn;
         String winner = null;
         
-        while(!isGameOver()) {                       
+        while(!isGameOver()) {
             // Compare speed of player and opponent
             isPlayersTurn = compareSpeed(player, opp);
             
@@ -369,7 +369,7 @@ public class Game {
 
         // Display the final stats and declare winner
         displayStats();
-        displayWinner(winner, moveCounter);        
-    }    
+        displayWinner(winner, moveCounter);
+    }
     
 }
