@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * Main controller for the game.
+ * <p>
+ * Contains and manages the player, opponent, and environment objects, and runs the main game loop.
+ * Handles all game logic including setup, turn order, action execution, buffs, and penalties.
+ * 
+ * @author Jon Chester Donguines
+ */
+
 public class Game {
 
     private Player player;

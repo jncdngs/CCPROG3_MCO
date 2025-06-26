@@ -1,3 +1,11 @@
+/**
+ * Environment where the game takes place.
+ * <p>
+ * Stores the environments's name and effects to the player and opponent's attack, damage, and defense. 
+ * 
+ * @author Jon Chester Donguines
+ */
+
 public class Environment {
 
     private String name;

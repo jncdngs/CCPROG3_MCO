@@ -1,3 +1,12 @@
+/**
+ * Character controlled by the opponent (Faux-AI).
+ * <p>
+ * Stores the opponent's name, armor, weapon, and stats. 
+ * Handles the actions made by the opponent and adjustments to the stats
+ * 
+ * @author Jon Chester Donguines
+ */
+
 public class Opponent {
     
     private String name;

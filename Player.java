@@ -1,4 +1,13 @@
-public class Player {
+/**
+ * Character controlled by the player.
+ * <p>
+ * Stores the character's name, armor, weapon, and stats. 
+ * Handles the actions made by the player and adjustments to the stats
+ * 
+ * @author Jon Chester Donguines
+ */
+
+ public class Player {
     
     private String name;
     private Armor armor;
