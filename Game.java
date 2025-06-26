@@ -24,22 +24,10 @@ public class Game {
         }
 
         // Display player stats
-        System.out.println("=========== Player ===========");
-        System.out.println("Name:    " + player.getName());
-        System.out.println("Armor:   " + player.getArmor().getName());
-        System.out.println("Weapon:  " + player.getWeapon().getName());
-        System.out.println("HP:      " + player.getHp());
-        System.out.println("Attack:  " + player.getAtk());
-        System.out.println("Defense: " + player.getDef());
-        System.out.println("Speed:   " + player.getSpd() + "\n");
+        player.displayStats();
 
         // Display opponent stats
-        System.out.println("========== Opponent ==========");
-        System.out.println("Name:    " + opp.getName());
-        System.out.println("HP:      " + opp.getHp());
-        System.out.println("Attack:  " + opp.getAtk());
-        System.out.println("Defense: " + opp.getDef());
-        System.out.println("Speed:   " + opp.getSpd() + "\n");
+        opp.displayStats();
     }
 
     /** 

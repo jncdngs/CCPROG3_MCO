@@ -296,4 +296,24 @@ public class Player {
         }
     }
 
+
+
+    /**
+     * Displays the current player stats.
+     * <p>
+     * Displays the player's name, armor name, weapon name, hit points, attack, 
+     * defense, and speed.
+     */
+    public void displayStats() {
+        System.out.println("=========== Player ===========");
+        System.out.println("Name:    " + getName());
+        System.out.println("Armor:   " + getArmor().getName());
+        System.out.println("Weapon:  " + getWeapon().getName());
+        System.out.println("HP:      " + getHp());
+        System.out.println("Attack:  " + getAtk());
+        System.out.println("Defense: " + getDef());
+        System.out.println("Speed:   " + getSpd());
+        System.out.println();
+    }
+
 }

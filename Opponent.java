@@ -214,6 +214,22 @@ public class Opponent {
             atk *= 3;
             isNextCharged = true;
         }
-    }  
+    }
+
+
+
+    /**
+     * Displays the current opponent stats.
+     * <p>
+     * Displays the opponent's name, hit points, attack, defense, and speed.
+     */
+    public void displayStats() {
+        System.out.println("========== Opponent ==========");
+        System.out.println("Name:    " + getName());
+        System.out.println("HP:      " + getHp());
+        System.out.println("Attack:  " + getAtk());
+        System.out.println("Defense: " + getDef());
+        System.out.println("Speed:   " + getSpd() + "\n");
+    }
 
 }
