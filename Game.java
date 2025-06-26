@@ -56,10 +56,7 @@ public class Game {
      *         false if both player and opponent's hit points are not zero
      */
     private boolean isGameOver() {
-        if(player.getHp() == 0 || opp.getHp() == 0)
-            return true;
-        else
-            return false;
+        return player.getHp() == 0 || opp.getHp() == 0;
     }
 
     /** 
