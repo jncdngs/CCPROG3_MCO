@@ -20,58 +20,42 @@ public class Player {
         this.spd = spd;
     }
 
-    /** 
-     * @return the name of the player
-     */
+    /** @return the name of the player */
     public String getName() {
         return this.name;
     }
 
-    /** 
-     * @return the current armor of the player
-     */
+    /** @return the current armor of the player */
     public Armor getArmor() {
         return this.armor;
     }
 
-    /** 
-     * @return the current weapon of the player
-     */
+    /** @return the current weapon of the player */
     public Weapon getWeapon() {
         return this.weapon;
     }
 
-    /** 
-     * @return the current hit points of the player
-     */
+    /** @return the current hit points of the player */
     public int getHp() {
         return this.hp;
     }
 
-    /** 
-     * @return the current attack points of the player
-     */
+    /** @return the current attack points of the player */
     public int getAtk() {
         return this.atk;
     }
 
-    /** 
-     * @return the current defense points of the player
-     */
+    /** @return the current defense points of the player */
     public int getDef() {
         return this.def;
     }
 
-    /** 
-     * @return the current speed points of the player
-     */
+    /** @return the current speed points of the player */
     public int getSpd() {
         return this.spd;
     }
 
-    /** 
-     * @return the current attack multiplier of the player
-     */
+    /** @return the current attack multiplier of the player */
     public float getAtkMult() {
         return this.atkMult;
     }

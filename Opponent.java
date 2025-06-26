@@ -18,44 +18,32 @@ public class Opponent {
         this.spd = spd;
     }
 
-    /** 
-     * @return the name of the opponent
-     */
+    /** @return the name of the opponent */
     public String getName() {
         return this.name;
     }
 
-    /** 
-     * @return the current hit points of the opponent
-     */
+    /** @return the current hit points of the opponent */
     public int getHp() {
         return this.hp;
     }
 
-    /** 
-     * @return the current attack points of the opponent
-     */
+    /** @return the current attack points of the opponent */
     public int getAtk() {
         return this.atk;
     }
 
-    /** 
-     * @return the current defense points of the opponent
-     */
+    /** @return the current defense points of the opponent */
     public int getDef() {
         return this.def;
     }
 
-    /** 
-     * @return the current speed points of the opponent
-     */
+    /** @return the current speed points of the opponent */
     public int getSpd() {
         return this.spd;
     }
 
-    /** 
-     * @return the current attack multiplier of the opponent
-     */
+    /** @return the current attack multiplier of the opponent */
     public float getAtkMult() {
         return this.atkMult;
     }

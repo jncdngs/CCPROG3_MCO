@@ -14,37 +14,27 @@ public class Environment {
         this.oppDef = oppDef;
     }
 
-    /** 
-     * @return the name of the environment
-     */
+    /** @return the name of the environment */
     public String getName() {
         return this.name;
     }
 
-    /** 
-     * @return the attack points to be added to the player after every turn
-     */
+    /** @return the attack points to be added to the player after every turn */
     public int getPlayerAtk() {
         return this.playerAtk;
     }
 
-    /** 
-     * @return the hit points to be deducted from the player after every turn
-     */
+    /** @return the hit points to be deducted from the player after every turn */
     public int getPlayerDmg() {
         return this.playerDmg;
     }
 
-    /** 
-     * @return the attack points to be added to the opponent after every turn
-     */
+    /** @return the attack points to be added to the opponent after every turn */
     public int getOppAtk() {
         return this.oppAtk;
     }
 
-    /** 
-     * @return the defense points to be deducted from the opponent after every turn
-     */
+    /** @return the defense points to be deducted from the opponent after every turn */
     public int getOppDef() {
         return this.oppDef;
     }
