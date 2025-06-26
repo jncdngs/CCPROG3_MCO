@@ -15,7 +15,7 @@ public class Opponent {
     private int def;
     private int spd;
     private float atkMult = 1;
-    private boolean isAttackCharged = false;
+    private boolean isAtkCharged = false;
     private boolean isNextCharged = false;
     private int prevAction = 0;
 
@@ -61,8 +61,8 @@ public class Opponent {
      * @return true if the current attack of the opponent is charged,
      *         false if the current attack of the opponent is not charged
      */
-    public boolean getIsAttackCharged() {
-        return this.isAttackCharged;
+    public boolean getIsAtkCharged() {
+        return this.isAtkCharged;
     }
 
     /** 
@@ -104,10 +104,10 @@ public class Opponent {
     /** 
      * Sets the flag indicating if the current attack of the opponent is charged.
      * 
-     * @param isAttackCharged the flag to indicate if the current attack is charged
+     * @param isAtkCharged the flag to indicate if the current attack is charged
      */
-    public void setIsAttackCharged(boolean isAttackCharged) {
-        this.isAttackCharged = isAttackCharged;
+    public void setIsAtkCharged(boolean isAtkCharged) {
+        this.isAtkCharged = isAtkCharged;
     }
 
     /** 
@@ -207,7 +207,7 @@ public class Opponent {
      * are multiplied by 3 and the next attack charged flag is set to true.
      */
     public void charge() {
-        if(!isAttackCharged) {
+        if(!isAtkCharged) {
             atk *= 3;
             isNextCharged = true;
         }

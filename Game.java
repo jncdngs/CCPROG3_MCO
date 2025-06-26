@@ -331,24 +331,24 @@ public class Game {
             }
 
             // If charge selected, set flag to true
-            if(player.getIsAttackCharged()) {
+            if(player.getIsAtkCharged()) {
                 player.setAtk(player.getAtk() / 3);
-                player.setIsAttackCharged(false);
+                player.setIsAtkCharged(false);
             }
             // If charge selected, set flag to true
             if(player.getIsNextCharged()) {
-                player.setIsAttackCharged(true);
+                player.setIsAtkCharged(true);
                 player.setIsNextCharged(false);
             }
 
             // If charge selected, set flag to true
-            if(opp.getIsAttackCharged()) {
+            if(opp.getIsAtkCharged()) {
                 opp.setAtk(opp.getAtk() / 3);
-                opp.setIsAttackCharged(false);
+                opp.setIsAtkCharged(false);
             }
             // If charge selected, set flag to true
             if(opp.getIsNextCharged()) {
-                opp.setIsAttackCharged(true);
+                opp.setIsAtkCharged(true);
                 opp.setIsNextCharged(false);
             }
             
