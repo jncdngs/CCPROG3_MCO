@@ -229,7 +229,8 @@ public class Opponent {
         System.out.println("HP:      " + getHp());
         System.out.println("Attack:  " + getAtk());
         System.out.println("Defense: " + getDef());
-        System.out.println("Speed:   " + getSpd() + "\n");
+        System.out.println("Speed:   " + getSpd());
+        System.out.println();
     }
 
 }
