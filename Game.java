@@ -33,8 +33,8 @@ public class Game {
                 System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
             }
             else {
-                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
-                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
+                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
+                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!\n");
             }
         }
 
