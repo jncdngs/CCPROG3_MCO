@@ -358,13 +358,21 @@ public class Game {
                 opp.setIsNextCharged(false);
             }
             
-            // If game is over, check winner
+            // If game is over, check winner based on turn order
             if(isGameOver()) {
-                if(player.getHp() == 0)
-                    winner = opp.getName();
-                else if(opp.getHp() == 0)
-                    winner = player.getName();
-            }
+                if(compareSpeed(player, opp)) {
+                    if(opp.getHp() == 0)
+                        winner = player.getName();
+                    else if(player.getHp() == 0)
+                        winner = opp.getName();
+                }
+                else {
+                    if(player.getHp() == 0)
+                        winner = opp.getName();
+                    else if(opp.getHp() == 0)
+                        winner = player.getName();
+                }
+            }       
             
             // Apply environment effects
             applyEnvEffects();
