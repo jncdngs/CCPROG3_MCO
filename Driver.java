@@ -13,8 +13,18 @@ students and/or persons.
 
 import java.util.Scanner;
 
+/**
+ * Main driver for the game.
+ * <p>
+ * Contains the main method (starting point) of the program.
+ */
 public class Driver {
 
+    /**
+     * Main method for the game.
+     * <p>
+     * Displays the main menu and asks the user to play or exit.
+     */
     public static void main(String[] args) {
         
         int menuOpt;
