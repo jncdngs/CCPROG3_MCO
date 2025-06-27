@@ -388,7 +388,7 @@ public class Game {
 
                 // Increment move counter
                 moveCounter++;
-			}
+			        }
         }
 
         // Display the final stats and declare winner
