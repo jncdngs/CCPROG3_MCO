@@ -382,13 +382,13 @@ public class Game {
                         winner = player.getName();
                 }
             }       
-            else {				
+            else {
                 // Apply environment effects
                 applyEnvEffects();
-
+                
                 // Increment move counter
                 moveCounter++;
-			        }
+            }
         }
 
         // Display the final stats and declare winner
