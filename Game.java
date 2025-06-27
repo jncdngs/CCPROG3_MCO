@@ -382,17 +382,18 @@ public class Game {
                         winner = player.getName();
                 }
             }       
-            
-            // Apply environment effects
-            applyEnvEffects();
+            else {				
+                // Apply environment effects
+                applyEnvEffects();
 
-            // Increment move counter
-            moveCounter++;
+                // Increment move counter
+                moveCounter++;
+			}
         }
 
         // Display the final stats and declare winner
         displayStats();
-        displayWinner(winner, moveCounter - 1);
+        displayWinner(winner, moveCounter);
     }
     
 }
