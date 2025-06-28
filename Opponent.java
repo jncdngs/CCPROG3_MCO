@@ -1,5 +1,5 @@
 /**
- * Character controlled by the opponent (Faux-AI).
+ * Character controlled by the opponent.
  * <p>
  * Stores the opponent's name, armor, weapon, and stats. 
  * Handles the actions made by the opponent and adjustments to the stats
@@ -19,6 +19,15 @@ public class Opponent {
     private boolean isNextCharged = false;
     private int prevAction = 0;
 
+    /**
+     * Constructs a character for the opponent with given stats.
+     * 
+     * @param name  the name of the opponent
+     * @param hp    the hit points of the opponent
+     * @param atk   the attack of the opponent
+     * @param def   the defense of the opponent
+     * @param spd   the speed of the opponent
+     */
     public Opponent(String name, int hp, int atk, int def, int spd) {
         this.name = name;
         this.hp = hp;
@@ -27,55 +36,84 @@ public class Opponent {
         this.spd = spd;
     }
 
-    /** @return the name of the opponent */
+    /**
+     * Returns the name of the opponent.
+     * 
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return the current hit points of the opponent */
+    /**
+     * Returns the current hit points of the opponent.
+     * 
+     * @return the current HP
+     */
     public int getHp() {
         return this.hp;
     }
 
-    /** @return the current attack points of the opponent */
+    /**
+     * Returns the current attack points of the opponent.
+     * 
+     * @return the current attack
+     */
     public int getAtk() {
         return this.atk;
     }
 
-    /** @return the current defense points of the opponent */
+    /**
+     * Returns the current defense points of the opponent.
+     * 
+     * @return the current defense
+     */
     public int getDef() {
         return this.def;
     }
 
-    /** @return the current speed points of the opponent */
+    /**
+     * Returns the current speed points of the opponent.
+     * 
+     * @return the current speed
+     */
     public int getSpd() {
         return this.spd;
     }
 
-    /** @return the current attack multiplier of the opponent */
+    /**
+     * Returns the current attack multiplier of the opponent.
+     * 
+     * @return the current attack multiplier
+     */
     public float getAtkMult() {
         return this.atkMult;
     }
 
     /** 
-     * @return true if the current attack of the opponent is charged,
-     *         false if the current attack of the opponent is not charged
+     * Checks if the current attack of the opponent is charged.
+     * 
+     * @return true if the current attack is charged,
+     *         false if the current attack is not charged
      */
     public boolean getIsAtkCharged() {
         return this.isAtkCharged;
     }
 
     /** 
-     * @return true if the next attack of the opponent is charged,
-     *         false if the next attack of the opponent is not charged
+     * Checks if the next attack of the opponent is charged.
+     * 
+     * @return true if the next attack is charged,
+     *         false if the next attack is not charged
      */
     public boolean getIsNextCharged() {
         return this.isNextCharged;
     }
 
     /** 
-     * @return the corresponding number for the previously chosen action:
-     *         1 for Attack, 2 for Defend, 3 for Charge
+     * Returns the corresponding number for the previously chosen action.
+     * 
+     * @return 1 for Attack, 2 for Defend, 3 for Charge
      */
     public int getPrevAction() {
         return this.prevAction;

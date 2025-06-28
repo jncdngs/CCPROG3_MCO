@@ -12,23 +12,42 @@ public class Weapon {
     private int atkBuff;
     private int spdPen;
 
+    /**
+     * Constructs a weapon that the player can equip with given stats.
+     * 
+     * @param name      the name of the armor
+     * @param atkBuff   the attack points to be added to the player
+     * @param spdPen    the speed points to be deducted from the player
+     */
     public Weapon(String name, int atkBuff, int spdPen) {
         this.name = name;
         this.atkBuff = atkBuff;
         this.spdPen = spdPen;
     }
 
-    /** @return the name of the weapon */
+    /**
+     * Returns the name of the weapon.
+     * 
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return the attack points to be added to the player */
+    /**
+     * Returns the attack points to be added to the player.
+     * 
+     * @return the attack points
+     */
     public int getAtkBuff() {
         return this.atkBuff;
     }
 
-    /** @return the speed points to be deducted from the player */
+    /**
+     * Returns the speed points to be deducted from the player.
+     * 
+     * @return the speed points
+     */
     public int getSpdPen() {
         return this.spdPen;
     }

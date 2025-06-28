@@ -14,6 +14,15 @@ public class Environment {
     private int oppAtk;
     private int oppDef;
 
+    /**
+     * Constructs an environment where the game takes place with given effects to player and opponent.
+     * 
+     * @param name          the name of the environment
+     * @param playerAtk     the attack the player will gain every turn
+     * @param playerDmg     the hit points the player will lose every turn
+     * @param oppAtk        the attack the opponent will gain every turn
+     * @param oppDef        the defense the opponent will lose every turn
+     */
     public Environment(String name, int playerAtk, int playerDmg, int oppAtk, int oppDef) {
         this.name = name;
         this.playerAtk = playerAtk;
@@ -22,27 +31,47 @@ public class Environment {
         this.oppDef = oppDef;
     }
 
-    /** @return the name of the environment */
+    /**
+     * Returns the name of the environment.
+     * 
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return the attack points to be added to the player after every turn */
+    /**
+     * Returns the attack points to be added to the player after every turn.
+     * 
+     * @return the attack points
+     */
     public int getPlayerAtk() {
         return this.playerAtk;
     }
 
-    /** @return the hit points to be deducted from the player after every turn */
+    /**
+     * Returns the hit points to be deducted from the player after every turn.
+     * 
+     * @return the hit points
+     */
     public int getPlayerDmg() {
         return this.playerDmg;
     }
 
-    /** @return the attack points to be added to the opponent after every turn */
+    /**
+     * Returns the attack points to be added to the opponent after every turn.
+     * 
+     * @return the attack points
+     */
     public int getOppAtk() {
         return this.oppAtk;
     }
 
-    /** @return the defense points to be deducted from the opponent after every turn */
+    /**
+     * Returns the defense points to be deducted from the opponent after every turn.
+     * 
+     * @return the defense points
+     */
     public int getOppDef() {
         return this.oppDef;
     }

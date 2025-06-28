@@ -12,23 +12,42 @@ public class Armor {
     private int defBuff;
     private int spdPen;
 
+    /**
+     * Constructs an armor that the player can equip with given stats.
+     * 
+     * @param name      the name of the armor
+     * @param defBuff   the defense points to be added to the player
+     * @param spdPen    the speed points to be deducted from the player
+     */
     public Armor(String name, int defBuff, int spdPen) {
         this.name = name;
         this.defBuff = defBuff;
         this.spdPen = spdPen;
     }
 
-    /** @return the name of the armor */
+    /**
+     * Returns the name of the armor.
+     * 
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return the defense points to be added to the player */
+    /**
+     * Returns the defense points to be added to the player.
+     * 
+     * @return the defense points
+     */
     public int getDefBuff() {
         return this.defBuff;
     }
 
-    /** @return the speed points to be deducted from the player */
+    /**
+     * Returns the speed points to be deducted from the player.
+     * 
+     * @return the speed points
+     */
     public int getSpdPen() {
         return this.spdPen;
     }

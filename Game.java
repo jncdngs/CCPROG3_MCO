@@ -93,9 +93,7 @@ public class Game {
      * @param currentTurn   the name of the player/opponent to choose
      * @param sc            the scanner object for user input
      * @return              corresponding number for the action:
-     *                      1 for Attack,
-     *                      2 for Defend,
-     *                      3 for Charge,
+     *                      1 for Attack, 2 for Defend, 3 for Charge
      */
     private int askAction(String currentTurn, Scanner sc) {
         int action;

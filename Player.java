@@ -21,6 +21,15 @@
     private boolean isNextCharged = false;
     private int prevAction = 0;
 
+    /**
+     * Constructs a character for the player with given base stats.
+     * 
+     * @param name  the name of the player
+     * @param hp    the base hit points of the player
+     * @param atk   the base attack of the player
+     * @param def   the base defense of the player
+     * @param spd   the base speed of the player
+     */
     public Player(String name, int hp, int atk, int def, int spd) {
         this.name = name;
         this.hp = hp;
@@ -29,65 +38,102 @@
         this.spd = spd;
     }
 
-    /** @return the name of the player */
+    /**
+     * Returns the name of the player.
+     * 
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
-    /** @return the current armor of the player */
+    /**
+     * Returns the current armor of the player.
+     * 
+     * @return the current armor
+     */
     public Armor getArmor() {
         return this.armor;
     }
 
-    /** @return the current weapon of the player */
+    /**
+     * Returns the current weapon of the player.
+     * 
+     * @return the current weapon
+     */
     public Weapon getWeapon() {
         return this.weapon;
     }
 
-    /** @return the current hit points of the player */
+    /**
+     * Returns the current hit points of the player.
+     * 
+     * @return the current HP
+     */
     public int getHp() {
         return this.hp;
     }
 
-    /** @return the current attack points of the player */
+    /**
+     * Returns the current attack points of the player.
+     * 
+     * @return the current attack
+     */
     public int getAtk() {
         return this.atk;
     }
 
-    /** @return the current defense points of the player */
+    /**
+     * Returns the current defense points of the player.
+     * 
+     * @return the current defense
+     */
     public int getDef() {
         return this.def;
     }
 
-    /** @return the current speed points of the player */
+    /**
+     * Returns the current speed points of the player.
+     * 
+     * @return the current speed
+     */
     public int getSpd() {
         return this.spd;
     }
 
-    /** @return the current attack multiplier of the player */
+    /**
+     * Returns the current attack multiplier of the player.
+     * 
+     * @return the current attack multiplier
+     */
     public float getAtkMult() {
         return this.atkMult;
     }
 
     /** 
-     * @return true if the current attack of the player is charged,
-     *         false if the current attack of the player is not charged
+     * Checks if the current attack of the player is charged.
+     * 
+     * @return true if the current attack is charged,
+     *         false if the current attack is not charged
      */
     public boolean getIsAtkCharged() {
         return this.isAtkCharged;
     }
 
     /** 
-     * @return true if the next attack of the player is charged,
-     *         false if the next attack of the player is not charged
+     * Checks if the next attack of the player is charged.
+     * 
+     * @return true if the next attack is charged,
+     *         false if the next attack is not charged
      */
     public boolean getIsNextCharged() {
         return this.isNextCharged;
     }
 
     /** 
-     * @return the corresponding number for the previously chosen action:
-     *         1 for Attack, 2 for Defend, 3 for Charge
+     * Returns the corresponding number for the previously chosen action.
+     * 
+     * @return 1 for Attack, 2 for Defend, 3 for Charge
      */
     public int getPrevAction() {
         return this.prevAction;
