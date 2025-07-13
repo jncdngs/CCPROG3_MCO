@@ -270,10 +270,10 @@ public class Game {
             // Ask #1 then #2 for action
             if(isPlayersTurn) {
                 playerAction = askAction("Player", sc);
-                oppAction = 1;
+                oppAction = opp.think(moveCounter);
             }
             else {
-                oppAction = 1;
+                oppAction = opp.think(moveCounter);
                 playerAction = askAction("Player", sc);
             }
             

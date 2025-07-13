@@ -250,6 +250,27 @@ public class Opponent {
             isNextCharged = true;
         }
     }
+    
+    /**
+     * Determines the action of the opponent (Faux-AI).
+     * <p>
+     * Checks the current move number and the name of the opponent and returns 
+     * the corresponding action based on a predetermined sequence.
+     * 
+     * @param moveCounter   the current move number of the game
+     * @return              corresponding number for the action:
+     *                      1 for Attack, 2 for Defend, 3 for Charge
+     */
+    public int think(int moveCounter) {
+        if(moveCounter % 3 == 2) {
+            if(name.equals("Viking"))
+                return 2;
+            else if(name.equals("Minotaur"))
+                return 3;
+        }
+
+        return 1;
+    }
 
 
 
