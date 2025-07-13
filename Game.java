@@ -31,8 +31,7 @@ public class Game {
             if(compareSpeed(player, opp)) {
                 System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
                 System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
-            }
-            else {
+            } else {
                 System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
                 System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!\n");
             }
@@ -271,8 +270,7 @@ public class Game {
             if(isPlayersTurn) {
                 playerAction = askAction("Player", sc);
                 oppAction = opp.think(moveCounter);
-            }
-            else {
+            } else {
                 oppAction = opp.think(moveCounter);
                 playerAction = askAction("Player", sc);
             }
@@ -312,8 +310,7 @@ public class Game {
                 player.setPrevAction(playerAction);
                 opp.setPrevAction(oppAction);
                 opp.resetAtkMult();
-            }
-            else {
+            } else {
                 switch(oppAction) {
                     case 1:
                         opp.attack(player);
@@ -379,8 +376,7 @@ public class Game {
                     else if(opp.getHp() == 0)
                         winner = player.getName();
                 }
-            }       
-            else {
+            } else {
                 // Apply environment effects
                 applyEnvEffects();
                 
