@@ -146,8 +146,7 @@ public class Game {
             System.out.println("[4] None\t\t0\t\t0\n");
             System.out.print("Choose an armor: ");
             armorOpt = sc.nextInt();
-        }
-        while(armorOpt < 1 || armorOpt > 4);
+        } while(armorOpt < 1 || armorOpt > 4);
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
@@ -158,8 +157,7 @@ public class Game {
             System.out.println("[4] None\t\t0\t\t0\n");
             System.out.print("Choose a weapon: ");
             weaponOpt = sc.nextInt();
-        }
-        while(weaponOpt < 1 || weaponOpt > 4);
+        } while(weaponOpt < 1 || weaponOpt > 4);
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
@@ -169,8 +167,7 @@ public class Game {
             System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
             System.out.print("Choose an environment: ");
             envOpt = sc.nextInt();
-        }
-        while(envOpt < 1 || envOpt > 3);
+        } while(envOpt < 1 || envOpt > 3);
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
@@ -180,8 +177,7 @@ public class Game {
             System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
             System.out.print("Choose an opponent: ");
             oppOpt = sc.nextInt();
-        }
-        while(oppOpt < 1 || oppOpt > 3);
+        } while(oppOpt < 1 || oppOpt > 3);
         
         player = new Player(playerName, 100, 1, 1, 50);
 

@@ -57,8 +57,7 @@ public class Driver {
                 default:
                     System.out.printf("\033[H\033[J\033[3J");
             }
-        }
-        while(menuOpt != 2);
+        } while(menuOpt != 2);
     }
     
 }
