@@ -179,7 +179,7 @@ public class Game {
             oppOpt = sc.nextInt();
         } while(oppOpt < 1 || oppOpt > 3);
         
-        player = new Player(playerName, 100, 1, 1, 50);
+        player = new Player(playerName);
 
         switch(armorOpt) {
             case 1:
@@ -190,10 +190,10 @@ public class Game {
                 break;
             case 3:
                 armor = new Armor("Heavy", 40, 25);
-                break;        
+                break;
             case 4:
                 armor = new Armor("None", 0, 0);
-                break;        
+                break;
         }
 
         switch(weaponOpt) {
@@ -205,10 +205,10 @@ public class Game {
                 break;
             case 3:
                 weapon = new Weapon("Battle Axe", 40, 20);
-                break;        
+                break;
             case 4:
                 weapon = new Weapon("None", 0, 0);
-                break;        
+                break;
         }
 
         switch(envOpt) {
@@ -220,19 +220,19 @@ public class Game {
                 break;
             case 3:
                 env = new Environment("Colosseum", 1, 0, 0, 1);
-                break;        
+                break;
         }
 
         switch(oppOpt) {
             case 1:
-                opp = new Opponent("Thief", 150, 20, 20, 40);
+                opp = new Thief();
                 break;
             case 2:
-                opp = new Opponent("Viking", 250, 30, 30, 30);
+                opp = new Viking();
                 break;
             case 3:
-                opp = new Opponent("Minotaur", 350, 40, 40, 20);
-                break;        
+                opp = new Minotaur();
+                break;
         }
 
         player.setArmor(armor);
@@ -365,8 +365,7 @@ public class Game {
                         winner = player.getName();
                     else if(player.getHp() == 0)
                         winner = opp.getName();
-                }
-                else {
+                } else {
                     if(player.getHp() == 0)
                         winner = opp.getName();
                     else if(opp.getHp() == 0)
