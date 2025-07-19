@@ -1,7 +1,5 @@
 scratch.txt
 *.class
 /demo
-DonguinesDeclaration.pdf
-DonguinesDemoLink.url
-DonguinesDemoLink.txt
-doc.zip
+/javadoc
+
