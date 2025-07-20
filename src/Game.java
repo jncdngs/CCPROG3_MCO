@@ -161,16 +161,6 @@ public class Game {
 
         do {
             System.out.printf("\033[H\033[J\033[3J");
-            System.out.println("Name\t\t\tPlayer\t\tOpponent");
-            System.out.println("[1] Arena\t\tNone\t\tNone");
-            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
-            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
-            System.out.print("Choose an environment: ");
-            envOpt = sc.nextInt();
-        } while(envOpt < 1 || envOpt > 3);
-
-        do {
-            System.out.printf("\033[H\033[J\033[3J");
             System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
             System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
             System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
@@ -178,6 +168,16 @@ public class Game {
             System.out.print("Choose an opponent: ");
             oppOpt = sc.nextInt();
         } while(oppOpt < 1 || oppOpt > 3);
+
+        do {
+            System.out.printf("\033[H\033[J\033[3J");
+            System.out.println("Name\t\t\tPlayer\t\tOpponent");
+            System.out.println("[1] Arena\t\tNone\t\tNone");
+            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
+            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
+            System.out.print("Choose an environment: ");
+            envOpt = sc.nextInt();
+        } while(envOpt < 1 || envOpt > 3);
         
         player = new Player(playerName);
 
@@ -211,18 +211,6 @@ public class Game {
                 break;
         }
 
-        switch(envOpt) {
-            case 1:
-                env = new Environment("Arena", 0, 0, 0, 0);
-                break;
-            case 2:
-                env = new Environment("Swamp", 0, 1, 1, 0);
-                break;
-            case 3:
-                env = new Environment("Colosseum", 1, 0, 0, 1);
-                break;
-        }
-
         switch(oppOpt) {
             case 1:
                 opp = new Thief();
@@ -232,6 +220,18 @@ public class Game {
                 break;
             case 3:
                 opp = new Minotaur();
+                break;
+        }
+
+        switch(envOpt) {
+            case 1:
+                env = new Environment("Arena", 0, 0, 0, 0);
+                break;
+            case 2:
+                env = new Environment("Swamp", 0, 1, 1, 0);
+                break;
+            case 3:
+                env = new Environment("Colosseum", 1, 0, 0, 1);
                 break;
         }
 
