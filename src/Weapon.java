@@ -6,7 +6,7 @@
  * @author Jon Chester Donguines
  */
 
-public class Weapon {
+public abstract class Weapon {
 
     private String name;
     private int atkBuff;
@@ -24,6 +24,10 @@ public class Weapon {
         this.atkBuff = atkBuff;
         this.spdPen = spdPen;
     }
+
+    public abstract void applyAbility(Player player);
+
+
 
     /**
      * Returns the name of the weapon.
