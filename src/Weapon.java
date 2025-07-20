@@ -6,7 +6,7 @@
  * @author Jon Chester Donguines
  */
 
-public abstract class Weapon {
+public class Weapon {
 
     private String name;
     private int atkBuff;
@@ -25,7 +25,9 @@ public abstract class Weapon {
         this.spdPen = spdPen;
     }
 
-    public abstract void applyAbility(Player player);
+    public void applyAbility(Player player) {
+        
+    }
 
 
 
