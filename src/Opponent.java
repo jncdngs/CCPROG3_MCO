@@ -20,6 +20,7 @@ public abstract class Opponent extends Character {
      */
     public Opponent(String name, int hp, int atk, int def, int spd) {
         super(name, hp, atk, def, spd);
+        System.out.println("[LOG] Opponent \"" + this.name + "\" created");
     }
 
 

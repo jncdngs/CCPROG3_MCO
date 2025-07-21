@@ -23,6 +23,7 @@ public class Armor {
         this.name = name;
         this.defBuff = defBuff;
         this.spdPen = spdPen;
+        System.out.println("[LOG] Armor \"" + this.name + "\" created");
     }
 
     /**

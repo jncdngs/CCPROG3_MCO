@@ -23,6 +23,7 @@ public class Weapon {
         this.name = name;
         this.atkBuff = atkBuff;
         this.spdPen = spdPen;
+        System.out.println("[LOG] Weapon \"" + this.name + "\" created");
     }
 
     public void applyAbility(Player player) {

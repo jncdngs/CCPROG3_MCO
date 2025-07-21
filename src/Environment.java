@@ -29,6 +29,7 @@ public class Environment {
         this.playerDmg = playerDmg;
         this.oppAtk = oppAtk;
         this.oppDef = oppDef;
+        System.out.println("[LOG] Environment \"" + this.name + "\" created");
     }
 
     /**
