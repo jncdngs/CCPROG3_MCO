@@ -14,7 +14,7 @@ public abstract class Character {
     protected int atk;
     protected int def;
     protected int spd;
-    protected float atkMult = 1;
+    protected double atkMult = 1;
     protected boolean isAtkCharged = false;
     protected boolean isNextCharged = false;
     protected int prevAction = 0;
@@ -86,7 +86,7 @@ public abstract class Character {
      * 
      * @return the current attack multiplier
      */
-    public float getAtkMult() {
+    public double getAtkMult() {
         return this.atkMult;
     }
 
@@ -135,7 +135,7 @@ public abstract class Character {
      * 
      * @param atkMult the multiplier to be applied to the current attack points
      */
-    public void setAtkMult(float atkMult) {
+    public void setAtkMult(double atkMult) {
         this.atkMult = atkMult;
     }
 
