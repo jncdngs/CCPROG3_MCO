@@ -1,20 +1,66 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 /**
  * Main controller for the game.
  * <p>
- * Contains and manages the player, opponent, and environment objects, and runs the main game loop.
+ * Contains and manages the GUI, player, opponent, and environment objects, and runs the main game loop.
  * Handles all game logic including setup, turn order, action execution, buffs, and penalties.
  * 
  * @author Jon Chester Donguines
  */
+public class Controller implements ActionListener {
 
-public class Game {
-
+    private GUI gui;
+    private Scanner sc;
     private Player player;
     private Environment env;
     private Opponent opp;
-    
+    private int menuOpt;
+
+    public Controller(GUI gui) {
+        this.gui = gui;
+
+        sc = new Scanner(System.in);
+        gui.setActionListeners(this);
+        menu();
+        System.out.println("Program executed");
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == gui.getBtnPlay()) {
+            gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
+            System.out.println("Switched to name panel");
+        }
+        else if(e.getSource() == gui.getBtnQuit()) {
+            int result = JOptionPane.showConfirmDialog(
+                gui, 
+                "Are you sure you want to quit the game?", 
+                "Exit Confirmation", 
+                JOptionPane.YES_NO_OPTION);
+
+            if(result == JOptionPane.YES_OPTION) {
+                System.out.println("Program exited");
+                System.exit(0);
+            }
+        }
+        else if(e.getSource() == gui.getBtnName()) {
+            if(!(gui.getNameField().getText().equals(""))) {   
+                player = new Player(gui.getNameField().getText());
+                if(player != null)
+                    System.out.println("Created player object with name " + player.getName());
+
+                gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
+                System.out.println("Switched to armor panel (GAME PANEL RN PLACEHOLDER)");
+            }
+
+        }
+    }
+
+
+
     /**
      * Displays the stats for the current turn.
      * <p>
@@ -24,7 +70,8 @@ public class Game {
     private void displayStats() {
         String[] action = new String[] {"attacked", "defended", "charged"};
         
-        System.out.printf("\033[H\033[J\033[3J");
+        // System.out.printf("\033[H\033[J\033[3J");
+        System.out.println();
 
         // Display previous actions executed
         if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
@@ -120,25 +167,61 @@ public class Game {
         return action;
     }
 
+    public void menu() {
+        // System.out.printf("\033[H\033[J\033[3J");
+        System.out.println();
+            
+        do {
+            System.out.println(">>==WARRIOR==<<\n");
+            System.out.println("[1] Play game");
+            System.out.println("[2] Exit game\n");
+            System.out.print("Enter option: ");
+            menuOpt = sc.nextInt();
+            sc.nextLine();
+
+            switch(menuOpt) {
+                case 1:
+                    setup();
+                    start();
+                    System.out.print("Press enter to return to main menu... ");
+                    sc.nextLine();
+                    sc.nextLine();
+                    // System.out.printf("\033[H\033[J\033[3J");
+                    System.out.println();
+                    break;
+                case 2:
+                    // System.out.printf("\033[H\033[J\033[3J");
+                    System.out.println();
+                    System.out.println("Exiting game...\n");
+                    break;
+                default:
+                    // System.out.printf("\033[H\033[J\033[3J");
+                    System.out.println();
+            }
+        } while(menuOpt != 2);
+    }
+    
     /** 
      * Sets up the game by asking the player for their name, armor, weapon, environment, and opponent.
      * <p>
      * Armor, Weapon, Environment, and Opponent objects are only created after user input.
-     * 
-     * @param sc the scanner object for user input
      */
-    public void setup(Scanner sc) {
+    public void setup() {
         Armor armor = null;
         Weapon weapon = null;
         String playerName = null;
         int armorOpt, weaponOpt, envOpt, oppOpt;
         
-        System.out.printf("\033[H\033[J\033[3J");
+        // // System.out.printf("\033[H\033[J\033[3J");
+        System.out.println();
         System.out.print("Enter name of player: ");
         playerName = sc.nextLine();
-
+        
+        player = new Player(playerName);
+        
         do {
-            System.out.printf("\033[H\033[J\033[3J");
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
             System.out.println("Name\t\t\tDefense\t\tSpeed");
             System.out.println("[1] Light Armor\t\t+20\t\t-5");
             System.out.println("[2] Medium Armor\t+30\t\t-15");
@@ -149,7 +232,8 @@ public class Game {
         } while(armorOpt < 1 || armorOpt > 4);
 
         do {
-            System.out.printf("\033[H\033[J\033[3J");
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
             System.out.println("Name\t\t\tAttack\t\tSpeed");
             System.out.println("[1] Dagger\t\t+20\t\t0");
             System.out.println("[2] Sword\t\t+30\t\t-10");
@@ -160,7 +244,8 @@ public class Game {
         } while(weaponOpt < 1 || weaponOpt > 4);
 
         do {
-            System.out.printf("\033[H\033[J\033[3J");
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
             System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
             System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
             System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
@@ -170,7 +255,8 @@ public class Game {
         } while(oppOpt < 1 || oppOpt > 3);
 
         do {
-            System.out.printf("\033[H\033[J\033[3J");
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
             System.out.println("Name\t\t\tPlayer\t\tOpponent");
             System.out.println("[1] Arena\t\tNone\t\tNone");
             System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
@@ -178,8 +264,6 @@ public class Game {
             System.out.print("Choose an environment: ");
             envOpt = sc.nextInt();
         } while(envOpt < 1 || envOpt > 3);
-        
-        player = new Player(playerName);
 
         switch(armorOpt) {
             case 1:
@@ -198,13 +282,13 @@ public class Game {
 
         switch(weaponOpt) {
             case 1:
-                weapon = new Weapon("Dagger", 20, 0);
+                weapon = new Dagger();
                 break;
             case 2:
-                weapon = new Weapon("Sword", 30, 10);
+                weapon = new Sword();
                 break;
             case 3:
-                weapon = new Weapon("Battle Axe", 40, 20);
+                weapon = new BattleAxe();
                 break;
             case 4:
                 weapon = new Weapon("None", 0, 0);
@@ -250,10 +334,8 @@ public class Game {
      * will be set to uncharged for the next turn. The game then checks if the 
      * game is over. If so, check for the winner. If not, apply the environmental 
      * effects and increment move counter by 1. Repeat.
-     * 
-     * @param sc the scanner object for user input
      */
-    public void start(Scanner sc) {
+    public void start() {
         int playerAction, oppAction, moveCounter = 1;
         boolean isPlayersTurn;
         String winner = null;
@@ -384,5 +466,5 @@ public class Game {
         displayStats();
         displayWinner(winner, moveCounter);
     }
-    
+
 }
