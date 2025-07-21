@@ -1,6 +1,5 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.event.*;
 import java.util.Scanner;
 
 /**
@@ -25,14 +24,14 @@ public class Controller implements ActionListener {
 
         sc = new Scanner(System.in);
         gui.setActionListeners(this);
+        System.out.println("[LOG] Program executed");
         menu();
-        System.out.println("Program executed");
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == gui.getBtnPlay()) {
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
-            System.out.println("Switched to name panel");
+            System.out.println("[LOG] Switched to name panel");
         }
         else if(e.getSource() == gui.getBtnQuit()) {
             int result = JOptionPane.showConfirmDialog(
@@ -42,20 +41,62 @@ public class Controller implements ActionListener {
                 JOptionPane.YES_NO_OPTION);
 
             if(result == JOptionPane.YES_OPTION) {
-                System.out.println("Program exited");
+                System.out.println("[LOG] Program exited");
                 System.exit(0);
             }
         }
         else if(e.getSource() == gui.getBtnName()) {
             if(!(gui.getNameField().getText().equals(""))) {   
                 player = new Player(gui.getNameField().getText());
-                if(player != null)
-                    System.out.println("Created player object with name " + player.getName());
 
-                gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
-                System.out.println("Switched to armor panel (GAME PANEL RN PLACEHOLDER)");
+                gui.getMainLayout().show(gui.getMainPanel(), "armorPanel");
+                System.out.println("[LOG] Switched to armor panel");
             }
 
+        }
+        else if(e.getSource() == gui.getBtnLight() ||
+                e.getSource() == gui.getBtnMedium() ||
+                e.getSource() == gui.getBtnHeavy() ||
+                e.getSource() == gui.getBtnNoArmor()) {
+
+            Armor armor = null;
+            
+            if(e.getSource() == gui.getBtnLight())
+                armor = new Armor("Light", 20, 5);
+            else if(e.getSource() == gui.getBtnMedium())
+                armor = new Armor("Medium", 30, 15);
+            else if(e.getSource() == gui.getBtnHeavy())
+                armor = new Armor("Heavy", 40, 25);
+            else if(e.getSource() == gui.getBtnNoArmor())
+                armor = new Armor("None", 0, 0);
+            
+            player.setArmor(armor);
+            System.out.println("[LOG] Set player armor to \"" + player.getArmor().getName() + "\"");
+
+            gui.getMainLayout().show(gui.getMainPanel(), "weaponPanel");
+            System.out.println("[LOG] Switched to weapon panel");
+        }
+        else if(e.getSource() == gui.getBtnDagger() ||
+                e.getSource() == gui.getBtnSword() ||
+                e.getSource() == gui.getBtnAxe() ||
+                e.getSource() == gui.getBtnNoWeapon()) {
+
+            Weapon weapon = null;
+            
+            if(e.getSource() == gui.getBtnDagger())
+                weapon = new Dagger();
+            else if(e.getSource() == gui.getBtnSword())
+                weapon = new Sword();
+            else if(e.getSource() == gui.getBtnAxe())
+                weapon = new BattleAxe();
+            else if(e.getSource() == gui.getBtnNoWeapon())
+                weapon = new Weapon("None", 0, 0);
+            
+            player.setWeapon(weapon);
+            System.out.println("[LOG] Set player weapon to \"" + player.getWeapon().getName() + "\"");
+
+            gui.getMainLayout().show(gui.getMainPanel(), "oppPanel");
+            System.out.println("[LOG] Switched to opponent panel");
         }
     }
 
@@ -231,6 +272,22 @@ public class Controller implements ActionListener {
             armorOpt = sc.nextInt();
         } while(armorOpt < 1 || armorOpt > 4);
 
+        switch(armorOpt) {
+            case 1:
+            armor = new Armor("Light", 20, 5);
+            break;
+            case 2:
+            armor = new Armor("Medium", 30, 15);
+            break;
+            case 3:
+            armor = new Armor("Heavy", 40, 25);
+            break;
+            case 4:
+            armor = new Armor("None", 0, 0);
+            break;
+        }
+        player.setArmor(armor);
+        
         do {
             // System.out.printf("\033[H\033[J\033[3J");
             System.out.println();
@@ -243,43 +300,6 @@ public class Controller implements ActionListener {
             weaponOpt = sc.nextInt();
         } while(weaponOpt < 1 || weaponOpt > 4);
 
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
-            System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
-            System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
-            System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
-            System.out.print("Choose an opponent: ");
-            oppOpt = sc.nextInt();
-        } while(oppOpt < 1 || oppOpt > 3);
-
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tPlayer\t\tOpponent");
-            System.out.println("[1] Arena\t\tNone\t\tNone");
-            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
-            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
-            System.out.print("Choose an environment: ");
-            envOpt = sc.nextInt();
-        } while(envOpt < 1 || envOpt > 3);
-
-        switch(armorOpt) {
-            case 1:
-                armor = new Armor("Light", 20, 5);
-                break;
-            case 2:
-                armor = new Armor("Medium", 30, 15);
-                break;
-            case 3:
-                armor = new Armor("Heavy", 40, 25);
-                break;
-            case 4:
-                armor = new Armor("None", 0, 0);
-                break;
-        }
-
         switch(weaponOpt) {
             case 1:
                 weapon = new Dagger();
@@ -290,10 +310,22 @@ public class Controller implements ActionListener {
             case 3:
                 weapon = new BattleAxe();
                 break;
-            case 4:
+                case 4:
                 weapon = new Weapon("None", 0, 0);
                 break;
         }
+        player.setWeapon(weapon);
+
+        do {
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
+            System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
+            System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
+            System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
+            System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
+            System.out.print("Choose an opponent: ");
+            oppOpt = sc.nextInt();
+        } while(oppOpt < 1 || oppOpt > 3);
 
         switch(oppOpt) {
             case 1:
@@ -307,6 +339,17 @@ public class Controller implements ActionListener {
                 break;
         }
 
+        do {
+            // System.out.printf("\033[H\033[J\033[3J");
+            System.out.println();
+            System.out.println("Name\t\t\tPlayer\t\tOpponent");
+            System.out.println("[1] Arena\t\tNone\t\tNone");
+            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
+            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
+            System.out.print("Choose an environment: ");
+            envOpt = sc.nextInt();
+        } while(envOpt < 1 || envOpt > 3);
+
         switch(envOpt) {
             case 1:
                 env = new Environment("Arena", 0, 0, 0, 0);
@@ -318,9 +361,6 @@ public class Controller implements ActionListener {
                 env = new Environment("Colosseum", 1, 0, 0, 1);
                 break;
         }
-
-        player.setArmor(armor);
-        player.setWeapon(weapon);
     }
 
     /** 
