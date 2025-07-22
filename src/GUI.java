@@ -128,11 +128,11 @@ public class GUI extends JFrame {
         menuBtnPanel.setOpaque(false);
         menuBtnPanel.setPreferredSize(new Dimension(300, 300));
 
-        btnPlay = new JButton("Play game");
+        btnPlay = new JButton("Play");
         btnPlay.setPreferredSize(new Dimension(200, 50));
         btnPlay.setFont(new Font("Arial", Font.PLAIN, 20));
         
-        btnQuit = new JButton("Quit game");
+        btnQuit = new JButton("Quit");
         btnQuit.setPreferredSize(new Dimension(200, 50));
         btnQuit.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -153,16 +153,15 @@ public class GUI extends JFrame {
         
         // Center panel
         namePrompt = new JLabel("Enter your name:");
-        nameField = new JTextField(16);
-        btnName = new JButton("Enter");
-
         namePrompt.setFont(new Font("Arial", Font.PLAIN, 20));
-
+        
+        nameField = new JTextField(16);
         nameField.setFont(new Font("Arial", Font.PLAIN, 20));
         nameField.setPreferredSize(new Dimension(100, 40));
-
-        btnName.setFont(new Font("Arial", Font.BOLD, 20));
-        btnName.setPreferredSize(new Dimension(100, 50));
+        
+        btnName = new JButton("Enter");
+        btnName.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnName.setPreferredSize(new Dimension(100, 40));
 
         JPanel nameMenu = new JPanel(new FlowLayout());
         nameMenu.setOpaque(false);
