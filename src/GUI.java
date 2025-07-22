@@ -189,7 +189,7 @@ public class GUI extends JFrame {
         JPanel armorNorth = new JPanel(new FlowLayout());
         armorNorth.setOpaque(false);
         
-        JLabel armorHeader = new JLabel("Pick an armor");
+        JLabel armorHeader = new JLabel("Pick an armor", SwingConstants.CENTER);
         armorHeader.setFont(new Font("Arial", Font.BOLD, 30));
         armorHeader.setPreferredSize(new Dimension(300, 100));
 
@@ -206,14 +206,21 @@ public class GUI extends JFrame {
         armorSouth.add(btnNoArmor);
 
         // West panel
-        JPanel armorWest = new JPanel(new GridBagLayout());
+        JPanel armorWest = new JPanel();
+        armorWest.setLayout(new BoxLayout(armorWest, BoxLayout.PAGE_AXIS));
         armorWest.setOpaque(false);
-        armorWest.setPreferredSize(new Dimension(530, 700));
+        armorWest.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon westIcon = new ImageIcon("Light.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
+        westIconLabel.setPreferredSize(new Dimension(250, 275));
         
-        JPanel westStats = new JPanel(new GridLayout(4,1));
+        JPanel westIconFlow = new JPanel(new FlowLayout());
+        westIconFlow.setPreferredSize(new Dimension(250, 300));
+        westIconFlow.add(westIconLabel);
+
+        JPanel westStats = new JPanel(new GridLayout(2,1));
+        westStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel westDef = new JLabel("Defense: +20", JLabel.CENTER);
         westDef.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -227,22 +234,32 @@ public class GUI extends JFrame {
         btnLight.setFont(new Font("Arial", Font.BOLD, 20));
         btnLight.setPreferredSize(new Dimension(200, 50));
 
-        westStats.add(westIconLabel);
+        JPanel btnLightFlow = new JPanel(new FlowLayout());
+        btnLightFlow.add(btnLight);
+
         westStats.add(westDef);
         westStats.add(westSpd);
-        westStats.add(btnLight);
 
+        armorWest.add(westIconFlow);
         armorWest.add(westStats);
+        armorWest.add(btnLightFlow);
 
         // Center panel
-        JPanel armorCenter = new JPanel(new GridBagLayout());
+        JPanel armorCenter = new JPanel();
+        armorCenter.setLayout(new BoxLayout(armorCenter, BoxLayout.PAGE_AXIS));
         armorCenter.setOpaque(false);
-        armorCenter.setPreferredSize(new Dimension(530, 700));
+        armorCenter.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon centerIcon = new ImageIcon("Medium.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
+        centerIconLabel.setPreferredSize(new Dimension(250, 275));
 
-        JPanel centerStats = new JPanel(new GridLayout(4,1));
+        JPanel centerIconFlow = new JPanel(new FlowLayout());
+        centerIconFlow.setPreferredSize(new Dimension(250, 300));
+        centerIconFlow.add(centerIconLabel);
+
+        JPanel centerStats = new JPanel(new GridLayout(2,1));
+        centerStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel centerDef = new JLabel("Defense: +30", JLabel.CENTER);
         centerDef.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -256,22 +273,32 @@ public class GUI extends JFrame {
         btnMedium.setFont(new Font("Arial", Font.BOLD, 20));
         btnMedium.setPreferredSize(new Dimension(200, 50));
 
-        centerStats.add(centerIconLabel);
+        JPanel btnMediumFlow = new JPanel(new FlowLayout());
+        btnMediumFlow.add(btnMedium);
+
         centerStats.add(centerDef);
         centerStats.add(centerSpd);
-        centerStats.add(btnMedium);
 
+        armorCenter.add(centerIconFlow);
         armorCenter.add(centerStats);
+        armorCenter.add(btnMediumFlow);
 
         // East panel
         JPanel armorEast = new JPanel(new GridBagLayout());
+        armorEast.setLayout(new BoxLayout(armorEast, BoxLayout.PAGE_AXIS));
         armorEast.setOpaque(false);
-        armorEast.setPreferredSize(new Dimension(530, 700));
+        armorEast.setPreferredSize(new Dimension(500, 700));
 
-        ImageIcon eastIcon = new ImageIcon("Medium.png");
+        ImageIcon eastIcon = new ImageIcon("Heavy.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
+        eastIconLabel.setPreferredSize(new Dimension(250, 275));
 
-        JPanel eastStats = new JPanel(new GridLayout(4,1));
+        JPanel eastIconFlow = new JPanel(new FlowLayout());
+        eastIconFlow.setPreferredSize(new Dimension(250, 300));
+        eastIconFlow.add(eastIconLabel);
+
+        JPanel eastStats = new JPanel(new GridLayout(2,1));
+        eastStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel eastDef = new JLabel("Defense: +40", JLabel.CENTER);
         eastDef.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -285,12 +312,15 @@ public class GUI extends JFrame {
         btnHeavy.setFont(new Font("Arial", Font.BOLD, 20));
         btnHeavy.setPreferredSize(new Dimension(200, 50));
 
-        eastStats.add(eastIconLabel);
+        JPanel btnHeavyFlow = new JPanel(new FlowLayout());
+        btnHeavyFlow.add(btnHeavy);
+
         eastStats.add(eastDef);
         eastStats.add(eastSpd);
-        eastStats.add(btnHeavy);
 
+        armorEast.add(eastIconFlow);
         armorEast.add(eastStats);
+        armorEast.add(btnHeavyFlow);
 
         // Add to armor panel
         armorPanel.add(armorNorth, BorderLayout.NORTH);
@@ -309,7 +339,7 @@ public class GUI extends JFrame {
         JPanel weaponNorth = new JPanel(new FlowLayout());
         weaponNorth.setOpaque(false);
         
-        JLabel weaponHeader = new JLabel("Pick a weapon");
+        JLabel weaponHeader = new JLabel("Pick a weapon", SwingConstants.CENTER);
         weaponHeader.setFont(new Font("Arial", Font.BOLD, 30));
         weaponHeader.setPreferredSize(new Dimension(300, 100));
 
@@ -326,14 +356,20 @@ public class GUI extends JFrame {
         weaponSouth.add(btnNoWeapon);
 
         // West panel
-        JPanel weaponWest = new JPanel(new GridBagLayout());
+        JPanel weaponWest = new JPanel(new GridLayout(3, 1));
         weaponWest.setOpaque(false);
-        weaponWest.setPreferredSize(new Dimension(530, 700));
+        weaponWest.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon westIcon = new ImageIcon("Dagger.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
+        westIconLabel.setPreferredSize(new Dimension(250, 275));
         
-        JPanel westStats = new JPanel(new GridLayout(4,1));
+        JPanel westIconFlow = new JPanel(new FlowLayout());
+        westIconFlow.setPreferredSize(new Dimension(130, 240));
+        westIconFlow.add(westIconLabel);
+
+        JPanel westStats = new JPanel(new GridLayout(3,1));
+        westStats.setPreferredSize(new Dimension(600, 700));
 
         JLabel westAtk = new JLabel("Attack: +20", JLabel.CENTER);
         westAtk.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -342,27 +378,42 @@ public class GUI extends JFrame {
         JLabel westSpd = new JLabel("Speed:   0", JLabel.CENTER);
         westSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         westSpd.setPreferredSize(new Dimension(200, 100));
+        
+        JLabel westAbility = new JLabel("When defending, every other defend will become a 100% evade", 
+                                        JLabel.CENTER);
+        westAbility.setFont(new Font("Arial", Font.PLAIN, 14));
+        westAbility.setPreferredSize(new Dimension(200, 100));
 
         btnDagger = new JButton("Dagger");
         btnDagger.setFont(new Font("Arial", Font.BOLD, 20));
         btnDagger.setPreferredSize(new Dimension(200, 50));
 
-        westStats.add(westIconLabel);
+        JPanel btnDaggerFlow = new JPanel(new FlowLayout());
+        btnDaggerFlow.add(btnDagger);
+
         westStats.add(westAtk);
         westStats.add(westSpd);
-        westStats.add(btnDagger);
+        westStats.add(westAbility);
 
+        weaponWest.add(westIconFlow);
         weaponWest.add(westStats);
+        weaponWest.add(btnDaggerFlow);
 
         // Center panel
-        JPanel weaponCenter = new JPanel(new GridBagLayout());
+        JPanel weaponCenter = new JPanel(new GridLayout(3, 1));
         weaponCenter.setOpaque(false);
-        weaponCenter.setPreferredSize(new Dimension(530, 700));
+        weaponCenter.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon centerIcon = new ImageIcon("Sword.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
+        centerIconLabel.setPreferredSize(new Dimension(250, 275));
 
-        JPanel centerStats = new JPanel(new GridLayout(4,1));
+        JPanel centerIconFlow = new JPanel(new FlowLayout());
+        centerIconFlow.setPreferredSize(new Dimension(130, 240));
+        centerIconFlow.add(centerIconLabel);
+
+        JPanel centerStats = new JPanel(new GridLayout(3,1));
+        centerStats.setPreferredSize(new Dimension(600, 700));
 
         JLabel centerAtk = new JLabel("Attack: +30", JLabel.CENTER);
         centerAtk.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -372,26 +423,41 @@ public class GUI extends JFrame {
         centerSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         centerSpd.setPreferredSize(new Dimension(200, 100));
 
+        JLabel centerAbility = new JLabel("When attacking, gain an additional +10 attack", 
+                                          JLabel.CENTER);
+        centerAbility.setFont(new Font("Arial", Font.PLAIN, 14));
+        centerAbility.setPreferredSize(new Dimension(200, 100));
+
         btnSword = new JButton("Sword");
         btnSword.setFont(new Font("Arial", Font.BOLD, 20));
         btnSword.setPreferredSize(new Dimension(200, 50));
 
-        centerStats.add(centerIconLabel);
+        JPanel btnSwordFlow = new JPanel(new FlowLayout());
+        btnSwordFlow.add(btnSword);
+
         centerStats.add(centerAtk);
         centerStats.add(centerSpd);
-        centerStats.add(btnSword);
+        centerStats.add(centerAbility);
 
+        weaponCenter.add(centerIconFlow);
         weaponCenter.add(centerStats);
+        weaponCenter.add(btnSwordFlow);
 
         // East panel
-        JPanel weaponEast = new JPanel(new GridBagLayout());
+        JPanel weaponEast = new JPanel(new GridLayout(3, 1));
         weaponEast.setOpaque(false);
-        weaponEast.setPreferredSize(new Dimension(530, 700));
+        weaponEast.setPreferredSize(new Dimension(500, 700));
 
-        ImageIcon eastIcon = new ImageIcon("Axe.png");
+        ImageIcon eastIcon = new ImageIcon("BattleAxe.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
+        eastIconLabel.setPreferredSize(new Dimension(250, 275));
 
-        JPanel eastStats = new JPanel(new GridLayout(4,1));
+        JPanel eastIconFlow = new JPanel(new FlowLayout());
+        eastIconFlow.setPreferredSize(new Dimension(130, 240));
+        eastIconFlow.add(eastIconLabel);
+
+        JPanel eastStats = new JPanel(new GridLayout(3,1));
+        eastStats.setPreferredSize(new Dimension(600, 700));
 
         JLabel eastAtk = new JLabel("Attack: +40", JLabel.CENTER);
         eastAtk.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -401,16 +467,25 @@ public class GUI extends JFrame {
         eastSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         eastSpd.setPreferredSize(new Dimension(200, 100));
 
+        JLabel eastAbility = new JLabel("When charging, gain 5 speed and 5 attack in the next turn", 
+                                        JLabel.CENTER);
+        eastAbility.setFont(new Font("Arial", Font.PLAIN, 14));
+        eastAbility.setPreferredSize(new Dimension(200, 100));
+
         btnAxe = new JButton("Battle Axe");
         btnAxe.setFont(new Font("Arial", Font.BOLD, 20));
         btnAxe.setPreferredSize(new Dimension(200, 50));
 
-        eastStats.add(eastIconLabel);
+        JPanel btnAxeFlow = new JPanel(new FlowLayout());
+        btnAxeFlow.add(btnAxe);
+
         eastStats.add(eastAtk);
         eastStats.add(eastSpd);
-        eastStats.add(btnAxe);
+        eastStats.add(eastAbility);
 
+        weaponEast.add(eastIconFlow);
         weaponEast.add(eastStats);
+        weaponEast.add(btnAxeFlow);
 
         // Add to weapon panel
         weaponPanel.add(weaponNorth, BorderLayout.NORTH);
@@ -429,7 +504,7 @@ public class GUI extends JFrame {
         JPanel oppNorth = new JPanel(new FlowLayout());
         oppNorth.setOpaque(false);
         
-        JLabel oppHeader = new JLabel("Pick an opponent");
+        JLabel oppHeader = new JLabel("Pick an opponent", SwingConstants.CENTER);
         oppHeader.setFont(new Font("Arial", Font.BOLD, 30));
         oppHeader.setPreferredSize(new Dimension(300, 100));
 
@@ -469,7 +544,7 @@ public class GUI extends JFrame {
 
         btnThief = new JButton("Thief");
         btnThief.setFont(new Font("Arial", Font.BOLD, 20));
-        btnThief.setPreferredSize(new Dimension(200, 100));
+        btnThief.setPreferredSize(new Dimension(200, 50));
 
         JPanel btnThiefFlow = new JPanel(new FlowLayout());
         btnThiefFlow.add(btnThief);
@@ -517,7 +592,7 @@ public class GUI extends JFrame {
 
         btnViking = new JButton("Viking");
         btnViking.setFont(new Font("Arial", Font.BOLD, 20));
-        btnViking.setPreferredSize(new Dimension(200, 100));
+        btnViking.setPreferredSize(new Dimension(200, 50));
 
         JPanel btnVikingFlow = new JPanel(new FlowLayout());
         btnVikingFlow.add(btnViking);
@@ -565,7 +640,7 @@ public class GUI extends JFrame {
 
         btnMinotaur = new JButton("Minotaur");
         btnMinotaur.setFont(new Font("Arial", Font.BOLD, 20));
-        btnMinotaur.setPreferredSize(new Dimension(200, 100));
+        btnMinotaur.setPreferredSize(new Dimension(200, 50));
 
         JPanel btnMinotaurFlow = new JPanel(new FlowLayout());
         btnMinotaurFlow.add(btnMinotaur);
@@ -595,23 +670,28 @@ public class GUI extends JFrame {
         JPanel envNorth = new JPanel(new FlowLayout());
         envNorth.setOpaque(false);
         
-        JLabel envHeader = new JLabel("Pick an environment");
+        JLabel envHeader = new JLabel("Pick an environment", SwingConstants.CENTER);
         envHeader.setFont(new Font("Arial", Font.BOLD, 30));
         envHeader.setPreferredSize(new Dimension(300, 100));
 
         envNorth.add(envHeader);
 
         // West panel
-        JPanel envWest = new JPanel(new GridBagLayout());
+        JPanel envWest = new JPanel();
+        envWest.setLayout(new BoxLayout(envWest, BoxLayout.PAGE_AXIS));
         envWest.setOpaque(false);
         envWest.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon westIcon = new ImageIcon("ArenaThumb.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
-        westIconLabel.setPreferredSize(new Dimension(256, 144));
+        westIconLabel.setPreferredSize(new Dimension(400, 300));
         
-        JPanel westStats = new JPanel(new GridLayout(4,1));
-        westStats.setPreferredSize(new Dimension(700, 700));
+        JPanel westIconFlow = new JPanel(new FlowLayout());
+        westIconFlow.setPreferredSize(new Dimension(300, 300));
+        westIconFlow.add(westIconLabel);
+
+        JPanel westStats = new JPanel(new GridLayout(2,1));
+        westStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel westPlayer = new JLabel("Player: No Penalty", JLabel.CENTER);
         westPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -625,24 +705,32 @@ public class GUI extends JFrame {
         btnArena.setFont(new Font("Arial", Font.BOLD, 20));
         btnArena.setPreferredSize(new Dimension(200, 50));
 
-        westStats.add(westIconLabel);
+        JPanel btnArenaFlow = new JPanel(new FlowLayout());
+        btnArenaFlow.add(btnArena);
+
         westStats.add(westPlayer);
         westStats.add(westOpp);
-        westStats.add(btnArena);
-
+        
+        envWest.add(westIconFlow);
         envWest.add(westStats);
-
+        envWest.add(btnArenaFlow);
+        
         // Center panel
-        JPanel envCenter = new JPanel(new GridBagLayout());
+        JPanel envCenter = new JPanel();
+        envCenter.setLayout(new BoxLayout(envCenter, BoxLayout.PAGE_AXIS));
         envCenter.setOpaque(false);
-        envCenter.setPreferredSize(new Dimension(700, 700));
+        envCenter.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon centerIcon = new ImageIcon("SwampThumb.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
-        centerIconLabel.setPreferredSize(new Dimension(256, 144));
+        centerIconLabel.setPreferredSize(new Dimension(400, 300));
 
-        JPanel centerStats = new JPanel(new GridLayout(4,1));
-        centerStats.setPreferredSize(new Dimension(700, 700));
+        JPanel centerIconFlow = new JPanel(new FlowLayout());
+        centerIconFlow.setPreferredSize(new Dimension(300, 300));
+        centerIconFlow.add(centerIconLabel);
+
+        JPanel centerStats = new JPanel(new GridLayout(2,1));
+        centerStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel centerPlayer = new JLabel("Player: -1 HP every turn", JLabel.CENTER);
         centerPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -656,24 +744,32 @@ public class GUI extends JFrame {
         btnSwamp.setFont(new Font("Arial", Font.BOLD, 20));
         btnSwamp.setPreferredSize(new Dimension(200, 50));
 
-        centerStats.add(centerIconLabel);
+        JPanel btnSwampFlow = new JPanel(new FlowLayout());
+        btnSwampFlow.add(btnSwamp);
+
         centerStats.add(centerPlayer);
         centerStats.add(centerOpp);
-        centerStats.add(btnSwamp);
-
+        
+        envCenter.add(centerIconFlow);
         envCenter.add(centerStats);
+        envCenter.add(btnSwampFlow);
 
         // East panel
-        JPanel envEast = new JPanel(new GridBagLayout());
+        JPanel envEast = new JPanel();
+        envEast.setLayout(new BoxLayout(envEast, BoxLayout.PAGE_AXIS));
         envEast.setOpaque(false);
         envEast.setPreferredSize(new Dimension(500, 700));
 
         ImageIcon eastIcon = new ImageIcon("ColosseumThumb.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
-        eastIconLabel.setPreferredSize(new Dimension(256, 144));
+        eastIconLabel.setPreferredSize(new Dimension(400, 300));
 
-        JPanel eastStats = new JPanel(new GridLayout(4,1));
-        eastStats.setPreferredSize(new Dimension(700, 700));
+        JPanel eastIconFlow = new JPanel(new FlowLayout());
+        eastIconFlow.setPreferredSize(new Dimension(300, 300));
+        eastIconFlow.add(eastIconLabel);
+
+        JPanel eastStats = new JPanel(new GridLayout(2,1));
+        eastStats.setPreferredSize(new Dimension(300, 200));
 
         JLabel eastPlayer = new JLabel("Player: +1 attack every turn", JLabel.CENTER);
         eastPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -687,13 +783,16 @@ public class GUI extends JFrame {
         btnColosseum.setFont(new Font("Arial", Font.BOLD, 20));
         btnColosseum.setPreferredSize(new Dimension(200, 50));
 
-        eastStats.add(eastIconLabel);
+        JPanel btnColosseumFlow = new JPanel(new FlowLayout());
+        btnColosseumFlow.add(btnColosseum);
+
         eastStats.add(eastPlayer);
         eastStats.add(eastOpp);
-        eastStats.add(btnColosseum);
-
+        
+        envEast.add(eastIconFlow);
         envEast.add(eastStats);
-
+        envEast.add(btnColosseumFlow);
+        
         // Add to environment panel
         envPanel.add(envNorth, BorderLayout.NORTH);
         envPanel.add(envWest, BorderLayout.WEST);
