@@ -24,14 +24,13 @@ public class Controller implements ActionListener {
 
         sc = new Scanner(System.in);
         gui.setActionListeners(this);
-        System.out.println("[LOG] Program executed");
-        menu();
+        // menu();
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == gui.getBtnPlay()) {
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
-            System.out.println("[LOG] Switched to name panel");
+            System.out.println("[LOG] Switched to name selection panel");
         }
         else if(e.getSource() == gui.getBtnQuit()) {
             int result = JOptionPane.showConfirmDialog(
@@ -50,7 +49,7 @@ public class Controller implements ActionListener {
                 player = new Player(gui.getNameField().getText());
 
                 gui.getMainLayout().show(gui.getMainPanel(), "armorPanel");
-                System.out.println("[LOG] Switched to armor panel");
+                System.out.println("[LOG] Switched to armor selection panel");
             }
 
         }
@@ -74,7 +73,7 @@ public class Controller implements ActionListener {
             System.out.println("[LOG] Set player armor to \"" + player.getArmor().getName() + "\"");
 
             gui.getMainLayout().show(gui.getMainPanel(), "weaponPanel");
-            System.out.println("[LOG] Switched to weapon panel");
+            System.out.println("[LOG] Switched to weapon selection panel");
         }
         else if(e.getSource() == gui.getBtnDagger() ||
                 e.getSource() == gui.getBtnSword() ||
@@ -96,7 +95,42 @@ public class Controller implements ActionListener {
             System.out.println("[LOG] Set player weapon to \"" + player.getWeapon().getName() + "\"");
 
             gui.getMainLayout().show(gui.getMainPanel(), "oppPanel");
-            System.out.println("[LOG] Switched to opponent panel");
+            System.out.println("[LOG] Switched to opponent selection panel");
+        }
+        else if(e.getSource() == gui.getBtnThief() ||
+                e.getSource() == gui.getBtnViking() ||
+                e.getSource() == gui.getBtnMinotaur()) {
+            
+            if(e.getSource() == gui.getBtnThief())
+                opp = new Thief();
+            else if(e.getSource() == gui.getBtnViking())
+                opp = new Viking();
+            else if(e.getSource() == gui.getBtnMinotaur())
+                opp = new Minotaur();
+            
+            System.out.println("[LOG] Set opponent to \"" + opp.getName() + "\"");
+
+            gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
+            System.out.println("[LOG] Switched to environment selection panel");
+        }
+        else if(e.getSource() == gui.getBtnArena() ||
+                e.getSource() == gui.getBtnSwamp() ||
+                e.getSource() == gui.getBtnColosseum()) {
+            
+            if(e.getSource() == gui.getBtnArena())
+                env = new Environment("Arena", 0, 0, 0, 0);
+            else if(e.getSource() == gui.getBtnSwamp())
+                env = new Environment("Swamp", 0, 1, 1, 0);
+            else if(e.getSource() == gui.getBtnColosseum())
+                env = new Environment("Colosseum", 1, 0, 0, 1);
+            
+            System.out.println("[LOG] Set environment to \"" + env.getName() + "\"");
+
+            gui.setEnvironment(env.getName() + ".png");
+            System.out.println("[LOG] Set game background to \"" + env.getName() + ".png\"");
+
+            gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
+            System.out.println("[LOG] Switched to main game panel");
         }
     }
 
