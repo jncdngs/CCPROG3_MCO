@@ -27,8 +27,8 @@ public class Driver {
         
         // Game game = new Game();
         GUI gui = new GUI();
-        Controller controller = new Controller(gui);
-
+        new Controller(gui);
+        
         // game.menu(sc);
 
     }
