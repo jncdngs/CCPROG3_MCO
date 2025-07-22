@@ -19,6 +19,7 @@ public class Player extends Character {
      */
     public Player(String name) {
         super(name, 100, 1, 1, 50);
+        System.out.println("[LOG] Player \"" + this.name + "\" created");
     }
 
     /**
@@ -76,11 +77,19 @@ public class Player extends Character {
      * @param opp the opponent object to be attacked
      */
     public void attack(Opponent opp) {
-        int dmg = (int)(atk * atkMult - opp.getDef());
+        int swordBuff = 0;
+
+        if(weapon.getName().equals("Sword")) {
+            swordBuff = 10;
+            System.out.println("[LOG] Sword ability applied (+10 attack)");
+        }
+        
+        int dmg = ((int)(atk * atkMult - opp.getDef())) + swordBuff;
         if(dmg < 0)
             dmg = 0;
         
         opp.loseHp(dmg);
+        System.out.println("[LOG] " + name + " attacked");
     }
 
     /** 
@@ -89,7 +98,7 @@ public class Player extends Character {
      * @param opp the opponent object to defend from
      */
     public void defend(Opponent opp) {
-        opp.setAtkMult(0.5f);
+        opp.setAtkMult(0.5);
     }
 
 
