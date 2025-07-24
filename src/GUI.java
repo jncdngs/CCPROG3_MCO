@@ -143,7 +143,7 @@ public class GUI extends JFrame {
 
         // Winner panel return button
         btnReturn = new JButton("Return to main menu");
-        btnReturn.setPreferredSize(new Dimension(300, 50));
+        btnReturn.setPreferredSize(new Dimension(200, 50));
         btnReturn.setFont(new Font("Arial", Font.BOLD, 20));
 
         this.add(mainPanel, BorderLayout.CENTER);
@@ -1019,17 +1019,19 @@ public class GUI extends JFrame {
     }
 
     public void displayWinPanel(String winner, int moveCounter) {
-        winPanel = new JPanel(new BoxLayout(winPanel, BoxLayout.PAGE_AXIS));
+        winPanel = new JPanel();
+        winPanel.setLayout(new GridBagLayout());
 
         JPanel winGrid = new JPanel(new GridLayout(3,1));
+        winGrid.setPreferredSize(new Dimension(500, 200));
 
         JLabel winnerLabel = new JLabel(winner + " won!", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 50));
-        winnerLabel.setPreferredSize(new Dimension(500, 200));
+        // winnerLabel.setPreferredSize(new Dimension(500, 200));
 
         JLabel countLabel = new JLabel("The game was won in " + moveCounter + " moves", SwingConstants.CENTER);
         countLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        countLabel.setPreferredSize(new Dimension(500, 200));
+        // countLabel.setPreferredSize(new Dimension(500, 200));
 
         winGrid.add(winnerLabel);
         winGrid.add(countLabel);
