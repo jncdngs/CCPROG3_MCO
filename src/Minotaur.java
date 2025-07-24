@@ -21,8 +21,8 @@ public class Minotaur extends Opponent {
     /**
      * Determines the action of the opponent (Faux-AI).
      * <p>
-     * Checks the current move number and the name of the opponent and returns 
-     * the corresponding action based on a predetermined sequence.
+     * Checks the current move number and returns the corresponding action 
+     * based on a predetermined sequence.
      * 
      * @param moveCounter   the current move number of the game
      * @return              corresponding number for the action:

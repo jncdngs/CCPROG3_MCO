@@ -56,8 +56,8 @@ public abstract class Opponent extends Character {
     /**
      * Determines the action of the opponent (Faux-AI).
      * <p>
-     * Checks the current move number and the name of the opponent and returns 
-     * the corresponding action based on a predetermined sequence.
+     * Checks the current move number and returns the corresponding action 
+     * based on a predetermined sequence.
      * 
      * @param moveCounter   the current move number of the game
      * @return              corresponding number for the action:
@@ -73,7 +73,7 @@ public abstract class Opponent extends Character {
      * Displays the opponent's name, hit points, attack, defense, and speed.
      */
     public void displayStats() {
-        System.out.println("========== Opponent ==========");
+        System.out.println("Opponent");
         System.out.println("Name:    " + getName());
         System.out.println("HP:      " + getHp());
         System.out.println("Attack:  " + getAtk());
