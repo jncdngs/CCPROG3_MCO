@@ -51,6 +51,7 @@ public class GUI extends JFrame {
     private ImageIcon startImg;
     private ImageIcon gameBackground;
 
+    private String oppName;
     private String envName;
     
     public GUI() {
@@ -811,17 +812,19 @@ public class GUI extends JFrame {
         envBackground.setLayout(new BorderLayout());
         
         // North panel
-        JPanel panelStats = new JPanel(new FlowLayout());
+        JPanel panelStats = new JPanel(new BorderLayout());
         panelStats.setOpaque(false);
+        panelStats.setPreferredSize(new Dimension(1500, 200));
 
         JLabel gameHeader = new JLabel("North Panel");
         gameHeader.setForeground(Color.WHITE);
         gameHeader.setFont(new Font("Arial", Font.BOLD, 30));
-        panelStats.add(gameHeader);
+
+        panelStats.add(gameHeader, BorderLayout.CENTER);
 
         envBackground.add(panelStats, BorderLayout.NORTH);
 
-        // South Panel
+        // South panel
         JPanel panelButtons = new JPanel();
         panelButtons.setLayout(new FlowLayout());
         panelButtons.setOpaque(false);
@@ -842,6 +845,30 @@ public class GUI extends JFrame {
         panelButtons.add(btnDefend);
         panelButtons.add(btnCharge);
 
+        // West panel
+        ImageIcon playerSprite = new ImageIcon("Player.png");
+        JLabel playerLabel = new JLabel(playerSprite, JLabel.CENTER);
+        playerLabel.setOpaque(false);
+        playerLabel.setPreferredSize(new Dimension(260, 480));
+        
+        JPanel playerLabelFlow = new JPanel(new GridLayout(1,1));
+        playerLabelFlow.setOpaque(false);
+        playerLabelFlow.setPreferredSize(new Dimension(700, 500));
+        playerLabelFlow.add(playerLabel);
+        
+        // East panel
+        ImageIcon oppSprite = new ImageIcon("Minotaur.png");
+        JLabel oppLabel = new JLabel(oppSprite, JLabel.CENTER);
+        oppLabel.setOpaque(false);
+        oppLabel.setPreferredSize(new Dimension(260, 480));
+        
+        JPanel oppLabelFlow = new JPanel(new GridLayout(1,1));
+        oppLabelFlow.setOpaque(false);
+        oppLabelFlow.setPreferredSize(new Dimension(700, 500));
+        oppLabelFlow.add(oppLabel);
+        
+        envBackground.add(playerLabelFlow, BorderLayout.WEST);
+        envBackground.add(oppLabelFlow, BorderLayout.EAST);
         envBackground.add(panelButtons, BorderLayout.SOUTH);
 
         gamePanel.add(envBackground, BorderLayout.CENTER);
@@ -873,9 +900,20 @@ public class GUI extends JFrame {
         btnColosseum.addActionListener(l);
     }
 
+    public void setOpp(String oppName) {
+        this.oppName = oppName;
+    }
+
     public void setEnvironment(String envName) {
-        // this.GameBackground = new ImageIcon(envName);
         this.envName = envName;
+    }
+
+    public void updateGamePanel() {
+        if (gamePanel != null)
+            mainPanel.remove(gamePanel);
+
+        addGamePanel();
+        mainPanel.add(gamePanel, "gamePanel");
     }
 
 
