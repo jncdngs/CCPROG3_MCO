@@ -26,11 +26,19 @@ public class Weapon {
         System.out.println("[LOG] Weapon \"" + this.name + "\" created");
     }
 
-    public void applyAbility(Player player) {
-        
+    public boolean isDagger() {
+        return false;
     }
 
+    public boolean isSword() {
+        return false;
+    }
 
+    public boolean isBattleAxe() {
+        return false;
+    }
+
+ 
 
     /**
      * Returns the name of the weapon.

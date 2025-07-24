@@ -15,8 +15,8 @@ public class Sword extends Weapon {
         super("Sword", 30, 10);
     }
 
-    public void applyAbility(Player player) {
-
+    public boolean isSword() {
+        return true;
     }
 
 }

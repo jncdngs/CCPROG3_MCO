@@ -15,8 +15,8 @@ public class BattleAxe extends Weapon {
         super("Battle Axe", 40, 20);
     }
 
-    public void applyAbility(Player player) {
-
+    public boolean isBattleAxe() {
+        return true;
     }
 
 }

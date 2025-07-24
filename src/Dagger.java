@@ -15,8 +15,8 @@ public class Dagger extends Weapon {
         super("Dagger", 20, 0);
     }
 
-    public void applyAbility(Player player) {
-
+    public boolean isDagger() {
+        return true;
     }
 
 }
