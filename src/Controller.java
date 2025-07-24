@@ -33,11 +33,15 @@ public class Controller implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == gui.getBtnPlay()) {
+            System.out.println("[LOG] Play button pressed");
+
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
             // gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to name selection panel");
         }
         else if(e.getSource() == gui.getBtnQuit()) {
+            System.out.println("[LOG] Quit button pressed");
+
             int result = JOptionPane.showConfirmDialog(
                 gui, 
                 "Are you sure you want to quit the game?", 
@@ -50,6 +54,8 @@ public class Controller implements ActionListener {
             }
         }
         else if(e.getSource() == gui.getBtnName()) {
+            System.out.println("[LOG] Enter button pressed");
+
             if(!(gui.getNameField().getText().trim().equals(""))) {   
                 player = new Player(gui.getNameField().getText());
 
@@ -176,19 +182,7 @@ public class Controller implements ActionListener {
                 gui.repaint();
             }
         }
-        else if(e.getSource() == gui.getBtnReturn()) {
-            // // Remove all existing panels from container
-            // gui.getMainPanel().removeAll();
-
-            // gui.addSetupPanel();
-            // gui.getMainLayout().show(gui.getMainPanel(), "startPanel");
-
-            // gui.getMainPanel().revalidate();
-            // gui.getMainPanel().repaint();
-            // gui.getStartPanel().revalidate();
-            // gui.getStartPanel().repaint();
-
-            
+        else if(e.getSource() == gui.getBtnReturn()) {            
             // Remove the old frame
             gui.dispose();
             
@@ -618,7 +612,6 @@ public class Controller implements ActionListener {
             }
             
             System.out.println("[LOG] Final stats below");
-            displayStats();
             gui.displayWinPanel(winner, moveCounter);
             gui.getBtnReturn().addActionListener(this);
             gui.revalidate();
@@ -633,6 +626,7 @@ public class Controller implements ActionListener {
             System.out.println("[LOG] Updated move count: " + moveCounter);
         }
 
+        displayStats();
         gui.updateStats(player, opp, isGameOver());
         gui.updateButtons(player);
         gui.revalidate();
