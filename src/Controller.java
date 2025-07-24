@@ -17,14 +17,19 @@ public class Controller implements ActionListener {
     private Player player;
     private Environment env;
     private Opponent opp;
+    
     private int menuOpt;
+    private int playerAction;
+    private int oppAction;
+    private int moveCounter = 1;
+    private boolean isPlayersTurn;
+    private String winner;
 
     public Controller(GUI gui) {
         this.gui = gui;
 
         sc = new Scanner(System.in);
         gui.setActionListeners(this);
-        // menu();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -46,7 +51,7 @@ public class Controller implements ActionListener {
             }
         }
         else if(e.getSource() == gui.getBtnName()) {
-            if(!(gui.getNameField().getText().equals(""))) {   
+            if(!(gui.getNameField().getText().trim().equals(""))) {   
                 player = new Player(gui.getNameField().getText());
 
                 gui.getMainLayout().show(gui.getMainPanel(), "armorPanel");
@@ -108,12 +113,10 @@ public class Controller implements ActionListener {
                 opp = new Viking();
             else if(e.getSource() == gui.getBtnMinotaur())
                 opp = new Minotaur();
-            
-            System.out.println("[LOG] Set opponent to \"" + opp.getName() + "\"");
 
             String oppName = opp.getName() + ".png";
-            gui.setOpp(oppName);
-            System.out.println("[LOG] Set opponent sprite to \"" + oppName);
+            gui.setOppFileName(oppName);
+            System.out.println("[LOG] Set opponent sprite to \"" + oppName + "\"");
 
             gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
             System.out.println("[LOG] Switched to environment selection panel");
@@ -133,11 +136,70 @@ public class Controller implements ActionListener {
 
             String envName = env.getName() + ".png";
             gui.setEnvironment(envName);
-            gui.updateGamePanel();
-            System.out.println("[LOG] Set game background to \"" + envName);
+            System.out.println("[LOG] Set game background to \"" + envName + "\"");
+            
+            // gui.addGameToMainPanel();
+            // gui.updateGamePanel();
+            gui.addGamePanel(player, opp);
+            gui.getMainPanel().add(gui.getGamePanel(), "gamePanel");
 
             gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to main game panel");
+
+            gui.getBtnAttack().addActionListener(this);
+            gui.getBtnDefend().addActionListener(this);
+            gui.getBtnCharge().addActionListener(this);
+            gui.getBtnReturn().addActionListener(this);
+
+            displayStats();
+            gui.revalidate();
+            gui.repaint();
+        }
+        else if(e.getSource() == gui.getBtnAttack() ||
+                e.getSource() == gui.getBtnDefend() ||
+                e.getSource() == gui.getBtnCharge()) {
+            if(e.getSource() == gui.getBtnAttack()) {
+                System.out.println("[LOG] Attack pressed");
+                nextTurn(1);
+                gui.revalidate();
+                gui.repaint();
+            }
+            else if(e.getSource() == gui.getBtnDefend()) {
+                System.out.println("[LOG] Defend pressed");
+                nextTurn(2);
+                gui.revalidate();
+                gui.repaint();
+            }
+            else if(e.getSource() == gui.getBtnCharge()) {
+                System.out.println("[LOG] Charge pressed");
+                nextTurn(3);
+                gui.revalidate();
+                gui.repaint();
+            }
+        }
+        else if(e.getSource() == gui.getBtnReturn()) {
+            // // Remove all existing panels from container
+            // gui.getMainPanel().removeAll();
+
+            // gui.addSetupPanel();
+            // gui.getMainLayout().show(gui.getMainPanel(), "startPanel");
+
+            // gui.getMainPanel().revalidate();
+            // gui.getMainPanel().repaint();
+            // gui.getStartPanel().revalidate();
+            // gui.getStartPanel().repaint();
+
+            
+            // Remove the old frame
+            gui.dispose();
+            
+            // Create a new GUI object
+            gui = new GUI();
+            
+            // Reset action listeners
+            gui.setActionListeners(this);
+
+            System.out.println("[LOG] Returned to start screen");
         }
     }
 
@@ -158,30 +220,33 @@ public class Controller implements ActionListener {
         // Display previous actions executed
         if(player.getPrevAction() != 0 || opp.getPrevAction() != 0) {
             if(compareSpeed(player, opp)) {
-                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!");
-                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
+                System.out.println("[LOG] " + player.getName() + " " + action[player.getPrevAction() - 1] + "!");
+                System.out.println("[LOG] " + opp.getName() + " " + action[opp.getPrevAction() - 1] + "!\n");
             } else {
-                System.out.println(opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
-                System.out.println(player.getName() + " " + action[player.getPrevAction() - 1] + "!\n");
+                System.out.println("[LOG] " + opp.getName() + " " + action[opp.getPrevAction() - 1] + "!");
+                System.out.println("[LOG] " + player.getName() + " " + action[player.getPrevAction() - 1] + "!\n");
             }
         }
 
+        System.out.println("[LOG] ===================================\n");
+
         // Display player stats
         player.displayStats();
-
         // Display opponent stats
         opp.displayStats();
+
+        System.out.println("=========================================\n");
     }
 
-    /** 
-     * Displays the name of the winner and the number of moves taken.
-     * 
-     * @param winner        the name of the winner
-     * @param moveCounter   the number of moves taken
-     */
-    private void displayWinner(String winner, int moveCounter) {
-        System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
-    }
+    // /** 
+    //  * Displays the name of the winner and the number of moves taken.
+    //  * 
+    //  * @param winner        the name of the winner
+    //  * @param moveCounter   the number of moves taken
+    //  */
+    // private void displayWinner(String winner, int moveCounter) {
+    //     System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
+    // }
 
     /** 
      * Checks if the game is over by checking the hit points of the player and opponent.
@@ -215,194 +280,193 @@ public class Controller implements ActionListener {
         opp.loseDef(env.getOppDef());
     }
 
-    /** 
-     * Asks the player/opponent to choose an action.
-     * 
-     * @param currentTurn   the name of the player/opponent to choose
-     * @param sc            the scanner object for user input
-     * @return              corresponding number for the action:
-     *                      1 for Attack, 2 for Defend, 3 for Charge
-     */
-    private int askAction(String currentTurn, Scanner sc) {
-        int action;
-        int chargeFlag = 0;
+    // /** 
+    //  * Asks the player/opponent to choose an action.
+    //  * 
+    //  * @param currentTurn   the name of the player/opponent to choose
+    //  * @param sc            the scanner object for user input
+    //  * @return              corresponding number for the action:
+    //  *                      1 for Attack, 2 for Defend, 3 for Charge
+    //  */
+    // private int askAction(String currentTurn, Scanner sc) {
+    //     int action;
+    //     int chargeFlag = 0;
 
-        if(this.player.getIsAtkCharged())
-            chargeFlag = 1;
+    //     if(this.player.getIsAtkCharged())
+    //         chargeFlag = 1;
 
-        do {
-            displayStats();
-            System.out.println(currentTurn + "'s turn!\n");
-            System.out.println("[1] Attack");
-            System.out.println("[2] Defend");
+    //     do {
+    //         displayStats();
+    //         System.out.println(currentTurn + "'s turn!\n");
+    //         System.out.println("[1] Attack");
+    //         System.out.println("[2] Defend");
             
-            if(chargeFlag == 0)
-                System.out.println("[3] Charge\n");
-            else
-                System.out.println();
+    //         if(chargeFlag == 0)
+    //             System.out.println("[3] Charge\n");
+    //         else
+    //             System.out.println();
             
-            System.out.print("Choose an action: ");
-            action = sc.nextInt();
-        }
-        while(action < 1 || action > 3 - chargeFlag);
+    //         System.out.print("Choose an action: ");
+    //         action = sc.nextInt();
+    //     }
+    //     while(action < 1 || action > 3 - chargeFlag);
 
-        return action;
-    }
+    //     return action;
+    // }
 
-    public void menu() {
-        // System.out.printf("\033[H\033[J\033[3J");
-        System.out.println();
+    // public void menu() {
+    //     // System.out.printf("\033[H\033[J\033[3J");
+    //     System.out.println();
             
-        do {
-            System.out.println(">>==WARRIOR==<<\n");
-            System.out.println("[1] Play game");
-            System.out.println("[2] Exit game\n");
-            System.out.print("Enter option: ");
-            menuOpt = sc.nextInt();
-            sc.nextLine();
+    //     do {
+    //         System.out.println(">>==WARRIOR==<<\n");
+    //         System.out.println("[1] Play game");
+    //         System.out.println("[2] Exit game\n");
+    //         System.out.print("Enter option: ");
+    //         menuOpt = sc.nextInt();
+    //         sc.nextLine();
 
-            switch(menuOpt) {
-                case 1:
-                    setup();
-                    start();
-                    System.out.print("Press enter to return to main menu... ");
-                    sc.nextLine();
-                    sc.nextLine();
-                    // System.out.printf("\033[H\033[J\033[3J");
-                    System.out.println();
-                    break;
-                case 2:
-                    // System.out.printf("\033[H\033[J\033[3J");
-                    System.out.println();
-                    System.out.println("Exiting game...\n");
-                    break;
-                default:
-                    // System.out.printf("\033[H\033[J\033[3J");
-                    System.out.println();
-            }
-        } while(menuOpt != 2);
-    }
+    //         switch(menuOpt) {
+    //             case 1:
+    //                 setup();
+    //                 // start();
+    //                 System.out.print("Press enter to return to main menu... ");
+    //                 sc.nextLine();
+    //                 sc.nextLine();
+    //                 // System.out.printf("\033[H\033[J\033[3J");
+    //                 System.out.println();
+    //                 break;
+    //             case 2:
+    //                 // System.out.printf("\033[H\033[J\033[3J");
+    //                 System.out.println();
+    //                 break;
+    //             default:
+    //                 // System.out.printf("\033[H\033[J\033[3J");
+    //                 System.out.println();
+    //         }
+    //     } while(menuOpt != 2);
+    // }
     
-    /** 
-     * Sets up the game by asking the player for their name, armor, weapon, environment, and opponent.
-     * <p>
-     * Armor, Weapon, Environment, and Opponent objects are only created after user input.
-     */
-    public void setup() {
-        Armor armor = null;
-        Weapon weapon = null;
-        String playerName = null;
-        int armorOpt, weaponOpt, envOpt, oppOpt;
+    // /** 
+    //  * Sets up the game by asking the player for their name, armor, weapon, environment, and opponent.
+    //  * <p>
+    //  * Armor, Weapon, Environment, and Opponent objects are only created after user input.
+    //  */
+    // public void setup() {
+    //     Armor armor = null;
+    //     Weapon weapon = null;
+    //     String playerName = null;
+    //     int armorOpt, weaponOpt, envOpt, oppOpt;
         
-        // // System.out.printf("\033[H\033[J\033[3J");
-        System.out.println();
-        System.out.print("Enter name of player: ");
-        playerName = sc.nextLine();
+    //     // // System.out.printf("\033[H\033[J\033[3J");
+    //     System.out.println();
+    //     System.out.print("Enter name of player: ");
+    //     playerName = sc.nextLine();
         
-        player = new Player(playerName);
+    //     player = new Player(playerName);
         
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tDefense\t\tSpeed");
-            System.out.println("[1] Light Armor\t\t+20\t\t-5");
-            System.out.println("[2] Medium Armor\t+30\t\t-15");
-            System.out.println("[3] Heavy Armor\t\t+40\t\t-25");
-            System.out.println("[4] None\t\t0\t\t0\n");
-            System.out.print("Choose an armor: ");
-            armorOpt = sc.nextInt();
-        } while(armorOpt < 1 || armorOpt > 4);
+    //     do {
+    //         // System.out.printf("\033[H\033[J\033[3J");
+    //         System.out.println();
+    //         System.out.println("Name\t\t\tDefense\t\tSpeed");
+    //         System.out.println("[1] Light Armor\t\t+20\t\t-5");
+    //         System.out.println("[2] Medium Armor\t+30\t\t-15");
+    //         System.out.println("[3] Heavy Armor\t\t+40\t\t-25");
+    //         System.out.println("[4] None\t\t0\t\t0\n");
+    //         System.out.print("Choose an armor: ");
+    //         armorOpt = sc.nextInt();
+    //     } while(armorOpt < 1 || armorOpt > 4);
 
-        switch(armorOpt) {
-            case 1:
-            armor = new Armor("Light", 20, 5);
-            break;
-            case 2:
-            armor = new Armor("Medium", 30, 15);
-            break;
-            case 3:
-            armor = new Armor("Heavy", 40, 25);
-            break;
-            case 4:
-            armor = new Armor("None", 0, 0);
-            break;
-        }
-        player.setArmor(armor);
+    //     switch(armorOpt) {
+    //         case 1:
+    //         armor = new Armor("Light", 20, 5);
+    //         break;
+    //         case 2:
+    //         armor = new Armor("Medium", 30, 15);
+    //         break;
+    //         case 3:
+    //         armor = new Armor("Heavy", 40, 25);
+    //         break;
+    //         case 4:
+    //         armor = new Armor("None", 0, 0);
+    //         break;
+    //     }
+    //     player.setArmor(armor);
         
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tAttack\t\tSpeed");
-            System.out.println("[1] Dagger\t\t+20\t\t0");
-            System.out.println("[2] Sword\t\t+30\t\t-10");
-            System.out.println("[3] Battle Axe\t\t+40\t\t-20");
-            System.out.println("[4] None\t\t0\t\t0\n");
-            System.out.print("Choose a weapon: ");
-            weaponOpt = sc.nextInt();
-        } while(weaponOpt < 1 || weaponOpt > 4);
+    //     do {
+    //         // System.out.printf("\033[H\033[J\033[3J");
+    //         System.out.println();
+    //         System.out.println("Name\t\t\tAttack\t\tSpeed");
+    //         System.out.println("[1] Dagger\t\t+20\t\t0");
+    //         System.out.println("[2] Sword\t\t+30\t\t-10");
+    //         System.out.println("[3] Battle Axe\t\t+40\t\t-20");
+    //         System.out.println("[4] None\t\t0\t\t0\n");
+    //         System.out.print("Choose a weapon: ");
+    //         weaponOpt = sc.nextInt();
+    //     } while(weaponOpt < 1 || weaponOpt > 4);
 
-        switch(weaponOpt) {
-            case 1:
-                weapon = new Dagger();
-                break;
-            case 2:
-                weapon = new Sword();
-                break;
-            case 3:
-                weapon = new BattleAxe();
-                break;
-                case 4:
-                weapon = new Weapon("None", 0, 0);
-                break;
-        }
-        player.setWeapon(weapon);
+    //     switch(weaponOpt) {
+    //         case 1:
+    //             weapon = new Dagger();
+    //             break;
+    //         case 2:
+    //             weapon = new Sword();
+    //             break;
+    //         case 3:
+    //             weapon = new BattleAxe();
+    //             break;
+    //             case 4:
+    //             weapon = new Weapon("None", 0, 0);
+    //             break;
+    //     }
+    //     player.setWeapon(weapon);
 
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
-            System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
-            System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
-            System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
-            System.out.print("Choose an opponent: ");
-            oppOpt = sc.nextInt();
-        } while(oppOpt < 1 || oppOpt > 3);
+    //     do {
+    //         // System.out.printf("\033[H\033[J\033[3J");
+    //         System.out.println();
+    //         System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
+    //         System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
+    //         System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
+    //         System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
+    //         System.out.print("Choose an opponent: ");
+    //         oppOpt = sc.nextInt();
+    //     } while(oppOpt < 1 || oppOpt > 3);
 
-        switch(oppOpt) {
-            case 1:
-                opp = new Thief();
-                break;
-            case 2:
-                opp = new Viking();
-                break;
-            case 3:
-                opp = new Minotaur();
-                break;
-        }
+    //     switch(oppOpt) {
+    //         case 1:
+    //             opp = new Thief();
+    //             break;
+    //         case 2:
+    //             opp = new Viking();
+    //             break;
+    //         case 3:
+    //             opp = new Minotaur();
+    //             break;
+    //     }
 
-        do {
-            // System.out.printf("\033[H\033[J\033[3J");
-            System.out.println();
-            System.out.println("Name\t\t\tPlayer\t\tOpponent");
-            System.out.println("[1] Arena\t\tNone\t\tNone");
-            System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
-            System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
-            System.out.print("Choose an environment: ");
-            envOpt = sc.nextInt();
-        } while(envOpt < 1 || envOpt > 3);
+    //     do {
+    //         // System.out.printf("\033[H\033[J\033[3J");
+    //         System.out.println();
+    //         System.out.println("Name\t\t\tPlayer\t\tOpponent");
+    //         System.out.println("[1] Arena\t\tNone\t\tNone");
+    //         System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
+    //         System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
+    //         System.out.print("Choose an environment: ");
+    //         envOpt = sc.nextInt();
+    //     } while(envOpt < 1 || envOpt > 3);
 
-        switch(envOpt) {
-            case 1:
-                env = new Environment("Arena", 0, 0, 0, 0);
-                break;
-            case 2:
-                env = new Environment("Swamp", 0, 1, 1, 0);
-                break;
-            case 3:
-                env = new Environment("Colosseum", 1, 0, 0, 1);
-                break;
-        }
-    }
+    //     switch(envOpt) {
+    //         case 1:
+    //             env = new Environment("Arena", 0, 0, 0, 0);
+    //             break;
+    //         case 2:
+    //             env = new Environment("Swamp", 0, 1, 1, 0);
+    //             break;
+    //         case 3:
+    //             env = new Environment("Colosseum", 1, 0, 0, 1);
+    //             break;
+    //     }
+    // }
 
     /** 
      * Starts the main game loop.
@@ -416,160 +480,164 @@ public class Controller implements ActionListener {
      * game is over. If so, check for the winner. If not, apply the environmental 
      * effects and increment move counter by 1. Repeat.
      */
-    public void start() {
-        int playerAction, oppAction, moveCounter = 1;
-        boolean isPlayersTurn;
-        String winner = null;
+    public void nextTurn(int playerAction) {
         
-        while(!isGameOver()) {
-            // Compare speed of player and opponent
-            isPlayersTurn = compareSpeed(player, opp);
+        displayStats();
+        gui.revalidate();
+        gui.repaint();
+
+        // Compare speed of player and opponent
+        isPlayersTurn = compareSpeed(player, opp);
+        
+        // Ask for action
+        this.playerAction = playerAction;
+        oppAction = opp.think(moveCounter);
+
+        // Check if someone defended
+        if(playerAction == 2)
+            isPlayersTurn = true;
+        else if(oppAction == 2)
+            isPlayersTurn = false;
+
+        // Execute actions in order
+        if(isPlayersTurn) {
+            switch(playerAction) {
+                case 1:
+                    player.attack(opp);
+                    break;
+                case 2:
+                    player.defend(opp);
+                    break;
+                case 3:
+                    player.charge();
+                    break;
+            }
+
+            switch(oppAction) {
+                case 1:
+                    opp.attack(player);
+                    break;
+                case 2:
+                    opp.defend(player);
+                    break;
+                case 3:
+                    opp.charge();
+                    break;
+            }
+
+            player.setPrevAction(playerAction);
+            opp.setPrevAction(oppAction);
+            opp.resetAtkMult();
+        } else {
+            switch(oppAction) {
+                case 1:
+                    opp.attack(player);
+                    break;
+                case 2:
+                    opp.defend(player);
+                    break;
+                case 3:
+                    opp.charge();
+                    break;
+            }
+
+            switch(playerAction) {
+                case 1:
+                    player.attack(opp);
+                    break;
+                case 2:
+                    player.defend(opp);
+                    break;
+                case 3:
+                    player.charge();
+                    break;
+            }
+
+            player.setPrevAction(playerAction);
+            opp.setPrevAction(oppAction);
+            player.resetAtkMult();
+        }
+
+        // If player selected charge, set flag to true
+        if(player.getIsAtkCharged()) {
+            player.setAtk(player.getAtk() / 3);
+            gui.setIsAtkCharged(false);
+            player.setIsAtkCharged(false);
+
+            if(player.getWeapon().isBattleAxe()) {
+                player.loseSpd(5);
+                player.loseAtk(5);
+
+                System.out.println("[LOG] Temporary battle axe buff removed");
+            }
+        }
+        if(player.getIsNextCharged()) {
+            player.setIsAtkCharged(true);
+            gui.setIsAtkCharged(true);
+            player.setIsNextCharged(false);
             
-            // Ask #1 then #2 for action
-            if(isPlayersTurn) {
-                playerAction = askAction("Player", sc);
-                oppAction = opp.think(moveCounter);
-            } else {
-                oppAction = opp.think(moveCounter);
-                playerAction = askAction("Player", sc);
-            }
-            
-            // Check if someone defended
-            if(playerAction == 2)
-                isPlayersTurn = true;
-            else if(oppAction == 2)
-                isPlayersTurn = false;
-            
-            // Execute actions in order
-            if(isPlayersTurn) {
-                switch(playerAction) {
-                    case 1:
-                        player.attack(opp);
-                        break;
-                    case 2:
-                        player.defend(opp);
-                        break;
-                    case 3:
-                        player.charge();
-                        break;
-                }
+            if(player.getWeapon().isBattleAxe()) {
+                player.gainSpd(5);
+                player.gainAtk(5);
 
-                switch(oppAction) {
-                    case 1:
-                        opp.attack(player);
-                        break;
-                    case 2:
-                        opp.defend(player);
-                        break;
-                    case 3:
-                        opp.charge();
-                        break;
-                }
-
-                player.setPrevAction(playerAction);
-                opp.setPrevAction(oppAction);
-                opp.resetAtkMult();
-            } else {
-                switch(oppAction) {
-                    case 1:
-                        opp.attack(player);
-                        break;
-                    case 2:
-                        opp.defend(player);
-                        break;
-                    case 3:
-                        opp.charge();
-                        break;
-                }
-
-                switch(playerAction) {
-                    case 1:
-                        player.attack(opp);
-                        break;
-                    case 2:
-                        player.defend(opp);
-                        break;
-                    case 3:
-                        player.charge();
-                        break;
-                }
-
-                player.setPrevAction(playerAction);
-                opp.setPrevAction(oppAction);
-                player.resetAtkMult();
-            }
-
-            // If player selected charge, set flag to true
-            if(player.getIsAtkCharged()) {
-                player.setAtk(player.getAtk() / 3);
-                player.setIsAtkCharged(false);
-
-                if(player.getWeapon().isBattleAxe()) {
-                    player.loseSpd(5);
-                    player.loseAtk(5);
-
-                    System.out.println("[LOG] Temporary battle axe buff removed");
-                }
-            }
-            if(player.getIsNextCharged()) {
-                player.setIsAtkCharged(true);
-                player.setIsNextCharged(false);
-                
-                if(player.getWeapon().isBattleAxe()) {
-                    player.gainSpd(5);
-                    player.gainAtk(5);
-
-                    System.out.println("[LOG] Temporary battle axe buff applied");
-                }
-            }
-
-            // If opponent selected charge, set flag to true
-            if(opp.getIsAtkCharged()) {
-                opp.setAtk(opp.getAtk() / 3);
-                opp.setIsAtkCharged(false);
-            }
-            if(opp.getIsNextCharged()) {
-                opp.setIsAtkCharged(true);
-                opp.setIsNextCharged(false);
-            }
-            
-            // If player defend is evade, set flag to true
-            if(player.getIsDefEvade()) {
-                opp.resetAtkMult();
-                player.setIsDefEvade(false);
-            }
-            if(player.getIsNextNotEvade()) {
-                player.setIsDefEvade(true);
-                player.setIsNextNotEvade(false);
-            }
-
-            // If game is over, check winner based on turn order
-            if(isGameOver()) {
-                if(compareSpeed(player, opp)) {
-                    if(opp.getHp() == 0)
-                        winner = player.getName();
-                    else if(player.getHp() == 0)
-                        winner = opp.getName();
-                } else {
-                    if(player.getHp() == 0)
-                        winner = opp.getName();
-                    else if(opp.getHp() == 0)
-                        winner = player.getName();
-                }
-            } else {
-                // Apply environment effects
-                applyEnvEffects();
-                System.out.println("[LOG] " + env.getName() + " effects applied");
-                
-                // Increment move counter
-                moveCounter++;
-                System.out.println("[LOG] Updated move count: " + moveCounter);
+                System.out.println("[LOG] Temporary battle axe buff applied");
             }
         }
 
-        // Display the final stats and declare winner
-        displayStats();
-        displayWinner(winner, moveCounter);
+        // If opponent selected charge, set flag to true
+        if(opp.getIsAtkCharged()) {
+            opp.setAtk(opp.getAtk() / 3);
+            opp.setIsAtkCharged(false);
+        }
+        if(opp.getIsNextCharged()) {
+            opp.setIsAtkCharged(true);
+            opp.setIsNextCharged(false);
+        }
+        
+        // If player defend is evade, set flag to true
+        if(player.getIsDefEvade()) {
+            opp.resetAtkMult();
+            player.setIsDefEvade(false);
+        }
+        if(player.getIsNextNotEvade()) {
+            player.setIsDefEvade(true);
+            player.setIsNextNotEvade(false);
+        }
+
+        // If game is over, check winner based on turn order
+        if(isGameOver()) {
+            if(compareSpeed(player, opp)) {
+                if(opp.getHp() == 0)
+                    winner = player.getName();
+                else if(player.getHp() == 0)
+                    winner = opp.getName();
+            } else {
+                if(player.getHp() == 0)
+                    winner = opp.getName();
+                else if(opp.getHp() == 0)
+                    winner = player.getName();
+            }
+            
+            System.out.println("[LOG] Final stats below");
+            displayStats();
+            gui.displayWinPanel(winner, moveCounter);
+            gui.getBtnReturn().addActionListener(this);
+            gui.revalidate();
+            gui.repaint();
+        } else {
+            // Apply environment effects
+            applyEnvEffects();
+            System.out.println("[LOG] " + env.getName() + " effects applied");
+            
+            // Increment move counter
+            moveCounter++;
+            System.out.println("[LOG] Updated move count: " + moveCounter);
+        }
+
+        gui.updateStats(player, opp, isGameOver());
+        gui.updateButtons(player);
+        gui.revalidate();
+        gui.repaint();
     }
 
 }

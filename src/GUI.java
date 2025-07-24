@@ -16,11 +16,25 @@ public class GUI extends JFrame {
     private JPanel oppPanel;
     private JPanel envPanel;
     private JPanel gamePanel;
+    private JPanel winPanel;
+
+    private JPanel panelButtons;
     
     private JLabel startBackground;
     private JLabel nameBackground;
     private JLabel namePrompt;
     private JLabel envBackground;
+
+    private JLabel playerArmorValue;
+    private JLabel playerWeaponValue;
+    private JLabel playerHPValue;
+    private JLabel playerAtkValue;
+    private JLabel playerDefValue;
+    private JLabel playerSpdValue;
+    private JLabel oppHPValue;
+    private JLabel oppAtkValue;
+    private JLabel oppDefValue;
+    private JLabel oppSpdValue;
     
     private JButton btnPlay;
     private JButton btnQuit;
@@ -45,14 +59,25 @@ public class GUI extends JFrame {
     private JButton btnSwamp;
     private JButton btnColosseum;
 
+    private JButton btnAttack;
+    private JButton btnDefend;
+    private JButton btnCharge;
+
+    private JButton btnReturn;
+
     private JTextField nameField;
 
     private ImageIcon icon;
     private ImageIcon startImg;
     private ImageIcon gameBackground;
 
-    private String oppName;
-    private String envName;
+    private String oppFileName;
+    private String envFileName;
+    private String currentTurn;
+    private String prevAction;
+
+    private boolean isAtkCharged;
+    private boolean isGameOver = false;
     
     public GUI() {
         super("Warrior");
@@ -63,7 +88,7 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout());
         setSize(1600, 900);
         
-        addMainPanel();
+        addSetupPanel();
         
         setVisible(true);
         setResizable(false);
@@ -72,7 +97,7 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void addMainPanel() {      
+    public void addSetupPanel() {
         startPanel = new JPanel();
         gamePanel = new JPanel();
         namePanel = new JPanel();
@@ -80,6 +105,7 @@ public class GUI extends JFrame {
         weaponPanel = new JPanel();
         oppPanel = new JPanel();
         envPanel = new JPanel();
+        winPanel = new JPanel();
 
         // Main card container panel
         mainLayout = new CardLayout(); 
@@ -88,33 +114,41 @@ public class GUI extends JFrame {
         // Start menu panel
         addStartPanel();
         mainPanel.add(startPanel, "startPanel");
+        System.out.println("[LOG] Added start panel to container");
 
         // Name input panel
         addNamePanel();
         mainPanel.add(namePanel, "namePanel");
+        System.out.println("[LOG] Added name panel to container");
 
         // Armor selection panel
         addArmorPanel();
         mainPanel.add(armorPanel, "armorPanel");
+        System.out.println("[LOG] Added armor panel to container");
 
         // Weapon selection panel
         addWeaponPanel();
         mainPanel.add(weaponPanel, "weaponPanel");
+        System.out.println("[LOG] Added weapon panel to container");
 
         // Opponent selection panel
         addOppPanel();
         mainPanel.add(oppPanel, "oppPanel");
+        System.out.println("[LOG] Added opp panel to container");
 
         // Environment selection panel
         addEnvPanel();
         mainPanel.add(envPanel, "envPanel");
-
-        // Main game panel
-        addGamePanel();
-        mainPanel.add(gamePanel, "gamePanel");
+        System.out.println("[LOG] Added env panel to container");
 
         this.add(mainPanel, BorderLayout.CENTER);
     }
+
+    // public void addGameToMainPanel() {
+    //     // Main game panel
+    //     addGamePanel();
+    //     mainPanel.add(gamePanel, "gamePanel");
+    // }
 
     private void addStartPanel() {
         startPanel.setLayout(new BorderLayout());
@@ -156,7 +190,7 @@ public class GUI extends JFrame {
         namePrompt = new JLabel("Enter your name:");
         namePrompt.setFont(new Font("Arial", Font.PLAIN, 20));
         
-        nameField = new JTextField(16);
+        nameField = new JTextField(12);
         nameField.setFont(new Font("Arial", Font.PLAIN, 20));
         nameField.setPreferredSize(new Dimension(100, 40));
         
@@ -803,43 +837,152 @@ public class GUI extends JFrame {
         System.out.println("[LOG] Environment panel created");
     }
 
-    private void addGamePanel() {
+    public void addGamePanel(Player player, Opponent opp) {
         gamePanel.setLayout(new BorderLayout());
 
         // Center panel
-        gameBackground = new ImageIcon(envName);
+        gameBackground = new ImageIcon(envFileName);
         envBackground = new JLabel(gameBackground);
         envBackground.setLayout(new BorderLayout());
         
         // North panel
         JPanel panelStats = new JPanel(new BorderLayout());
         panelStats.setOpaque(false);
-        panelStats.setPreferredSize(new Dimension(1500, 200));
+        panelStats.setPreferredSize(new Dimension(1600, 200));
 
-        JLabel gameHeader = new JLabel("North Panel");
+        JLabel gameHeader = new JLabel(opp.getName() + " " + prevAction, SwingConstants.CENTER);
         gameHeader.setForeground(Color.WHITE);
-        gameHeader.setFont(new Font("Arial", Font.BOLD, 30));
 
-        panelStats.add(gameHeader, BorderLayout.CENTER);
+        JPanel playerStats = new JPanel(new GridLayout(3, 1));
+        playerStats.setOpaque(false);
+        playerStats.setPreferredSize(new Dimension(700, 200));
+
+        JLabel playerNameLabel = new JLabel(player.getName(), SwingConstants.CENTER);
+        playerNameLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        playerNameLabel.setForeground(Color.WHITE);
+
+        JPanel playerLabels = new JPanel(new GridLayout(1, 6));
+        playerLabels.setOpaque(false);
+        
+        JLabel playerArmorLabel = new JLabel("Armor", SwingConstants.CENTER);
+        playerArmorLabel.setForeground(Color.WHITE);
+        JLabel playerWeaponLabel = new JLabel("Weapon", SwingConstants.CENTER);
+        playerWeaponLabel.setForeground(Color.WHITE);
+        JLabel playerHPLabel = new JLabel("HP", SwingConstants.CENTER);
+        playerHPLabel.setForeground(Color.WHITE);
+        JLabel playerAtkLabel = new JLabel("Attack", SwingConstants.CENTER);
+        playerAtkLabel.setForeground(Color.WHITE);
+        JLabel playerDefLabel = new JLabel("Defense", SwingConstants.CENTER);
+        playerDefLabel.setForeground(Color.WHITE);
+        JLabel playerSpdLabel = new JLabel("Speed", SwingConstants.CENTER);
+        playerSpdLabel.setForeground(Color.WHITE);
+        
+        playerLabels.add(playerArmorLabel);
+        playerLabels.add(playerWeaponLabel);
+        playerLabels.add(playerHPLabel);
+        playerLabels.add(playerAtkLabel);
+        playerLabels.add(playerDefLabel);
+        playerLabels.add(playerSpdLabel);
+        
+        JPanel playerValues = new JPanel(new GridLayout(1, 6));      
+        // playerValues.setFont(new Font("Arial", Font.PLAIN, 12));
+        playerValues.setOpaque(false);
+
+        playerArmorValue = new JLabel(player.getArmor().getName(), SwingConstants.CENTER);
+        playerArmorValue.setForeground(Color.WHITE);
+        playerWeaponValue = new JLabel(player.getWeapon().getName(), SwingConstants.CENTER);
+        playerWeaponValue.setForeground(Color.WHITE);
+        playerHPValue = new JLabel(String.valueOf(player.getHp()), SwingConstants.CENTER);
+        playerHPValue.setForeground(Color.WHITE);
+        playerAtkValue = new JLabel(String.valueOf(player.getAtk()), SwingConstants.CENTER);
+        playerAtkValue.setForeground(Color.WHITE);
+        playerDefValue = new JLabel(String.valueOf(player.getDef()), SwingConstants.CENTER);
+        playerDefValue.setForeground(Color.WHITE);
+        playerSpdValue = new JLabel(String.valueOf(player.getSpd()), SwingConstants.CENTER);
+        playerSpdValue.setForeground(Color.WHITE);
+
+        playerValues.add(playerArmorValue);
+        playerValues.add(playerWeaponValue);
+        playerValues.add(playerHPValue);
+        playerValues.add(playerAtkValue);
+        playerValues.add(playerDefValue);
+        playerValues.add(playerSpdValue);
+
+        playerStats.add(playerNameLabel);
+        playerStats.add(playerLabels);
+        playerStats.add(playerValues);
+        
+        JPanel oppStats = new JPanel(new GridLayout(3, 1));
+        oppStats.setOpaque(false);
+        oppStats.setPreferredSize(new Dimension(700, 200));
+
+        JLabel oppNameLabel = new JLabel(opp.getName(), SwingConstants.CENTER);
+        oppNameLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        oppNameLabel.setForeground(Color.WHITE);
+
+        JPanel oppLabels = new JPanel(new GridLayout(1, 4));
+        oppLabels.setOpaque(false);
+
+        JLabel oppHPLabel = new JLabel("HP", SwingConstants.CENTER);
+        oppHPLabel.setForeground(Color.WHITE);
+        JLabel oppAtkLabel = new JLabel("Attack", SwingConstants.CENTER);
+        oppAtkLabel.setForeground(Color.WHITE);
+        JLabel oppDefLabel = new JLabel("Defense", SwingConstants.CENTER);
+        oppDefLabel.setForeground(Color.WHITE);
+        JLabel oppSpdLabel = new JLabel("Speed", SwingConstants.CENTER);
+        oppSpdLabel.setForeground(Color.WHITE);
+
+        oppLabels.add(oppHPLabel);
+        oppLabels.add(oppAtkLabel);
+        oppLabels.add(oppDefLabel);
+        oppLabels.add(oppSpdLabel);
+
+        JPanel oppValues = new JPanel(new GridLayout(1, 4));
+        oppValues.setOpaque(false);
+
+        oppHPValue = new JLabel(String.valueOf(opp.getHp()), SwingConstants.CENTER);
+        oppHPValue.setForeground(Color.WHITE);
+        oppAtkValue = new JLabel(String.valueOf(opp.getAtk()), SwingConstants.CENTER);
+        oppAtkValue.setForeground(Color.WHITE);
+        oppDefValue = new JLabel(String.valueOf(opp.getDef()), SwingConstants.CENTER);
+        oppDefValue.setForeground(Color.WHITE);
+        oppSpdValue = new JLabel(String.valueOf(opp.getSpd()), SwingConstants.CENTER);
+        oppSpdValue.setForeground(Color.WHITE);
+
+        oppValues.add(oppHPValue);
+        oppValues.add(oppAtkValue);
+        oppValues.add(oppDefValue);
+        oppValues.add(oppSpdValue);
+
+        oppStats.add(oppNameLabel);
+        oppStats.add(oppLabels);
+        oppStats.add(oppValues);
+
+        // Add player and opponent stats to north panel
+        if(prevAction != null)
+            panelStats.add(gameHeader, BorderLayout.CENTER);
+
+        panelStats.add(playerStats, BorderLayout.WEST);
+        panelStats.add(oppStats, BorderLayout.EAST);
 
         envBackground.add(panelStats, BorderLayout.NORTH);
 
         // South panel
-        JPanel panelButtons = new JPanel();
+        panelButtons = new JPanel();
         panelButtons.setLayout(new FlowLayout());
         panelButtons.setOpaque(false);
 
-        JButton btnAttack = new JButton("Attack");
+        btnAttack = new JButton("Attack");
         btnAttack.setPreferredSize(new Dimension(200, 50));
-        btnAttack.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnAttack.setFont(new Font("Arial", Font.BOLD, 20));
 
-        JButton btnDefend = new JButton("Defend");
+        btnDefend = new JButton("Defend");
         btnDefend.setPreferredSize(new Dimension(200, 50));
-        btnDefend.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnDefend.setFont(new Font("Arial", Font.BOLD, 20));
         
-        JButton btnCharge = new JButton("Charge");
+        btnCharge = new JButton("Charge");
         btnCharge.setPreferredSize(new Dimension(200, 50));
-        btnCharge.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnCharge.setFont(new Font("Arial", Font.BOLD, 20));
 
         panelButtons.add(btnAttack);
         panelButtons.add(btnDefend);
@@ -848,7 +991,7 @@ public class GUI extends JFrame {
         // West panel
         ImageIcon playerSprite = new ImageIcon("Player.png");
         JLabel playerLabel = new JLabel(playerSprite, JLabel.CENTER);
-        playerLabel.setOpaque(false);
+        // playerLabel.setOpaque(false);
         playerLabel.setPreferredSize(new Dimension(260, 480));
         
         JPanel playerLabelFlow = new JPanel(new GridLayout(1,1));
@@ -857,9 +1000,9 @@ public class GUI extends JFrame {
         playerLabelFlow.add(playerLabel);
         
         // East panel
-        ImageIcon oppSprite = new ImageIcon(oppName);
+        ImageIcon oppSprite = new ImageIcon(oppFileName);
         JLabel oppLabel = new JLabel(oppSprite, JLabel.CENTER);
-        oppLabel.setOpaque(false);
+        // oppLabel.setOpaque(false);
         oppLabel.setPreferredSize(new Dimension(260, 480));
         
         JPanel oppLabelFlow = new JPanel(new GridLayout(1,1));
@@ -874,6 +1017,33 @@ public class GUI extends JFrame {
         gamePanel.add(envBackground, BorderLayout.CENTER);
 
         System.out.println("[LOG] Game panel created");
+    }
+
+    public void displayWinPanel(String winner, int moveCounter) {
+        winPanel = new JPanel(new BoxLayout(winPanel, BoxLayout.PAGE_AXIS));
+
+        JPanel winGrid = new JPanel(new GridLayout(3,1));
+
+        JLabel winnerLabel = new JLabel(winner + " won!", SwingConstants.CENTER);
+        winnerLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        winnerLabel.setPreferredSize(new Dimension(500, 200));
+
+        JLabel countLabel = new JLabel("The game was won in " + moveCounter + " moves", SwingConstants.CENTER);
+        countLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        countLabel.setPreferredSize(new Dimension(500, 200));
+
+        btnReturn = new JButton("Return to main menu");
+        btnReturn.setPreferredSize(new Dimension(300, 50));
+        btnReturn.setFont(new Font("Arial", Font.BOLD, 20));
+
+        winGrid.add(winnerLabel);
+        winGrid.add(countLabel);
+        winGrid.add(btnReturn);
+
+        winPanel.add(winGrid);
+        
+        mainPanel.add(winPanel, "winPanel");
+        mainLayout.show(mainPanel, "winPanel");
     }
 
     public void setActionListeners(ActionListener l) {
@@ -900,20 +1070,39 @@ public class GUI extends JFrame {
         btnColosseum.addActionListener(l);
     }
 
-    public void setOpp(String oppName) {
-        this.oppName = oppName;
+    public void updateStats(Player player, Opponent opp, boolean isGameOver) {
+        playerArmorValue.setText(String.valueOf(player.getArmor().getName()));
+        playerWeaponValue.setText(String.valueOf(player.getWeapon().getName()));
+        playerHPValue.setText(String.valueOf(player.getHp()));
+        playerAtkValue.setText(String.valueOf(player.getAtk()));
+        playerDefValue.setText(String.valueOf(player.getDef()));
+        playerSpdValue.setText(String.valueOf(player.getSpd()));
+
+        oppHPValue.setText(String.valueOf(opp.getHp()));
+        oppAtkValue.setText(String.valueOf(opp.getAtk()));
+        oppDefValue.setText(String.valueOf(opp.getDef()));
+        oppSpdValue.setText(String.valueOf(opp.getSpd()));
+
+        isAtkCharged = player.getIsAtkCharged();
+        this.isGameOver = isGameOver;
+
+        System.out.println("[LOG] Updated game stats");
     }
 
-    public void setEnvironment(String envName) {
-        this.envName = envName;
-    }
+    public void updateButtons(Player player) {
+        // Remove all action buttons
+        panelButtons.removeAll();
 
-    public void updateGamePanel() {
-        if (gamePanel != null)
-            mainPanel.remove(gamePanel);
+        // Add attack and defend buttons
+        panelButtons.add(btnAttack);
+        panelButtons.add(btnDefend);
 
-        addGamePanel();
-        mainPanel.add(gamePanel, "gamePanel");
+        // Add charge button if player attack is not charged
+        if(!player.isAtkCharged)
+            panelButtons.add(btnCharge);
+        
+        panelButtons.revalidate();
+        panelButtons.repaint();
     }
 
 
@@ -929,12 +1118,24 @@ public class GUI extends JFrame {
     public JPanel getStartPanel() {
         return this.startPanel;
     }
-    
+
+    public JPanel getGamePanel() {
+        return this.gamePanel;
+    }
+
+    public JPanel getWinPanel() {
+        return this.winPanel;
+    }
+
     public JPanel getMenuBtnPanel() {
         return this.menuBtnPanel;
     }
 
-    public JLabel getstartBackground() {
+    public JPanel getPanelButtons() {
+        return this.panelButtons;
+    }
+
+    public JLabel getStartBackground() {
         return this.startBackground;
     }
 
@@ -1006,8 +1207,38 @@ public class GUI extends JFrame {
         return this.btnColosseum;
     }
     
+    public JButton getBtnAttack() {
+        return this.btnAttack;
+    }
+    
+    public JButton getBtnDefend() {
+        return this.btnDefend;
+    }
+    
+    public JButton getBtnCharge() {
+        return this.btnCharge;
+    }
+
+    public JButton getBtnReturn() {
+        return this.btnReturn;
+    }
+
+    public String getCurrentTurn() {
+        return this.currentTurn;
+    }
+
     public JTextField getNameField() {
         return this.nameField;
+    }
+
+    /** 
+     * Checks if the current attack of the player is charged.
+     * 
+     * @return true if the current attack is charged,
+     *         false if the current attack is not charged
+     */
+    public boolean getIsAtkCharged() {
+        return this.isAtkCharged;
     }
 
 
@@ -1022,19 +1253,23 @@ public class GUI extends JFrame {
     
     public void setStartPanel(JPanel startPanel) {
         this.startPanel = startPanel;
-    }            
+    }
 
     public void setMenuBtnPanel(JPanel menuBtnPanel) {
         this.menuBtnPanel = menuBtnPanel;
-    }            
+    }
+
+    public void setPanelButtons(JPanel panelButtons) {
+        this.panelButtons = panelButtons;
+    }
 
     public void setstartBackground(JLabel startBackground) {
         this.startBackground = startBackground;
-    }        
+    }
 
     public void setBtnPlay(JButton btnPlay) {
         this.btnPlay = btnPlay;
-    }    
+    }
 
     public void setBtnQuit(JButton btnQuit) {
         this.btnQuit = btnQuit;
@@ -1096,8 +1331,46 @@ public class GUI extends JFrame {
         this.btnColosseum = btnColosseum;
     }
 
+    public void setBtnAttack(JButton btnAttack) {
+        this.btnAttack = btnAttack;
+    }
+
+    public void setBtnDefend(JButton btnDefend) {
+        this.btnDefend = btnDefend;
+    }
+    
+    public void setBtnCharge(JButton btnCharge) {
+        this.btnCharge = btnCharge;
+    }
+
+    public void setCurrentTurn(String currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public void setPrevAction(int prevAction) {
+        String[] action = new String[] {"attacked", "defended", "charged"};
+
+        this.prevAction = action[prevAction - 1];
+    }
+
     public void setNameField(JTextField nameField) {
         this.nameField = nameField;
     }
 
+    /** 
+     * Sets the flag indicating if the current attack of the player is charged.
+     * 
+     * @param isAtkCharged the flag to indicate if the current attack is charged
+     */
+    public void setIsAtkCharged(boolean isAtkCharged) {
+        this.isAtkCharged = isAtkCharged;
+    }
+
+    public void setOppFileName(String oppFileName) {
+        this.oppFileName = oppFileName;
+    }
+
+    public void setEnvironment(String envFileName) {
+        this.envFileName = envFileName;
+    }
 }

@@ -25,11 +25,11 @@ public class Driver {
      */
     public static void main(String[] args) {
         
-        // Game game = new Game();
         GUI gui = new GUI();
         new Controller(gui);
-        
-        // game.menu(sc);
+
+        // Controller con = new Controller(gui);
+        // con.menu();
 
     }
     
