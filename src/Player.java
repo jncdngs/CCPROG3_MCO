@@ -11,6 +11,8 @@ public class Player extends Character {
     
     private Armor armor;
     private Weapon weapon;
+    private boolean isDefEvade = false;
+    private boolean isNextNotEvade = false;
 
     /**
      * Constructs a character for the player with given base stats.
@@ -40,6 +42,14 @@ public class Player extends Character {
         return this.weapon;
     }
 
+    public boolean getIsDefEvade() {
+        return this.isDefEvade;
+    }
+
+    public boolean getIsNextNotEvade() {
+        return this.isNextNotEvade;
+    }
+
 
     
     /** 
@@ -64,6 +74,14 @@ public class Player extends Character {
         loseSpd(weapon.getSpdPen());
     }
 
+    public void setIsDefEvade(boolean isDefEvade) {
+        this.isDefEvade = isDefEvade;
+    }
+
+    public void setIsNextNotEvade(boolean isNextNotEvade) {
+        this.isNextNotEvade = isNextNotEvade;
+    }
+
 
 
     /** 
@@ -78,13 +96,15 @@ public class Player extends Character {
      */
     public void attack(Opponent opp) {
         int swordBuff = 0;
+        int dmg;
 
-        if(weapon.getName().equals("Sword")) {
+        if(weapon.isSword()) {
             swordBuff = 10;
             System.out.println("[LOG] Sword ability applied (+10 attack)");
         }
         
-        int dmg = ((int)(atk * atkMult - opp.getDef())) + swordBuff;
+        dmg = ((int)(atk * atkMult - opp.getDef())) + swordBuff;
+
         if(dmg < 0)
             dmg = 0;
         
@@ -98,7 +118,21 @@ public class Player extends Character {
      * @param opp the opponent object to defend from
      */
     public void defend(Opponent opp) {
-        opp.setAtkMult(0.5);
+        if(weapon.isDagger() && !isDefEvade) {
+            opp.setAtkMult(0.0);
+            isNextNotEvade = true;
+            System.out.println("[LOG] Dagger ability applied");
+        }
+        else {
+            opp.setAtkMult(0.5);
+        }
+
+        System.out.println("[LOG] " + name + " defended");
+
+        // if(!isAtkCharged) {
+        //     atk *= 3;
+        //     isNextCharged = true;
+        // }
     }
 
 
