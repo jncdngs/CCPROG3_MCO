@@ -30,6 +30,7 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == gui.getBtnPlay()) {
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
+            // gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to name selection panel");
         }
         else if(e.getSource() == gui.getBtnQuit()) {
@@ -110,6 +111,10 @@ public class Controller implements ActionListener {
             
             System.out.println("[LOG] Set opponent to \"" + opp.getName() + "\"");
 
+            String oppName = opp.getName() + ".png";
+            gui.setOpp(oppName);
+            System.out.println("[LOG] Set opponent sprite to \"" + oppName);
+
             gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
             System.out.println("[LOG] Switched to environment selection panel");
         }
@@ -126,8 +131,10 @@ public class Controller implements ActionListener {
             
             System.out.println("[LOG] Set environment to \"" + env.getName() + "\"");
 
-            gui.setEnvironment(env.getName() + ".png");
-            System.out.println("[LOG] Set game background to \"" + env.getName() + ".png\"");
+            String envName = env.getName() + ".png";
+            gui.setEnvironment(envName);
+            gui.updateGamePanel();
+            System.out.println("[LOG] Set game background to \"" + envName);
 
             gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to main game panel");
@@ -492,28 +499,50 @@ public class Controller implements ActionListener {
                 player.resetAtkMult();
             }
 
-            // If charge selected, set flag to true
+            // If player selected charge, set flag to true
             if(player.getIsAtkCharged()) {
                 player.setAtk(player.getAtk() / 3);
                 player.setIsAtkCharged(false);
+
+                if(player.getWeapon().isBattleAxe()) {
+                    player.loseSpd(5);
+                    player.loseAtk(5);
+
+                    System.out.println("[LOG] Temporary battle axe buff removed");
+                }
             }
-            // If charge selected, set flag to true
             if(player.getIsNextCharged()) {
                 player.setIsAtkCharged(true);
                 player.setIsNextCharged(false);
+                
+                if(player.getWeapon().isBattleAxe()) {
+                    player.gainSpd(5);
+                    player.gainAtk(5);
+
+                    System.out.println("[LOG] Temporary battle axe buff applied");
+                }
             }
 
-            // If charge selected, set flag to true
+            // If opponent selected charge, set flag to true
             if(opp.getIsAtkCharged()) {
                 opp.setAtk(opp.getAtk() / 3);
                 opp.setIsAtkCharged(false);
             }
-            // If charge selected, set flag to true
             if(opp.getIsNextCharged()) {
                 opp.setIsAtkCharged(true);
                 opp.setIsNextCharged(false);
             }
             
+            // If player defend is evade, set flag to true
+            if(player.getIsDefEvade()) {
+                opp.resetAtkMult();
+                player.setIsDefEvade(false);
+            }
+            if(player.getIsNextNotEvade()) {
+                player.setIsDefEvade(true);
+                player.setIsNextNotEvade(false);
+            }
+
             // If game is over, check winner based on turn order
             if(isGameOver()) {
                 if(compareSpeed(player, opp)) {
@@ -530,9 +559,11 @@ public class Controller implements ActionListener {
             } else {
                 // Apply environment effects
                 applyEnvEffects();
+                System.out.println("[LOG] " + env.getName() + " effects applied");
                 
                 // Increment move counter
                 moveCounter++;
+                System.out.println("[LOG] Updated move count: " + moveCounter);
             }
         }
 
