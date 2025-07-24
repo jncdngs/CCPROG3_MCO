@@ -77,7 +77,7 @@ public class GUI extends JFrame {
     private String prevAction;
 
     private boolean isAtkCharged;
-    private boolean isGameOver = false;
+    // private boolean isGameOver = false;
     
     public GUI() {
         super("Warrior");
@@ -141,14 +141,13 @@ public class GUI extends JFrame {
         mainPanel.add(envPanel, "envPanel");
         System.out.println("[LOG] Added env panel to container");
 
+        // Winner panel return button
+        btnReturn = new JButton("Return to main menu");
+        btnReturn.setPreferredSize(new Dimension(300, 50));
+        btnReturn.setFont(new Font("Arial", Font.BOLD, 20));
+
         this.add(mainPanel, BorderLayout.CENTER);
     }
-
-    // public void addGameToMainPanel() {
-    //     // Main game panel
-    //     addGamePanel();
-    //     mainPanel.add(gamePanel, "gamePanel");
-    // }
 
     private void addStartPanel() {
         startPanel.setLayout(new BorderLayout());
@@ -1032,10 +1031,6 @@ public class GUI extends JFrame {
         countLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         countLabel.setPreferredSize(new Dimension(500, 200));
 
-        btnReturn = new JButton("Return to main menu");
-        btnReturn.setPreferredSize(new Dimension(300, 50));
-        btnReturn.setFont(new Font("Arial", Font.BOLD, 20));
-
         winGrid.add(winnerLabel);
         winGrid.add(countLabel);
         winGrid.add(btnReturn);
@@ -1084,7 +1079,7 @@ public class GUI extends JFrame {
         oppSpdValue.setText(String.valueOf(opp.getSpd()));
 
         isAtkCharged = player.getIsAtkCharged();
-        this.isGameOver = isGameOver;
+        // this.isGameOver = isGameOver;
 
         System.out.println("[LOG] Updated game stats");
     }

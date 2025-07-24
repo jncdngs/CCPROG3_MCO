@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
 /**
  * Main controller for the game.
@@ -13,13 +12,13 @@ import java.util.Scanner;
 public class Controller implements ActionListener {
 
     private GUI gui;
-    private Scanner sc;
+    // private Scanner sc;
     private Player player;
     private Environment env;
     private Opponent opp;
     
-    private int menuOpt;
-    private int playerAction;
+    // private int menuOpt;
+    // private int playerAction;
     private int oppAction;
     private int moveCounter = 1;
     private boolean isPlayersTurn;
@@ -28,7 +27,7 @@ public class Controller implements ActionListener {
     public Controller(GUI gui) {
         this.gui = gui;
 
-        sc = new Scanner(System.in);
+        // sc = new Scanner(System.in);
         gui.setActionListeners(this);
     }
 
@@ -489,8 +488,8 @@ public class Controller implements ActionListener {
         // Compare speed of player and opponent
         isPlayersTurn = compareSpeed(player, opp);
         
-        // Ask for action
-        this.playerAction = playerAction;
+        // Determine opponent's action
+        // this.playerAction = playerAction;
         oppAction = opp.think(moveCounter);
 
         // Check if someone defended
