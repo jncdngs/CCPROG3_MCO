@@ -50,7 +50,7 @@ public abstract class Opponent extends Character {
      * @param player the player object to defend from
      */
     public void defend(Player player) {
-        player.setAtkMult(0.5f);
+        player.setAtkMult(0.5);
     }
     
     /**
