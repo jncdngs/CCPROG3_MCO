@@ -248,7 +248,7 @@ public abstract class Character {
      * Resets the attack multiplier of the player to 1.
      */
     public void resetAtkMult() {
-        this.atkMult = 1;
+        this.atkMult = 1.0;
     }
 
 
@@ -263,6 +263,8 @@ public abstract class Character {
         if(!isAtkCharged) {
             atk *= 3;
             isNextCharged = true;
+
+            System.out.println("[LOG] " + name + " charged");
         }
     }
 
