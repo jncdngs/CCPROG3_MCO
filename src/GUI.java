@@ -857,7 +857,7 @@ public class GUI extends JFrame {
         playerLabelFlow.add(playerLabel);
         
         // East panel
-        ImageIcon oppSprite = new ImageIcon("Minotaur.png");
+        ImageIcon oppSprite = new ImageIcon(oppName);
         JLabel oppLabel = new JLabel(oppSprite, JLabel.CENTER);
         oppLabel.setOpaque(false);
         oppLabel.setPreferredSize(new Dimension(260, 480));
