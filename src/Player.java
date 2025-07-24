@@ -109,7 +109,6 @@ public class Player extends Character {
             dmg = 0;
         
         opp.loseHp(dmg);
-        System.out.println("[LOG] " + name + " attacked");
     }
 
     /** 
@@ -144,7 +143,7 @@ public class Player extends Character {
      * defense, and speed.
      */
     public void displayStats() {
-        System.out.println("=========== Player ===========");
+        System.out.println("Player");
         System.out.println("Name:    " + getName());
         System.out.println("Armor:   " + getArmor().getName());
         System.out.println("Weapon:  " + getWeapon().getName());
