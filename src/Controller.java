@@ -20,7 +20,7 @@ public class Controller implements ActionListener {
     // private int menuOpt;
     // private int playerAction;
     private int oppAction;
-    private int moveCounter = 1;
+    private int moveCounter;
     private boolean isPlayersTurn;
     private String winner;
 
@@ -142,6 +142,9 @@ public class Controller implements ActionListener {
             String envName = env.getName() + ".png";
             gui.setEnvironment(envName);
             System.out.println("[LOG] Set game background to \"" + envName + "\"");
+
+            moveCounter = 1;
+            System.out.println("[LOG] Reset move counter");
             
             // gui.addGameToMainPanel();
             // gui.updateGamePanel();
