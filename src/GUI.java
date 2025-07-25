@@ -942,16 +942,27 @@ public class GUI extends JFrame {
         
         JLabel playerArmorLabel = new JLabel("Armor", SwingConstants.CENTER);
         playerArmorLabel.setForeground(Color.WHITE);
+        playerArmorLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel playerWeaponLabel = new JLabel("Weapon", SwingConstants.CENTER);
         playerWeaponLabel.setForeground(Color.WHITE);
+        playerWeaponLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel playerHPLabel = new JLabel("HP", SwingConstants.CENTER);
         playerHPLabel.setForeground(Color.WHITE);
+        playerHPLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel playerAtkLabel = new JLabel("Attack", SwingConstants.CENTER);
         playerAtkLabel.setForeground(Color.WHITE);
+        playerAtkLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel playerDefLabel = new JLabel("Defense", SwingConstants.CENTER);
         playerDefLabel.setForeground(Color.WHITE);
+        playerDefLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
         JLabel playerSpdLabel = new JLabel("Speed", SwingConstants.CENTER);
         playerSpdLabel.setForeground(Color.WHITE);
+        playerSpdLabel.setFont(new Font("Arial", Font.BOLD, 16));
         
         playerLabels.add(playerArmorLabel);
         playerLabels.add(playerWeaponLabel);
@@ -967,16 +978,27 @@ public class GUI extends JFrame {
 
         playerArmorValue = new JLabel(player.getArmor().getName(), SwingConstants.CENTER);
         playerArmorValue.setForeground(Color.WHITE);
+        playerArmorValue.setFont(new Font("Arial", Font.PLAIN, 16));
+
         playerWeaponValue = new JLabel(player.getWeapon().getName(), SwingConstants.CENTER);
         playerWeaponValue.setForeground(Color.WHITE);
+        playerWeaponValue.setFont(new Font("Arial", Font.PLAIN, 16));
+
         playerHPValue = new JLabel(String.valueOf(player.getHp()), SwingConstants.CENTER);
         playerHPValue.setForeground(Color.WHITE);
+        playerHPValue.setFont(new Font("Arial", Font.PLAIN, 16));
+
         playerAtkValue = new JLabel(String.valueOf(player.getAtk()), SwingConstants.CENTER);
         playerAtkValue.setForeground(Color.WHITE);
+        playerAtkValue.setFont(new Font("Arial", Font.PLAIN, 16));
+
         playerDefValue = new JLabel(String.valueOf(player.getDef()), SwingConstants.CENTER);
         playerDefValue.setForeground(Color.WHITE);
+        playerDefValue.setFont(new Font("Arial", Font.PLAIN, 16));
+
         playerSpdValue = new JLabel(String.valueOf(player.getSpd()), SwingConstants.CENTER);
         playerSpdValue.setForeground(Color.WHITE);
+        playerSpdValue.setFont(new Font("Arial", Font.PLAIN, 16));
 
         playerValues.add(playerArmorValue);
         playerValues.add(playerWeaponValue);
@@ -1005,12 +1027,16 @@ public class GUI extends JFrame {
 
         JLabel oppHPLabel = new JLabel("HP", SwingConstants.CENTER);
         oppHPLabel.setForeground(Color.WHITE);
+        oppHPLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JLabel oppAtkLabel = new JLabel("Attack", SwingConstants.CENTER);
         oppAtkLabel.setForeground(Color.WHITE);
+        oppAtkLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JLabel oppDefLabel = new JLabel("Defense", SwingConstants.CENTER);
         oppDefLabel.setForeground(Color.WHITE);
+        oppDefLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JLabel oppSpdLabel = new JLabel("Speed", SwingConstants.CENTER);
         oppSpdLabel.setForeground(Color.WHITE);
+        oppSpdLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         oppLabels.add(oppHPLabel);
         oppLabels.add(oppAtkLabel);
@@ -1023,12 +1049,16 @@ public class GUI extends JFrame {
 
         oppHPValue = new JLabel(String.valueOf(opp.getHp()), SwingConstants.CENTER);
         oppHPValue.setForeground(Color.WHITE);
+        oppHPValue.setFont(new Font("Arial", Font.PLAIN, 16));
         oppAtkValue = new JLabel(String.valueOf(opp.getAtk()), SwingConstants.CENTER);
         oppAtkValue.setForeground(Color.WHITE);
+        oppAtkValue.setFont(new Font("Arial", Font.PLAIN, 16));
         oppDefValue = new JLabel(String.valueOf(opp.getDef()), SwingConstants.CENTER);
         oppDefValue.setForeground(Color.WHITE);
+        oppDefValue.setFont(new Font("Arial", Font.PLAIN, 16));
         oppSpdValue = new JLabel(String.valueOf(opp.getSpd()), SwingConstants.CENTER);
         oppSpdValue.setForeground(Color.WHITE);
+        oppSpdValue.setFont(new Font("Arial", Font.PLAIN, 16));
 
         oppValues.add(oppHPValue);
         oppValues.add(oppAtkValue);
@@ -1108,7 +1138,7 @@ public class GUI extends JFrame {
         winPanel.setLayout(new GridBagLayout());
 
         JPanel winGrid = new JPanel(new GridLayout(3,1));
-        winGrid.setPreferredSize(new Dimension(800, 200));
+        winGrid.setPreferredSize(new Dimension(1400, 200));
 
         JLabel winnerLabel = new JLabel(winner + " won!", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 50));
