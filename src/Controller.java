@@ -13,8 +13,8 @@ public class Controller implements ActionListener {
 
     private GUI gui;
     private Player player;
-    private Environment env;
     private Opponent opp;
+    private Environment env;
     
     private int oppAction;
     private int moveCounter;
