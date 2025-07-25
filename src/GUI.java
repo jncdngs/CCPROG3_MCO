@@ -35,6 +35,7 @@ public class GUI extends JFrame {
     private JLabel oppAtkValue;
     private JLabel oppDefValue;
     private JLabel oppSpdValue;
+    private JLabel gameHeader;
     
     private JButton btnPlay;
     private JButton btnQuit;
@@ -74,17 +75,18 @@ public class GUI extends JFrame {
     private String oppFileName;
     private String envFileName;
     private String currentTurn;
-    private String prevAction;
 
     private boolean isAtkCharged;
-    // private boolean isGameOver = false;
     
     public GUI() {
+        // Set window name
         super("Warrior");
-                
+
+        // Set window icon
         icon = new ImageIcon("Icon.png");
         setIconImage(icon.getImage());
         
+        // Set size and layout
         setLayout(new BorderLayout());
         setSize(1600, 900);
         
@@ -143,33 +145,39 @@ public class GUI extends JFrame {
 
         // Winner panel return button
         btnReturn = new JButton("Return to main menu");
-        btnReturn.setPreferredSize(new Dimension(200, 50));
+        btnReturn.setPreferredSize(new Dimension(300, 50));
         btnReturn.setFont(new Font("Arial", Font.BOLD, 20));
 
+        // Add to frame
         this.add(mainPanel, BorderLayout.CENTER);
     }
 
     private void addStartPanel() {
         startPanel.setLayout(new BorderLayout());
         
-        // Center panel
+        // CENTER PANEL
+        // Set background image
         startImg = new ImageIcon("Background.png");
         startBackground = new JLabel(startImg);
         startBackground.setLayout(new BorderLayout());
         
-        // South panel
+        // SOUTH PANEL
+        // Set layout for buttons
         menuBtnPanel = new JPanel(new FlowLayout());
         menuBtnPanel.setOpaque(false);
         menuBtnPanel.setPreferredSize(new Dimension(300, 300));
 
+        // Add play button
         btnPlay = new JButton("Play");
         btnPlay.setPreferredSize(new Dimension(200, 50));
         btnPlay.setFont(new Font("Arial", Font.PLAIN, 20));
         
+        // Add quit button
         btnQuit = new JButton("Quit");
         btnQuit.setPreferredSize(new Dimension(200, 50));
         btnQuit.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        // Add buttons to button panel
         menuBtnPanel.add(btnPlay);
         menuBtnPanel.add(btnQuit);
 
@@ -185,14 +193,17 @@ public class GUI extends JFrame {
     private void addNamePanel() {
         namePanel.setLayout(new BorderLayout());
         
-        // Center panel
+        // CENTER PANEL
+        // Add prompt
         namePrompt = new JLabel("Enter your name:");
         namePrompt.setFont(new Font("Arial", Font.PLAIN, 20));
         
+        // Add text box
         nameField = new JTextField(12);
         nameField.setFont(new Font("Arial", Font.PLAIN, 20));
         nameField.setPreferredSize(new Dimension(100, 40));
         
+        // Add enter button
         btnName = new JButton("Enter");
         btnName.setFont(new Font("Arial", Font.PLAIN, 20));
         btnName.setPreferredSize(new Dimension(100, 40));
@@ -201,11 +212,12 @@ public class GUI extends JFrame {
         nameMenu.setOpaque(false);
         nameMenu.setPreferredSize(new Dimension(300, 300));
 
+        // Add prompt, text box, and button to panel
         nameMenu.add(namePrompt);
         nameMenu.add(nameField);
         nameMenu.add(btnName);
 
-        // Background
+        // Set background image
         nameBackground = new JLabel(startImg);
         nameBackground.setLayout(new BorderLayout());
 
@@ -219,7 +231,7 @@ public class GUI extends JFrame {
     private void addArmorPanel() {
         armorPanel.setLayout(new BorderLayout());
         
-        // North panel
+        // NORTH PANEL
         JPanel armorNorth = new JPanel(new FlowLayout());
         armorNorth.setOpaque(false);
         
@@ -229,7 +241,7 @@ public class GUI extends JFrame {
 
         armorNorth.add(armorHeader);
 
-        // South panel
+        // SOUTH PANEL
         JPanel armorSouth = new JPanel(new FlowLayout());
         armorSouth.setOpaque(false);
 
@@ -239,12 +251,13 @@ public class GUI extends JFrame {
 
         armorSouth.add(btnNoArmor);
 
-        // West panel
+        // WEST PANEL
         JPanel armorWest = new JPanel();
         armorWest.setLayout(new BoxLayout(armorWest, BoxLayout.PAGE_AXIS));
         armorWest.setOpaque(false);
         armorWest.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon westIcon = new ImageIcon("Light.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
         westIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -253,6 +266,7 @@ public class GUI extends JFrame {
         westIconFlow.setPreferredSize(new Dimension(250, 300));
         westIconFlow.add(westIconLabel);
 
+        // Add stats
         JPanel westStats = new JPanel(new GridLayout(2,1));
         westStats.setPreferredSize(new Dimension(300, 200));
 
@@ -264,6 +278,7 @@ public class GUI extends JFrame {
         westSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         westSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnLight = new JButton("Light");
         btnLight.setFont(new Font("Arial", Font.BOLD, 20));
         btnLight.setPreferredSize(new Dimension(200, 50));
@@ -271,19 +286,22 @@ public class GUI extends JFrame {
         JPanel btnLightFlow = new JPanel(new FlowLayout());
         btnLightFlow.add(btnLight);
 
+        // Add to stats panel
         westStats.add(westDef);
         westStats.add(westSpd);
 
+        // Add to west panel
         armorWest.add(westIconFlow);
         armorWest.add(westStats);
         armorWest.add(btnLightFlow);
 
-        // Center panel
+        // CENTER PANEL
         JPanel armorCenter = new JPanel();
         armorCenter.setLayout(new BoxLayout(armorCenter, BoxLayout.PAGE_AXIS));
         armorCenter.setOpaque(false);
         armorCenter.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon centerIcon = new ImageIcon("Medium.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
         centerIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -292,6 +310,7 @@ public class GUI extends JFrame {
         centerIconFlow.setPreferredSize(new Dimension(250, 300));
         centerIconFlow.add(centerIconLabel);
 
+        // Add stats
         JPanel centerStats = new JPanel(new GridLayout(2,1));
         centerStats.setPreferredSize(new Dimension(300, 200));
 
@@ -303,6 +322,7 @@ public class GUI extends JFrame {
         centerSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         centerSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnMedium = new JButton("Medium");
         btnMedium.setFont(new Font("Arial", Font.BOLD, 20));
         btnMedium.setPreferredSize(new Dimension(200, 50));
@@ -310,19 +330,22 @@ public class GUI extends JFrame {
         JPanel btnMediumFlow = new JPanel(new FlowLayout());
         btnMediumFlow.add(btnMedium);
 
+        // Add to stats panel
         centerStats.add(centerDef);
         centerStats.add(centerSpd);
 
+        // Add to center panel
         armorCenter.add(centerIconFlow);
         armorCenter.add(centerStats);
         armorCenter.add(btnMediumFlow);
 
-        // East panel
+        // EAST PANEL
         JPanel armorEast = new JPanel(new GridBagLayout());
         armorEast.setLayout(new BoxLayout(armorEast, BoxLayout.PAGE_AXIS));
         armorEast.setOpaque(false);
         armorEast.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon eastIcon = new ImageIcon("Heavy.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
         eastIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -331,6 +354,7 @@ public class GUI extends JFrame {
         eastIconFlow.setPreferredSize(new Dimension(250, 300));
         eastIconFlow.add(eastIconLabel);
 
+        // Add stats
         JPanel eastStats = new JPanel(new GridLayout(2,1));
         eastStats.setPreferredSize(new Dimension(300, 200));
 
@@ -342,6 +366,7 @@ public class GUI extends JFrame {
         eastSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         eastSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnHeavy = new JButton("Heavy");
         btnHeavy.setFont(new Font("Arial", Font.BOLD, 20));
         btnHeavy.setPreferredSize(new Dimension(200, 50));
@@ -349,14 +374,16 @@ public class GUI extends JFrame {
         JPanel btnHeavyFlow = new JPanel(new FlowLayout());
         btnHeavyFlow.add(btnHeavy);
 
+        // Add to stats panel
         eastStats.add(eastDef);
         eastStats.add(eastSpd);
 
+        // Add to east panel
         armorEast.add(eastIconFlow);
         armorEast.add(eastStats);
         armorEast.add(btnHeavyFlow);
 
-        // Add to armor panel
+        // Add all panels to armor panel
         armorPanel.add(armorNorth, BorderLayout.NORTH);
         armorPanel.add(armorSouth, BorderLayout.SOUTH);
         armorPanel.add(armorWest, BorderLayout.WEST);
@@ -369,7 +396,7 @@ public class GUI extends JFrame {
     private void addWeaponPanel() {
         weaponPanel.setLayout(new BorderLayout());
         
-        // North panel
+        // NORTH PANEL
         JPanel weaponNorth = new JPanel(new FlowLayout());
         weaponNorth.setOpaque(false);
         
@@ -379,7 +406,7 @@ public class GUI extends JFrame {
 
         weaponNorth.add(weaponHeader);
 
-        // South panel
+        // SOUTH PANEL
         JPanel weaponSouth = new JPanel(new FlowLayout());
         weaponSouth.setOpaque(false);
 
@@ -389,11 +416,12 @@ public class GUI extends JFrame {
 
         weaponSouth.add(btnNoWeapon);
 
-        // West panel
+        // WEST PANEL
         JPanel weaponWest = new JPanel(new GridLayout(3, 1));
         weaponWest.setOpaque(false);
         weaponWest.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon westIcon = new ImageIcon("Dagger.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
         westIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -402,6 +430,7 @@ public class GUI extends JFrame {
         westIconFlow.setPreferredSize(new Dimension(130, 240));
         westIconFlow.add(westIconLabel);
 
+        // Add stats
         JPanel westStats = new JPanel(new GridLayout(3,1));
         westStats.setPreferredSize(new Dimension(600, 700));
 
@@ -418,6 +447,7 @@ public class GUI extends JFrame {
         westAbility.setFont(new Font("Arial", Font.PLAIN, 14));
         westAbility.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnDagger = new JButton("Dagger");
         btnDagger.setFont(new Font("Arial", Font.BOLD, 20));
         btnDagger.setPreferredSize(new Dimension(200, 50));
@@ -425,19 +455,22 @@ public class GUI extends JFrame {
         JPanel btnDaggerFlow = new JPanel(new FlowLayout());
         btnDaggerFlow.add(btnDagger);
 
+        // Add to stats panel
         westStats.add(westAtk);
         westStats.add(westSpd);
         westStats.add(westAbility);
 
+        // Add to west panel
         weaponWest.add(westIconFlow);
         weaponWest.add(westStats);
         weaponWest.add(btnDaggerFlow);
 
-        // Center panel
+        // CENTER PANEL
         JPanel weaponCenter = new JPanel(new GridLayout(3, 1));
         weaponCenter.setOpaque(false);
         weaponCenter.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon centerIcon = new ImageIcon("Sword.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
         centerIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -446,6 +479,7 @@ public class GUI extends JFrame {
         centerIconFlow.setPreferredSize(new Dimension(130, 240));
         centerIconFlow.add(centerIconLabel);
 
+        // Add stats
         JPanel centerStats = new JPanel(new GridLayout(3,1));
         centerStats.setPreferredSize(new Dimension(600, 700));
 
@@ -462,6 +496,7 @@ public class GUI extends JFrame {
         centerAbility.setFont(new Font("Arial", Font.PLAIN, 14));
         centerAbility.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnSword = new JButton("Sword");
         btnSword.setFont(new Font("Arial", Font.BOLD, 20));
         btnSword.setPreferredSize(new Dimension(200, 50));
@@ -469,19 +504,22 @@ public class GUI extends JFrame {
         JPanel btnSwordFlow = new JPanel(new FlowLayout());
         btnSwordFlow.add(btnSword);
 
+        // Add to stats panel
         centerStats.add(centerAtk);
         centerStats.add(centerSpd);
         centerStats.add(centerAbility);
 
+        // Add to center panel
         weaponCenter.add(centerIconFlow);
         weaponCenter.add(centerStats);
         weaponCenter.add(btnSwordFlow);
 
-        // East panel
+        // EAST PANEL
         JPanel weaponEast = new JPanel(new GridLayout(3, 1));
         weaponEast.setOpaque(false);
         weaponEast.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon eastIcon = new ImageIcon("BattleAxe.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
         eastIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -490,6 +528,7 @@ public class GUI extends JFrame {
         eastIconFlow.setPreferredSize(new Dimension(130, 240));
         eastIconFlow.add(eastIconLabel);
 
+        // Add stats
         JPanel eastStats = new JPanel(new GridLayout(3,1));
         eastStats.setPreferredSize(new Dimension(600, 700));
 
@@ -506,6 +545,7 @@ public class GUI extends JFrame {
         eastAbility.setFont(new Font("Arial", Font.PLAIN, 14));
         eastAbility.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnAxe = new JButton("Battle Axe");
         btnAxe.setFont(new Font("Arial", Font.BOLD, 20));
         btnAxe.setPreferredSize(new Dimension(200, 50));
@@ -513,10 +553,12 @@ public class GUI extends JFrame {
         JPanel btnAxeFlow = new JPanel(new FlowLayout());
         btnAxeFlow.add(btnAxe);
 
+        // Add to stats panel
         eastStats.add(eastAtk);
         eastStats.add(eastSpd);
         eastStats.add(eastAbility);
 
+        // Add to east panel
         weaponEast.add(eastIconFlow);
         weaponEast.add(eastStats);
         weaponEast.add(btnAxeFlow);
@@ -534,7 +576,7 @@ public class GUI extends JFrame {
     private void addOppPanel() {
         oppPanel.setLayout(new BorderLayout());
         
-        // North panel
+        // NORTH PANEL
         JPanel oppNorth = new JPanel(new FlowLayout());
         oppNorth.setOpaque(false);
         
@@ -544,11 +586,12 @@ public class GUI extends JFrame {
 
         oppNorth.add(oppHeader);
 
-        // West panel
+        // WEST PANEL
         JPanel oppWest = new JPanel(new GridLayout(3, 1));
         oppWest.setOpaque(false);
         oppWest.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon westIcon = new ImageIcon("ThiefThumb.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
         westIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -557,6 +600,7 @@ public class GUI extends JFrame {
         westIconFlow.setPreferredSize(new Dimension(130, 240));
         westIconFlow.add(westIconLabel);
         
+        // Add stats
         JPanel westStats = new JPanel(new GridLayout(4, 1));
         westStats.setPreferredSize(new Dimension(600, 700));
 
@@ -576,6 +620,7 @@ public class GUI extends JFrame {
         westSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         westSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnThief = new JButton("Thief");
         btnThief.setFont(new Font("Arial", Font.BOLD, 20));
         btnThief.setPreferredSize(new Dimension(200, 50));
@@ -583,20 +628,23 @@ public class GUI extends JFrame {
         JPanel btnThiefFlow = new JPanel(new FlowLayout());
         btnThiefFlow.add(btnThief);
 
+        // Add to stats panel
         westStats.add(westHp);
         westStats.add(westAtk);
         westStats.add(westDef);
         westStats.add(westSpd);
 
+        // Add to west panel
         oppWest.add(westIconFlow);
         oppWest.add(westStats);
         oppWest.add(btnThiefFlow);
 
-        // Center panel
+        // CENTER PANEL
         JPanel oppCenter = new JPanel(new GridLayout(3, 1));
         oppCenter.setOpaque(false);
         oppCenter.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon centerIcon = new ImageIcon("VikingThumb.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
         centerIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -605,6 +653,7 @@ public class GUI extends JFrame {
         centerIconFlow.setPreferredSize(new Dimension(130, 240));
         centerIconFlow.add(centerIconLabel);        
 
+        // Add stats
         JPanel centerStats = new JPanel(new GridLayout(4,1));
         centerStats.setPreferredSize(new Dimension(600, 700));
 
@@ -624,6 +673,7 @@ public class GUI extends JFrame {
         centerSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         centerSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnViking = new JButton("Viking");
         btnViking.setFont(new Font("Arial", Font.BOLD, 20));
         btnViking.setPreferredSize(new Dimension(200, 50));
@@ -631,20 +681,23 @@ public class GUI extends JFrame {
         JPanel btnVikingFlow = new JPanel(new FlowLayout());
         btnVikingFlow.add(btnViking);
 
+        // Add to stats panel
         centerStats.add(centerHp);
         centerStats.add(centerAtk);
         centerStats.add(centerDef);
         centerStats.add(centerSpd);
 
+        // Add to center panel
         oppCenter.add(centerIconFlow);
         oppCenter.add(centerStats);
         oppCenter.add(btnVikingFlow);
         
-        // East panel
+        // EAST PANEL
         JPanel oppEast = new JPanel(new GridLayout(3, 1));
         oppEast.setOpaque(false);
         oppEast.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon eastIcon = new ImageIcon("MinotaurThumb.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
         eastIconLabel.setPreferredSize(new Dimension(250, 275));
@@ -653,6 +706,7 @@ public class GUI extends JFrame {
         eastIconFlow.setPreferredSize(new Dimension(130, 240));
         eastIconFlow.add(eastIconLabel);        
 
+        // Add stats
         JPanel eastStats = new JPanel(new GridLayout(4,1));
         eastStats.setPreferredSize(new Dimension(600, 700));
 
@@ -672,6 +726,7 @@ public class GUI extends JFrame {
         eastSpd.setFont(new Font("Arial", Font.PLAIN, 20));
         eastSpd.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnMinotaur = new JButton("Minotaur");
         btnMinotaur.setFont(new Font("Arial", Font.BOLD, 20));
         btnMinotaur.setPreferredSize(new Dimension(200, 50));
@@ -679,16 +734,18 @@ public class GUI extends JFrame {
         JPanel btnMinotaurFlow = new JPanel(new FlowLayout());
         btnMinotaurFlow.add(btnMinotaur);
 
+        // Add to stats panel
         eastStats.add(eastHp);
         eastStats.add(eastAtk);
         eastStats.add(eastDef);
         eastStats.add(eastSpd);
 
+        // Add to east panel
         oppEast.add(eastIconFlow);
         oppEast.add(eastStats);
         oppEast.add(btnMinotaurFlow);
 
-        // Add to opponent panel
+        // Add all panels to opponent panel
         oppPanel.add(oppNorth, BorderLayout.NORTH);
         oppPanel.add(oppWest, BorderLayout.WEST);
         oppPanel.add(oppCenter, BorderLayout.CENTER);
@@ -700,7 +757,7 @@ public class GUI extends JFrame {
     private void addEnvPanel() {
         envPanel.setLayout(new BorderLayout());
         
-        // North panel
+        // NORTH PANEL
         JPanel envNorth = new JPanel(new FlowLayout());
         envNorth.setOpaque(false);
         
@@ -710,12 +767,13 @@ public class GUI extends JFrame {
 
         envNorth.add(envHeader);
 
-        // West panel
+        // WEST PANEL
         JPanel envWest = new JPanel();
         envWest.setLayout(new BoxLayout(envWest, BoxLayout.PAGE_AXIS));
         envWest.setOpaque(false);
         envWest.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon westIcon = new ImageIcon("ArenaThumb.png");
         JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
         westIconLabel.setPreferredSize(new Dimension(400, 300));
@@ -724,6 +782,7 @@ public class GUI extends JFrame {
         westIconFlow.setPreferredSize(new Dimension(300, 300));
         westIconFlow.add(westIconLabel);
 
+        // Add stats
         JPanel westStats = new JPanel(new GridLayout(2,1));
         westStats.setPreferredSize(new Dimension(300, 200));
 
@@ -735,6 +794,7 @@ public class GUI extends JFrame {
         westOpp.setFont(new Font("Arial", Font.PLAIN, 20));
         westOpp.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnArena = new JButton("Arena");
         btnArena.setFont(new Font("Arial", Font.BOLD, 20));
         btnArena.setPreferredSize(new Dimension(200, 50));
@@ -742,19 +802,22 @@ public class GUI extends JFrame {
         JPanel btnArenaFlow = new JPanel(new FlowLayout());
         btnArenaFlow.add(btnArena);
 
+        // Add to stats panel
         westStats.add(westPlayer);
         westStats.add(westOpp);
         
+        // Add to west panel
         envWest.add(westIconFlow);
         envWest.add(westStats);
         envWest.add(btnArenaFlow);
         
-        // Center panel
+        // CENTER PANEL
         JPanel envCenter = new JPanel();
         envCenter.setLayout(new BoxLayout(envCenter, BoxLayout.PAGE_AXIS));
         envCenter.setOpaque(false);
         envCenter.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon centerIcon = new ImageIcon("SwampThumb.png");
         JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
         centerIconLabel.setPreferredSize(new Dimension(400, 300));
@@ -763,6 +826,7 @@ public class GUI extends JFrame {
         centerIconFlow.setPreferredSize(new Dimension(300, 300));
         centerIconFlow.add(centerIconLabel);
 
+        // Add stats
         JPanel centerStats = new JPanel(new GridLayout(2,1));
         centerStats.setPreferredSize(new Dimension(300, 200));
 
@@ -774,6 +838,7 @@ public class GUI extends JFrame {
         centerOpp.setFont(new Font("Arial", Font.PLAIN, 20));
         centerOpp.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnSwamp = new JButton("Swamp");
         btnSwamp.setFont(new Font("Arial", Font.BOLD, 20));
         btnSwamp.setPreferredSize(new Dimension(200, 50));
@@ -781,19 +846,22 @@ public class GUI extends JFrame {
         JPanel btnSwampFlow = new JPanel(new FlowLayout());
         btnSwampFlow.add(btnSwamp);
 
+        // Add to stats panel
         centerStats.add(centerPlayer);
         centerStats.add(centerOpp);
         
+        // Add to center panel
         envCenter.add(centerIconFlow);
         envCenter.add(centerStats);
         envCenter.add(btnSwampFlow);
 
-        // East panel
+        // EAST PANEL
         JPanel envEast = new JPanel();
         envEast.setLayout(new BoxLayout(envEast, BoxLayout.PAGE_AXIS));
         envEast.setOpaque(false);
         envEast.setPreferredSize(new Dimension(500, 700));
 
+        // Add icon
         ImageIcon eastIcon = new ImageIcon("ColosseumThumb.png");
         JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
         eastIconLabel.setPreferredSize(new Dimension(400, 300));
@@ -802,6 +870,7 @@ public class GUI extends JFrame {
         eastIconFlow.setPreferredSize(new Dimension(300, 300));
         eastIconFlow.add(eastIconLabel);
 
+        // Add stats
         JPanel eastStats = new JPanel(new GridLayout(2,1));
         eastStats.setPreferredSize(new Dimension(300, 200));
 
@@ -813,6 +882,7 @@ public class GUI extends JFrame {
         eastOpp.setFont(new Font("Arial", Font.PLAIN, 20));
         eastOpp.setPreferredSize(new Dimension(200, 100));
 
+        // Add select button
         btnColosseum = new JButton("Colosseum");
         btnColosseum.setFont(new Font("Arial", Font.BOLD, 20));
         btnColosseum.setPreferredSize(new Dimension(200, 50));
@@ -820,14 +890,16 @@ public class GUI extends JFrame {
         JPanel btnColosseumFlow = new JPanel(new FlowLayout());
         btnColosseumFlow.add(btnColosseum);
 
+        // Add to stats panel
         eastStats.add(eastPlayer);
         eastStats.add(eastOpp);
         
+        // Add to east panel
         envEast.add(eastIconFlow);
         envEast.add(eastStats);
         envEast.add(btnColosseumFlow);
         
-        // Add to environment panel
+        // Add all panels to environment panel
         envPanel.add(envNorth, BorderLayout.NORTH);
         envPanel.add(envWest, BorderLayout.WEST);
         envPanel.add(envCenter, BorderLayout.CENTER);
@@ -839,27 +911,32 @@ public class GUI extends JFrame {
     public void addGamePanel(Player player, Opponent opp) {
         gamePanel.setLayout(new BorderLayout());
 
-        // Center panel
+        // CENTER PANEL
         gameBackground = new ImageIcon(envFileName);
         envBackground = new JLabel(gameBackground);
         envBackground.setLayout(new BorderLayout());
         
-        // North panel
+        // NORTH PANEL
         JPanel panelStats = new JPanel(new BorderLayout());
         panelStats.setOpaque(false);
         panelStats.setPreferredSize(new Dimension(1600, 200));
 
-        JLabel gameHeader = new JLabel(opp.getName() + " " + prevAction, SwingConstants.CENTER);
+        // Add game header panel
+        gameHeader = new JLabel("FIGHT!", SwingConstants.CENTER);
+        gameHeader.setFont(new Font("Arial", Font.BOLD, 16));
         gameHeader.setForeground(Color.WHITE);
 
+        // Add player stats panel
         JPanel playerStats = new JPanel(new GridLayout(3, 1));
         playerStats.setOpaque(false);
         playerStats.setPreferredSize(new Dimension(700, 200));
 
+        // Add player name
         JLabel playerNameLabel = new JLabel(player.getName(), SwingConstants.CENTER);
         playerNameLabel.setFont(new Font("Arial", Font.BOLD, 30));
         playerNameLabel.setForeground(Color.WHITE);
 
+        // Add player stat labels
         JPanel playerLabels = new JPanel(new GridLayout(1, 6));
         playerLabels.setOpaque(false);
         
@@ -883,6 +960,7 @@ public class GUI extends JFrame {
         playerLabels.add(playerDefLabel);
         playerLabels.add(playerSpdLabel);
         
+        // Add player stat values
         JPanel playerValues = new JPanel(new GridLayout(1, 6));      
         // playerValues.setFont(new Font("Arial", Font.PLAIN, 12));
         playerValues.setOpaque(false);
@@ -911,14 +989,17 @@ public class GUI extends JFrame {
         playerStats.add(playerLabels);
         playerStats.add(playerValues);
         
+        // Add opponent stats panel
         JPanel oppStats = new JPanel(new GridLayout(3, 1));
         oppStats.setOpaque(false);
         oppStats.setPreferredSize(new Dimension(700, 200));
 
+        // Add opponent name
         JLabel oppNameLabel = new JLabel(opp.getName(), SwingConstants.CENTER);
         oppNameLabel.setFont(new Font("Arial", Font.BOLD, 30));
         oppNameLabel.setForeground(Color.WHITE);
 
+        // Add opponent stat labels
         JPanel oppLabels = new JPanel(new GridLayout(1, 4));
         oppLabels.setOpaque(false);
 
@@ -936,6 +1017,7 @@ public class GUI extends JFrame {
         oppLabels.add(oppDefLabel);
         oppLabels.add(oppSpdLabel);
 
+        // Add opponent stat values
         JPanel oppValues = new JPanel(new GridLayout(1, 4));
         oppValues.setOpaque(false);
 
@@ -958,39 +1040,42 @@ public class GUI extends JFrame {
         oppStats.add(oppValues);
 
         // Add player and opponent stats to north panel
-        if(prevAction != null)
-            panelStats.add(gameHeader, BorderLayout.CENTER);
+        panelStats.add(gameHeader, BorderLayout.CENTER);
 
         panelStats.add(playerStats, BorderLayout.WEST);
         panelStats.add(oppStats, BorderLayout.EAST);
 
         envBackground.add(panelStats, BorderLayout.NORTH);
 
-        // South panel
+        // SOUTH PANEL
         panelButtons = new JPanel();
         panelButtons.setLayout(new FlowLayout());
         panelButtons.setOpaque(false);
 
+        // Add attack button
         btnAttack = new JButton("Attack");
         btnAttack.setPreferredSize(new Dimension(200, 50));
         btnAttack.setFont(new Font("Arial", Font.BOLD, 20));
 
+        // Add defend button
         btnDefend = new JButton("Defend");
         btnDefend.setPreferredSize(new Dimension(200, 50));
         btnDefend.setFont(new Font("Arial", Font.BOLD, 20));
         
+        // Add charge button
         btnCharge = new JButton("Charge");
         btnCharge.setPreferredSize(new Dimension(200, 50));
         btnCharge.setFont(new Font("Arial", Font.BOLD, 20));
 
+        // Add buttons to button panel
         panelButtons.add(btnAttack);
         panelButtons.add(btnDefend);
         panelButtons.add(btnCharge);
 
-        // West panel
+        // WEST PANEL
+        // Add player sprite
         ImageIcon playerSprite = new ImageIcon("Player.png");
         JLabel playerLabel = new JLabel(playerSprite, JLabel.CENTER);
-        // playerLabel.setOpaque(false);
         playerLabel.setPreferredSize(new Dimension(260, 480));
         
         JPanel playerLabelFlow = new JPanel(new GridLayout(1,1));
@@ -998,10 +1083,10 @@ public class GUI extends JFrame {
         playerLabelFlow.setPreferredSize(new Dimension(700, 500));
         playerLabelFlow.add(playerLabel);
         
-        // East panel
+        // EAST PANEL
+        // Add opponent sprite
         ImageIcon oppSprite = new ImageIcon(oppFileName);
         JLabel oppLabel = new JLabel(oppSprite, JLabel.CENTER);
-        // oppLabel.setOpaque(false);
         oppLabel.setPreferredSize(new Dimension(260, 480));
         
         JPanel oppLabelFlow = new JPanel(new GridLayout(1,1));
@@ -1023,51 +1108,61 @@ public class GUI extends JFrame {
         winPanel.setLayout(new GridBagLayout());
 
         JPanel winGrid = new JPanel(new GridLayout(3,1));
-        winGrid.setPreferredSize(new Dimension(500, 200));
+        winGrid.setPreferredSize(new Dimension(800, 200));
 
         JLabel winnerLabel = new JLabel(winner + " won!", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 50));
-        // winnerLabel.setPreferredSize(new Dimension(500, 200));
 
         JLabel countLabel = new JLabel("The game was won in " + moveCounter + " moves", SwingConstants.CENTER);
         countLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        // countLabel.setPreferredSize(new Dimension(500, 200));
 
+        // Add return button to a flow panel to resize
+        JPanel btnReturnFlow = new JPanel(new FlowLayout());
+        btnReturnFlow.add(btnReturn);
+
+        // Add labels and button to panel
         winGrid.add(winnerLabel);
         winGrid.add(countLabel);
-        winGrid.add(btnReturn);
+        winGrid.add(btnReturnFlow);
 
         winPanel.add(winGrid);
         
+        // Add panel to main panel
         mainPanel.add(winPanel, "winPanel");
         mainLayout.show(mainPanel, "winPanel");
     }
 
     public void setActionListeners(ActionListener l) {
+        // Add action listeners to start and name panel buttons
         btnPlay.addActionListener(l);
         btnQuit.addActionListener(l);
         btnName.addActionListener(l);
 
+        // Add action listeners to armor panel buttons
         btnLight.addActionListener(l);
         btnMedium.addActionListener(l);
         btnHeavy.addActionListener(l);
         btnNoArmor.addActionListener(l);
 
+        // Add action listeners to weapon panel buttons
         btnDagger.addActionListener(l);
         btnSword.addActionListener(l);
         btnAxe.addActionListener(l);
         btnNoWeapon.addActionListener(l);
 
+        // Add action listeners to opponent panel buttons
         btnThief.addActionListener(l);
         btnViking.addActionListener(l);
         btnMinotaur.addActionListener(l);
 
+        // Add action listeners to environment panel buttons
         btnArena.addActionListener(l);
         btnSwamp.addActionListener(l);
         btnColosseum.addActionListener(l);
     }
 
-    public void updateStats(Player player, Opponent opp, boolean isGameOver) {
+    public void updateStats(Player player, Opponent opp, boolean isGameOver, String prevOppAction) {
+        // Update values of player stats
         playerArmorValue.setText(String.valueOf(player.getArmor().getName()));
         playerWeaponValue.setText(String.valueOf(player.getWeapon().getName()));
         playerHPValue.setText(String.valueOf(player.getHp()));
@@ -1075,13 +1170,17 @@ public class GUI extends JFrame {
         playerDefValue.setText(String.valueOf(player.getDef()));
         playerSpdValue.setText(String.valueOf(player.getSpd()));
 
+        // Update values of opponent stats
         oppHPValue.setText(String.valueOf(opp.getHp()));
         oppAtkValue.setText(String.valueOf(opp.getAtk()));
         oppDefValue.setText(String.valueOf(opp.getDef()));
         oppSpdValue.setText(String.valueOf(opp.getSpd()));
 
+        // Update previous opponent action header
+        gameHeader.setText(prevOppAction);
+
+        // Set flag to true if player picked charge
         isAtkCharged = player.getIsAtkCharged();
-        // this.isGameOver = isGameOver;
 
         System.out.println("[LOG] Updated game stats");
     }
@@ -1342,12 +1441,6 @@ public class GUI extends JFrame {
 
     public void setCurrentTurn(String currentTurn) {
         this.currentTurn = currentTurn;
-    }
-
-    public void setPrevAction(int prevAction) {
-        String[] action = new String[] {"attacked", "defended", "charged"};
-
-        this.prevAction = action[prevAction - 1];
     }
 
     public void setNameField(JTextField nameField) {
