@@ -21,15 +21,12 @@ public class Driver {
     /**
      * Main method for the game.
      * <p>
-     * Displays the main menu from the Game class.
+     * Displays the main panel when initializing GUI object.
      */
     public static void main(String[] args) {
         
         GUI gui = new GUI();
         new Controller(gui);
-
-        // Controller con = new Controller(gui);
-        // con.menu();
 
     }
     
