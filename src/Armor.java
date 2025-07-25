@@ -1,7 +1,7 @@
 /**
  * Armor equipped by the player.
  * <p>
- * Stores the armor's name, defense buff, and speed penalty. 
+ * Stores the armor's name, defense buff, and speed penalty.
  * 
  * @author Jon Chester Donguines
  */

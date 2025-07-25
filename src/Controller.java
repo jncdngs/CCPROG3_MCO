@@ -12,13 +12,10 @@ import java.awt.event.*;
 public class Controller implements ActionListener {
 
     private GUI gui;
-    // private Scanner sc;
     private Player player;
     private Environment env;
     private Opponent opp;
     
-    // private int menuOpt;
-    // private int playerAction;
     private int oppAction;
     private int moveCounter;
     private boolean isPlayersTurn;
@@ -26,8 +23,6 @@ public class Controller implements ActionListener {
 
     public Controller(GUI gui) {
         this.gui = gui;
-
-        // sc = new Scanner(System.in);
         gui.setActionListeners(this);
     }
 
@@ -36,7 +31,6 @@ public class Controller implements ActionListener {
             System.out.println("[LOG] Play button pressed");
 
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
-            // gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to name selection panel");
         }
         else if(e.getSource() == gui.getBtnQuit()) {
@@ -56,7 +50,7 @@ public class Controller implements ActionListener {
         else if(e.getSource() == gui.getBtnName()) {
             System.out.println("[LOG] Enter button pressed");
 
-            if(!(gui.getNameField().getText().trim().equals(""))) {   
+            if(!(gui.getNameField().getText().trim().equals(""))) {
                 player = new Player(gui.getNameField().getText());
 
                 gui.getMainLayout().show(gui.getMainPanel(), "armorPanel");
@@ -146,8 +140,6 @@ public class Controller implements ActionListener {
             moveCounter = 1;
             System.out.println("[LOG] Reset move counter");
             
-            // gui.addGameToMainPanel();
-            // gui.updateGamePanel();
             gui.addGamePanel(player, opp);
             gui.getMainPanel().add(gui.getGamePanel(), "gamePanel");
 
@@ -185,7 +177,7 @@ public class Controller implements ActionListener {
                 gui.repaint();
             }
         }
-        else if(e.getSource() == gui.getBtnReturn()) {            
+        else if(e.getSource() == gui.getBtnReturn()) {
             // Remove the old frame
             gui.dispose();
             
@@ -243,16 +235,6 @@ public class Controller implements ActionListener {
         return prevAction;
     }
 
-    // /** 
-    //  * Displays the name of the winner and the number of moves taken.
-    //  * 
-    //  * @param winner        the name of the winner
-    //  * @param moveCounter   the number of moves taken
-    //  */
-    // private void displayWinner(String winner, int moveCounter) {
-    //     System.out.println(winner + " won the game in " + moveCounter + " moves!\n");
-    // }
-
     /** 
      * Checks if the game is over by checking the hit points of the player and opponent.
      * 
@@ -284,194 +266,6 @@ public class Controller implements ActionListener {
         opp.gainAtk(env.getOppAtk());
         opp.loseDef(env.getOppDef());
     }
-
-    // /** 
-    //  * Asks the player/opponent to choose an action.
-    //  * 
-    //  * @param currentTurn   the name of the player/opponent to choose
-    //  * @param sc            the scanner object for user input
-    //  * @return              corresponding number for the action:
-    //  *                      1 for Attack, 2 for Defend, 3 for Charge
-    //  */
-    // private int askAction(String currentTurn, Scanner sc) {
-    //     int action;
-    //     int chargeFlag = 0;
-
-    //     if(this.player.getIsAtkCharged())
-    //         chargeFlag = 1;
-
-    //     do {
-    //         displayStats();
-    //         System.out.println(currentTurn + "'s turn!\n");
-    //         System.out.println("[1] Attack");
-    //         System.out.println("[2] Defend");
-            
-    //         if(chargeFlag == 0)
-    //             System.out.println("[3] Charge\n");
-    //         else
-    //             System.out.println();
-            
-    //         System.out.print("Choose an action: ");
-    //         action = sc.nextInt();
-    //     }
-    //     while(action < 1 || action > 3 - chargeFlag);
-
-    //     return action;
-    // }
-
-    // public void menu() {
-    //     // System.out.printf("\033[H\033[J\033[3J");
-    //     System.out.println();
-            
-    //     do {
-    //         System.out.println(">>==WARRIOR==<<\n");
-    //         System.out.println("[1] Play game");
-    //         System.out.println("[2] Exit game\n");
-    //         System.out.print("Enter option: ");
-    //         menuOpt = sc.nextInt();
-    //         sc.nextLine();
-
-    //         switch(menuOpt) {
-    //             case 1:
-    //                 setup();
-    //                 // start();
-    //                 System.out.print("Press enter to return to main menu... ");
-    //                 sc.nextLine();
-    //                 sc.nextLine();
-    //                 // System.out.printf("\033[H\033[J\033[3J");
-    //                 System.out.println();
-    //                 break;
-    //             case 2:
-    //                 // System.out.printf("\033[H\033[J\033[3J");
-    //                 System.out.println();
-    //                 break;
-    //             default:
-    //                 // System.out.printf("\033[H\033[J\033[3J");
-    //                 System.out.println();
-    //         }
-    //     } while(menuOpt != 2);
-    // }
-    
-    // /** 
-    //  * Sets up the game by asking the player for their name, armor, weapon, environment, and opponent.
-    //  * <p>
-    //  * Armor, Weapon, Environment, and Opponent objects are only created after user input.
-    //  */
-    // public void setup() {
-    //     Armor armor = null;
-    //     Weapon weapon = null;
-    //     String playerName = null;
-    //     int armorOpt, weaponOpt, envOpt, oppOpt;
-        
-    //     // // System.out.printf("\033[H\033[J\033[3J");
-    //     System.out.println();
-    //     System.out.print("Enter name of player: ");
-    //     playerName = sc.nextLine();
-        
-    //     player = new Player(playerName);
-        
-    //     do {
-    //         // System.out.printf("\033[H\033[J\033[3J");
-    //         System.out.println();
-    //         System.out.println("Name\t\t\tDefense\t\tSpeed");
-    //         System.out.println("[1] Light Armor\t\t+20\t\t-5");
-    //         System.out.println("[2] Medium Armor\t+30\t\t-15");
-    //         System.out.println("[3] Heavy Armor\t\t+40\t\t-25");
-    //         System.out.println("[4] None\t\t0\t\t0\n");
-    //         System.out.print("Choose an armor: ");
-    //         armorOpt = sc.nextInt();
-    //     } while(armorOpt < 1 || armorOpt > 4);
-
-    //     switch(armorOpt) {
-    //         case 1:
-    //         armor = new Armor("Light", 20, 5);
-    //         break;
-    //         case 2:
-    //         armor = new Armor("Medium", 30, 15);
-    //         break;
-    //         case 3:
-    //         armor = new Armor("Heavy", 40, 25);
-    //         break;
-    //         case 4:
-    //         armor = new Armor("None", 0, 0);
-    //         break;
-    //     }
-    //     player.setArmor(armor);
-        
-    //     do {
-    //         // System.out.printf("\033[H\033[J\033[3J");
-    //         System.out.println();
-    //         System.out.println("Name\t\t\tAttack\t\tSpeed");
-    //         System.out.println("[1] Dagger\t\t+20\t\t0");
-    //         System.out.println("[2] Sword\t\t+30\t\t-10");
-    //         System.out.println("[3] Battle Axe\t\t+40\t\t-20");
-    //         System.out.println("[4] None\t\t0\t\t0\n");
-    //         System.out.print("Choose a weapon: ");
-    //         weaponOpt = sc.nextInt();
-    //     } while(weaponOpt < 1 || weaponOpt > 4);
-
-    //     switch(weaponOpt) {
-    //         case 1:
-    //             weapon = new Dagger();
-    //             break;
-    //         case 2:
-    //             weapon = new Sword();
-    //             break;
-    //         case 3:
-    //             weapon = new BattleAxe();
-    //             break;
-    //             case 4:
-    //             weapon = new Weapon("None", 0, 0);
-    //             break;
-    //     }
-    //     player.setWeapon(weapon);
-
-    //     do {
-    //         // System.out.printf("\033[H\033[J\033[3J");
-    //         System.out.println();
-    //         System.out.println("Name\t\t\tHP\t\tAttack\t\tDefense\t\tSpeed");
-    //         System.out.println("[1] Thief\t\t150\t\t20\t\t20\t\t40");
-    //         System.out.println("[2] Viking\t\t250\t\t30\t\t30\t\t30");
-    //         System.out.println("[3] Minotaur\t\t350\t\t40\t\t40\t\t20\n");
-    //         System.out.print("Choose an opponent: ");
-    //         oppOpt = sc.nextInt();
-    //     } while(oppOpt < 1 || oppOpt > 3);
-
-    //     switch(oppOpt) {
-    //         case 1:
-    //             opp = new Thief();
-    //             break;
-    //         case 2:
-    //             opp = new Viking();
-    //             break;
-    //         case 3:
-    //             opp = new Minotaur();
-    //             break;
-    //     }
-
-    //     do {
-    //         // System.out.printf("\033[H\033[J\033[3J");
-    //         System.out.println();
-    //         System.out.println("Name\t\t\tPlayer\t\tOpponent");
-    //         System.out.println("[1] Arena\t\tNone\t\tNone");
-    //         System.out.println("[2] Swamp\t\t-1 dmg/turn\t+1 atk/turn");
-    //         System.out.println("[3] Colosseum\t\t+1 atk/turn\t-1 def/turn\n");
-    //         System.out.print("Choose an environment: ");
-    //         envOpt = sc.nextInt();
-    //     } while(envOpt < 1 || envOpt > 3);
-
-    //     switch(envOpt) {
-    //         case 1:
-    //             env = new Environment("Arena", 0, 0, 0, 0);
-    //             break;
-    //         case 2:
-    //             env = new Environment("Swamp", 0, 1, 1, 0);
-    //             break;
-    //         case 3:
-    //             env = new Environment("Colosseum", 1, 0, 0, 1);
-    //             break;
-    //     }
-    // }
 
     /** 
      * Starts the main game loop.

@@ -122,16 +122,10 @@ public class Player extends Character {
             isNextNotEvade = true;
             System.out.println("[LOG] Dagger ability applied");
         }
-        else {
+        else
             opp.setAtkMult(0.5);
-        }
 
         System.out.println("[LOG] " + name + " defended");
-
-        // if(!isAtkCharged) {
-        //     atk *= 3;
-        //     isNextCharged = true;
-        // }
     }
 
 

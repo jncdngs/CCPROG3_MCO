@@ -15,8 +15,6 @@ public class Minotaur extends Opponent {
     public Minotaur() {
         super("Minotaur", 350, 40, 40, 20);
     }
-
-
     
     /**
      * Determines the action of the opponent (Faux-AI).

@@ -651,7 +651,7 @@ public class GUI extends JFrame {
         
         JPanel centerIconFlow = new JPanel(new FlowLayout());
         centerIconFlow.setPreferredSize(new Dimension(130, 240));
-        centerIconFlow.add(centerIconLabel);        
+        centerIconFlow.add(centerIconLabel);
 
         // Add stats
         JPanel centerStats = new JPanel(new GridLayout(4,1));
@@ -704,7 +704,7 @@ public class GUI extends JFrame {
         
         JPanel eastIconFlow = new JPanel(new FlowLayout());
         eastIconFlow.setPreferredSize(new Dimension(130, 240));
-        eastIconFlow.add(eastIconLabel);        
+        eastIconFlow.add(eastIconLabel);
 
         // Add stats
         JPanel eastStats = new JPanel(new GridLayout(4,1));

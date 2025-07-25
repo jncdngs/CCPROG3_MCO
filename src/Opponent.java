@@ -23,8 +23,6 @@ public abstract class Opponent extends Character {
         System.out.println("[LOG] Opponent \"" + this.name + "\" created");
     }
 
-
-
     /** 
      * Deducts hit points from the player. 
      * <p>

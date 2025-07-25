@@ -1,7 +1,7 @@
 /**
  * Battle Axe weapon equipped by the player.
  * <p>
- * Stores the weapon's name, attack buff, and speed penalty. 
+ * Stores the weapon's name, attack buff, and speed penalty.
  * 
  * @author Jon Chester Donguines
  */
