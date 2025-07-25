@@ -234,6 +234,15 @@ public class Controller implements ActionListener {
         System.out.println("=========================================\n");
     }
 
+    public String getPrevOppAction() {
+        String prevAction;
+        String[] action = new String[] {"attacked", "defended", "charged"};
+
+        prevAction = opp.getName() + " " + action[opp.getPrevAction() - 1] + "!";
+
+        return prevAction;
+    }
+
     // /** 
     //  * Displays the name of the winner and the number of moves taken.
     //  * 
@@ -630,7 +639,7 @@ public class Controller implements ActionListener {
         }
 
         displayStats();
-        gui.updateStats(player, opp, isGameOver());
+        gui.updateStats(player, opp, isGameOver(), getPrevOppAction());
         gui.updateButtons(player);
         gui.revalidate();
         gui.repaint();
