@@ -12,11 +12,14 @@ public class NamePanel {
 
     private JTextField nameField;
 
+    private ImageIcon startImg;
+
     public NamePanel() {
         this.namePanel = new JPanel();
+        startImg = new ImageIcon("Background.png");
     }
 
-    public void addNamePanel(GUI gui) {
+    public void addNamePanel() {
         namePanel.setLayout(new BorderLayout());
         
         // CENTER PANEL
@@ -44,7 +47,7 @@ public class NamePanel {
         nameMenu.add(btnName);
 
         // Set background image
-        nameBackground = new JLabel(gui.getStartImg());
+        nameBackground = new JLabel(startImg);
         nameBackground.setLayout(new BorderLayout());
 
         nameBackground.add(nameMenu, BorderLayout.SOUTH);

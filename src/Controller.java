@@ -102,15 +102,15 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "oppPanel");
             System.out.println("[LOG] Switched to opponent selection panel");
         }
-        else if(e.getSource() == gui.getBtnThief() ||
-                e.getSource() == gui.getBtnViking() ||
-                e.getSource() == gui.getBtnMinotaur()) {
+        else if(e.getSource() == gui.getOppPanel().getBtnThief() ||
+                e.getSource() == gui.getOppPanel().getBtnViking() ||
+                e.getSource() == gui.getOppPanel().getBtnMinotaur()) {
             
-            if(e.getSource() == gui.getBtnThief())
+            if(e.getSource() == gui.getOppPanel().getBtnThief())
                 opp = new Thief();
-            else if(e.getSource() == gui.getBtnViking())
+            else if(e.getSource() == gui.getOppPanel().getBtnViking())
                 opp = new Viking();
-            else if(e.getSource() == gui.getBtnMinotaur())
+            else if(e.getSource() == gui.getOppPanel().getBtnMinotaur())
                 opp = new Minotaur();
 
             String oppName = opp.getName() + ".png";
@@ -120,15 +120,15 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
             System.out.println("[LOG] Switched to environment selection panel");
         }
-        else if(e.getSource() == gui.getBtnArena() ||
-                e.getSource() == gui.getBtnSwamp() ||
-                e.getSource() == gui.getBtnColosseum()) {
+        else if(e.getSource() == gui.getEnvPanel().getBtnArena() ||
+                e.getSource() == gui.getEnvPanel().getBtnSwamp() ||
+                e.getSource() == gui.getEnvPanel().getBtnColosseum()) {
             
-            if(e.getSource() == gui.getBtnArena())
+            if(e.getSource() == gui.getEnvPanel().getBtnArena())
                 env = new Environment("Arena", 0, 0, 0, 0);
-            else if(e.getSource() == gui.getBtnSwamp())
+            else if(e.getSource() == gui.getEnvPanel().getBtnSwamp())
                 env = new Environment("Swamp", 0, 1, 1, 0);
-            else if(e.getSource() == gui.getBtnColosseum())
+            else if(e.getSource() == gui.getEnvPanel().getBtnColosseum())
                 env = new Environment("Colosseum", 1, 0, 0, 1);
             
             System.out.println("[LOG] Set environment to \"" + env.getName() + "\"");

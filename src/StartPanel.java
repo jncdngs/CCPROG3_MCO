@@ -11,16 +11,19 @@ public class StartPanel {
     private JButton btnPlay;
     private JButton btnQuit;
 
+    private ImageIcon startImg;
+
     public StartPanel() {
         this.startPanel = new JPanel();
+        startImg = new ImageIcon("Background.png");
     }
 
-    public void addStartPanel(GUI gui) {
+    public void addStartPanel() {
         startPanel.setLayout(new BorderLayout());
         
         // CENTER PANEL
         // Set background image
-        startBackground = new JLabel(gui.getStartImg());
+        startBackground = new JLabel(startImg);
         startBackground.setLayout(new BorderLayout());
         
         // SOUTH PANEL

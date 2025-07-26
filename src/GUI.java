@@ -12,6 +12,8 @@ public class GUI extends JFrame {
     private NamePanel namePanel;
     private ArmorPanel armorPanel;
     private WeaponPanel weaponPanel;
+    private OppPanel oppPanel;
+    private EnvPanel envPanel;
     private GamePanel gamePanel;
     private WinPanel winPanel;
 
@@ -19,21 +21,12 @@ public class GUI extends JFrame {
     // private JPanel namePanel;
     // private JPanel armorPanel;
     // private JPanel weaponPanel;
-    private JPanel oppPanel;
-    private JPanel envPanel;
+    // private JPanel oppPanel;
+    // private JPanel envPanel;
     // private JPanel gamePanel;
     // private JPanel winPanel;
     
-    private JButton btnThief;
-    private JButton btnViking;
-    private JButton btnMinotaur;
-
-    private JButton btnArena;
-    private JButton btnSwamp;
-    private JButton btnColosseum;
-
     private ImageIcon icon;
-    private ImageIcon startImg;
     
     public GUI() {
         // Set window name
@@ -62,23 +55,21 @@ public class GUI extends JFrame {
         namePanel = new NamePanel();
         armorPanel = new ArmorPanel();
         weaponPanel = new WeaponPanel();
-        oppPanel = new JPanel();
-        envPanel = new JPanel();
+        oppPanel = new OppPanel();
+        envPanel = new EnvPanel();
         winPanel = new WinPanel();
-
-        startImg = new ImageIcon("Background.png");
 
         // Main card container panel
         mainLayout = new CardLayout();
         mainPanel = new JPanel(mainLayout);
 
         // Start menu panel
-        startPanel.addStartPanel(this);
+        startPanel.addStartPanel();
         mainPanel.add(startPanel.getStartPanel(), "startPanel");
         System.out.println("[LOG] Added start panel to container");
 
         // Name input panel
-        namePanel.addNamePanel(this);
+        namePanel.addNamePanel();
         mainPanel.add(namePanel.getNamePanel(), "namePanel");
         System.out.println("[LOG] Added name panel to container");
 
@@ -93,13 +84,13 @@ public class GUI extends JFrame {
         System.out.println("[LOG] Added weapon panel to container");
 
         // Opponent selection panel
-        addOppPanel();
-        mainPanel.add(oppPanel, "oppPanel");
+        oppPanel.addOppPanel();
+        mainPanel.add(oppPanel.getOppPanel(), "oppPanel");
         System.out.println("[LOG] Added opp panel to container");
 
         // Environment selection panel
-        addEnvPanel();
-        mainPanel.add(envPanel, "envPanel");
+        envPanel.addEnvPanel();
+        mainPanel.add(envPanel.getEnvPanel(), "envPanel");
         System.out.println("[LOG] Added env panel to container");
 
         // Winner panel return button
@@ -110,341 +101,6 @@ public class GUI extends JFrame {
 
         // Add to frame
         this.add(mainPanel, BorderLayout.CENTER);
-    }
-
-    private void addOppPanel() {
-        oppPanel.setLayout(new BorderLayout());
-        
-        // NORTH PANEL
-        JPanel oppNorth = new JPanel(new FlowLayout());
-        oppNorth.setOpaque(false);
-        
-        JLabel oppHeader = new JLabel("Pick an opponent", SwingConstants.CENTER);
-        oppHeader.setFont(new Font("Arial", Font.BOLD, 30));
-        oppHeader.setPreferredSize(new Dimension(300, 100));
-
-        oppNorth.add(oppHeader);
-
-        // WEST PANEL
-        JPanel oppWest = new JPanel(new GridLayout(3, 1));
-        oppWest.setOpaque(false);
-        oppWest.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon westIcon = new ImageIcon("ThiefThumb.png");
-        JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
-        westIconLabel.setPreferredSize(new Dimension(250, 275));
-
-        JPanel westIconFlow = new JPanel(new FlowLayout());
-        westIconFlow.setPreferredSize(new Dimension(130, 240));
-        westIconFlow.add(westIconLabel);
-        
-        // Add stats
-        JPanel westStats = new JPanel(new GridLayout(4, 1));
-        westStats.setPreferredSize(new Dimension(600, 700));
-
-        JLabel westHp = new JLabel("HP: 150", JLabel.CENTER);
-        westHp.setFont(new Font("Arial", Font.PLAIN, 20));
-        westHp.setPreferredSize(new Dimension(200, 100));
-
-        JLabel westAtk = new JLabel("Attack: 20", JLabel.CENTER);
-        westAtk.setFont(new Font("Arial", Font.PLAIN, 20));
-        westAtk.setPreferredSize(new Dimension(200, 100));
-
-        JLabel westDef = new JLabel("Defense: 20", JLabel.CENTER);
-        westDef.setFont(new Font("Arial", Font.PLAIN, 20));
-        westDef.setPreferredSize(new Dimension(200, 100));
-
-        JLabel westSpd = new JLabel("Speed: 40", JLabel.CENTER);
-        westSpd.setFont(new Font("Arial", Font.PLAIN, 20));
-        westSpd.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnThief = new JButton("Thief");
-        btnThief.setFont(new Font("Arial", Font.BOLD, 20));
-        btnThief.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnThiefFlow = new JPanel(new FlowLayout());
-        btnThiefFlow.add(btnThief);
-
-        // Add to stats panel
-        westStats.add(westHp);
-        westStats.add(westAtk);
-        westStats.add(westDef);
-        westStats.add(westSpd);
-
-        // Add to west panel
-        oppWest.add(westIconFlow);
-        oppWest.add(westStats);
-        oppWest.add(btnThiefFlow);
-
-        // CENTER PANEL
-        JPanel oppCenter = new JPanel(new GridLayout(3, 1));
-        oppCenter.setOpaque(false);
-        oppCenter.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon centerIcon = new ImageIcon("VikingThumb.png");
-        JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
-        centerIconLabel.setPreferredSize(new Dimension(250, 275));
-        
-        JPanel centerIconFlow = new JPanel(new FlowLayout());
-        centerIconFlow.setPreferredSize(new Dimension(130, 240));
-        centerIconFlow.add(centerIconLabel);
-
-        // Add stats
-        JPanel centerStats = new JPanel(new GridLayout(4,1));
-        centerStats.setPreferredSize(new Dimension(600, 700));
-
-        JLabel centerHp = new JLabel("HP: 250", JLabel.CENTER);
-        centerHp.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerHp.setPreferredSize(new Dimension(200, 100));
-
-        JLabel centerAtk = new JLabel("Attack: 30", JLabel.CENTER);
-        centerAtk.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerAtk.setPreferredSize(new Dimension(200, 100));
-
-        JLabel centerDef = new JLabel("Defense: 30", JLabel.CENTER);
-        centerDef.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerDef.setPreferredSize(new Dimension(200, 100));
-
-        JLabel centerSpd = new JLabel("Speed: 30", JLabel.CENTER);
-        centerSpd.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerSpd.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnViking = new JButton("Viking");
-        btnViking.setFont(new Font("Arial", Font.BOLD, 20));
-        btnViking.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnVikingFlow = new JPanel(new FlowLayout());
-        btnVikingFlow.add(btnViking);
-
-        // Add to stats panel
-        centerStats.add(centerHp);
-        centerStats.add(centerAtk);
-        centerStats.add(centerDef);
-        centerStats.add(centerSpd);
-
-        // Add to center panel
-        oppCenter.add(centerIconFlow);
-        oppCenter.add(centerStats);
-        oppCenter.add(btnVikingFlow);
-        
-        // EAST PANEL
-        JPanel oppEast = new JPanel(new GridLayout(3, 1));
-        oppEast.setOpaque(false);
-        oppEast.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon eastIcon = new ImageIcon("MinotaurThumb.png");
-        JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
-        eastIconLabel.setPreferredSize(new Dimension(250, 275));
-        
-        JPanel eastIconFlow = new JPanel(new FlowLayout());
-        eastIconFlow.setPreferredSize(new Dimension(130, 240));
-        eastIconFlow.add(eastIconLabel);
-
-        // Add stats
-        JPanel eastStats = new JPanel(new GridLayout(4,1));
-        eastStats.setPreferredSize(new Dimension(600, 700));
-
-        JLabel eastHp = new JLabel("HP: 350", JLabel.CENTER);
-        eastHp.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastHp.setPreferredSize(new Dimension(200, 100));
-
-        JLabel eastAtk = new JLabel("Attack: 40", JLabel.CENTER);
-        eastAtk.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastAtk.setPreferredSize(new Dimension(200, 100));
-
-        JLabel eastDef = new JLabel("Defense: 40", JLabel.CENTER);
-        eastDef.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastDef.setPreferredSize(new Dimension(200, 100));
-
-        JLabel eastSpd = new JLabel("Speed: 20", JLabel.CENTER);
-        eastSpd.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastSpd.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnMinotaur = new JButton("Minotaur");
-        btnMinotaur.setFont(new Font("Arial", Font.BOLD, 20));
-        btnMinotaur.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnMinotaurFlow = new JPanel(new FlowLayout());
-        btnMinotaurFlow.add(btnMinotaur);
-
-        // Add to stats panel
-        eastStats.add(eastHp);
-        eastStats.add(eastAtk);
-        eastStats.add(eastDef);
-        eastStats.add(eastSpd);
-
-        // Add to east panel
-        oppEast.add(eastIconFlow);
-        oppEast.add(eastStats);
-        oppEast.add(btnMinotaurFlow);
-
-        // Add all panels to opponent panel
-        oppPanel.add(oppNorth, BorderLayout.NORTH);
-        oppPanel.add(oppWest, BorderLayout.WEST);
-        oppPanel.add(oppCenter, BorderLayout.CENTER);
-        oppPanel.add(oppEast, BorderLayout.EAST);
-
-        System.out.println("[LOG] Opponent panel created");
-    }
-
-    private void addEnvPanel() {
-        envPanel.setLayout(new BorderLayout());
-        
-        // NORTH PANEL
-        JPanel envNorth = new JPanel(new FlowLayout());
-        envNorth.setOpaque(false);
-        
-        JLabel envHeader = new JLabel("Pick an environment", SwingConstants.CENTER);
-        envHeader.setFont(new Font("Arial", Font.BOLD, 30));
-        envHeader.setPreferredSize(new Dimension(300, 100));
-
-        envNorth.add(envHeader);
-
-        // WEST PANEL
-        JPanel envWest = new JPanel();
-        envWest.setLayout(new BoxLayout(envWest, BoxLayout.PAGE_AXIS));
-        envWest.setOpaque(false);
-        envWest.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon westIcon = new ImageIcon("ArenaThumb.png");
-        JLabel westIconLabel = new JLabel(westIcon, JLabel.CENTER);
-        westIconLabel.setPreferredSize(new Dimension(400, 300));
-        
-        JPanel westIconFlow = new JPanel(new FlowLayout());
-        westIconFlow.setPreferredSize(new Dimension(300, 300));
-        westIconFlow.add(westIconLabel);
-
-        // Add stats
-        JPanel westStats = new JPanel(new GridLayout(2,1));
-        westStats.setPreferredSize(new Dimension(300, 200));
-
-        JLabel westPlayer = new JLabel("Player: No Penalty", JLabel.CENTER);
-        westPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
-        westPlayer.setPreferredSize(new Dimension(200, 100));
-
-        JLabel westOpp = new JLabel("Opponent: No Penalty", JLabel.CENTER);
-        westOpp.setFont(new Font("Arial", Font.PLAIN, 20));
-        westOpp.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnArena = new JButton("Arena");
-        btnArena.setFont(new Font("Arial", Font.BOLD, 20));
-        btnArena.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnArenaFlow = new JPanel(new FlowLayout());
-        btnArenaFlow.add(btnArena);
-
-        // Add to stats panel
-        westStats.add(westPlayer);
-        westStats.add(westOpp);
-        
-        // Add to west panel
-        envWest.add(westIconFlow);
-        envWest.add(westStats);
-        envWest.add(btnArenaFlow);
-        
-        // CENTER PANEL
-        JPanel envCenter = new JPanel();
-        envCenter.setLayout(new BoxLayout(envCenter, BoxLayout.PAGE_AXIS));
-        envCenter.setOpaque(false);
-        envCenter.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon centerIcon = new ImageIcon("SwampThumb.png");
-        JLabel centerIconLabel = new JLabel(centerIcon, JLabel.CENTER);
-        centerIconLabel.setPreferredSize(new Dimension(400, 300));
-
-        JPanel centerIconFlow = new JPanel(new FlowLayout());
-        centerIconFlow.setPreferredSize(new Dimension(300, 300));
-        centerIconFlow.add(centerIconLabel);
-
-        // Add stats
-        JPanel centerStats = new JPanel(new GridLayout(2,1));
-        centerStats.setPreferredSize(new Dimension(300, 200));
-
-        JLabel centerPlayer = new JLabel("Player: -1 HP every turn", JLabel.CENTER);
-        centerPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerPlayer.setPreferredSize(new Dimension(200, 100));
-
-        JLabel centerOpp = new JLabel("Opponent: +1 attack every turn", JLabel.CENTER);
-        centerOpp.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerOpp.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnSwamp = new JButton("Swamp");
-        btnSwamp.setFont(new Font("Arial", Font.BOLD, 20));
-        btnSwamp.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnSwampFlow = new JPanel(new FlowLayout());
-        btnSwampFlow.add(btnSwamp);
-
-        // Add to stats panel
-        centerStats.add(centerPlayer);
-        centerStats.add(centerOpp);
-        
-        // Add to center panel
-        envCenter.add(centerIconFlow);
-        envCenter.add(centerStats);
-        envCenter.add(btnSwampFlow);
-
-        // EAST PANEL
-        JPanel envEast = new JPanel();
-        envEast.setLayout(new BoxLayout(envEast, BoxLayout.PAGE_AXIS));
-        envEast.setOpaque(false);
-        envEast.setPreferredSize(new Dimension(500, 700));
-
-        // Add icon
-        ImageIcon eastIcon = new ImageIcon("ColosseumThumb.png");
-        JLabel eastIconLabel = new JLabel(eastIcon, JLabel.CENTER);
-        eastIconLabel.setPreferredSize(new Dimension(400, 300));
-
-        JPanel eastIconFlow = new JPanel(new FlowLayout());
-        eastIconFlow.setPreferredSize(new Dimension(300, 300));
-        eastIconFlow.add(eastIconLabel);
-
-        // Add stats
-        JPanel eastStats = new JPanel(new GridLayout(2,1));
-        eastStats.setPreferredSize(new Dimension(300, 200));
-
-        JLabel eastPlayer = new JLabel("Player: +1 attack every turn", JLabel.CENTER);
-        eastPlayer.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastPlayer.setPreferredSize(new Dimension(200, 100));
-
-        JLabel eastOpp = new JLabel("Opponent: -1 defense every turn", JLabel.CENTER);
-        eastOpp.setFont(new Font("Arial", Font.PLAIN, 20));
-        eastOpp.setPreferredSize(new Dimension(200, 100));
-
-        // Add select button
-        btnColosseum = new JButton("Colosseum");
-        btnColosseum.setFont(new Font("Arial", Font.BOLD, 20));
-        btnColosseum.setPreferredSize(new Dimension(200, 50));
-
-        JPanel btnColosseumFlow = new JPanel(new FlowLayout());
-        btnColosseumFlow.add(btnColosseum);
-
-        // Add to stats panel
-        eastStats.add(eastPlayer);
-        eastStats.add(eastOpp);
-        
-        // Add to east panel
-        envEast.add(eastIconFlow);
-        envEast.add(eastStats);
-        envEast.add(btnColosseumFlow);
-        
-        // Add all panels to environment panel
-        envPanel.add(envNorth, BorderLayout.NORTH);
-        envPanel.add(envWest, BorderLayout.WEST);
-        envPanel.add(envCenter, BorderLayout.CENTER);
-        envPanel.add(envEast, BorderLayout.EAST);
-
-        System.out.println("[LOG] Environment panel created");
     }
 
     public void setActionListeners(ActionListener l) {
@@ -466,14 +122,14 @@ public class GUI extends JFrame {
         weaponPanel.getBtnNoWeapon().addActionListener(l);
 
         // Add action listeners to opponent panel buttons
-        btnThief.addActionListener(l);
-        btnViking.addActionListener(l);
-        btnMinotaur.addActionListener(l);
+        oppPanel.getBtnThief().addActionListener(l);
+        oppPanel.getBtnViking().addActionListener(l);
+        oppPanel.getBtnMinotaur().addActionListener(l);
 
         // Add action listeners to environment panel buttons
-        btnArena.addActionListener(l);
-        btnSwamp.addActionListener(l);
-        btnColosseum.addActionListener(l);
+        envPanel.getBtnArena().addActionListener(l);
+        envPanel.getBtnSwamp().addActionListener(l);
+        envPanel.getBtnColosseum().addActionListener(l);
     }
 
 
@@ -502,13 +158,13 @@ public class GUI extends JFrame {
         return this.weaponPanel;
     }
 
-    // public OppPanel getOppPanel() {
-    //     return this.oppPanel;
-    // }
+    public OppPanel getOppPanel() {
+        return this.oppPanel;
+    }
 
-    // public EnvPanel getEnvPanel() {
-    //     return this.envPanel;
-    // }
+    public EnvPanel getEnvPanel() {
+        return this.envPanel;
+    }
 
     public GamePanel getGamePanel() {
         return this.gamePanel;
@@ -516,34 +172,6 @@ public class GUI extends JFrame {
 
     public WinPanel getWinPanel() {
         return this.winPanel;
-    }
-
-    public JButton getBtnThief() {
-        return this.btnThief;
-    }
-
-    public JButton getBtnViking() {
-        return this.btnViking;
-    }
-
-    public JButton getBtnMinotaur() {
-        return this.btnMinotaur;
-    }
-
-    public JButton getBtnArena() {
-        return this.btnArena;
-    }
-    
-    public JButton getBtnSwamp() {
-        return this.btnSwamp;
-    }
-    
-    public JButton getBtnColosseum() {
-        return this.btnColosseum;
-    }
-    
-    public ImageIcon getStartImg() {
-        return this.startImg;
     }
     
 }
