@@ -58,20 +58,20 @@ public class Controller implements ActionListener {
             }
 
         }
-        else if(e.getSource() == gui.getBtnLight() ||
-                e.getSource() == gui.getBtnMedium() ||
-                e.getSource() == gui.getBtnHeavy() ||
-                e.getSource() == gui.getBtnNoArmor()) {
+        else if(e.getSource() == gui.getArmorPanel().getBtnLight() ||
+                e.getSource() == gui.getArmorPanel().getBtnMedium() ||
+                e.getSource() == gui.getArmorPanel().getBtnHeavy() ||
+                e.getSource() == gui.getArmorPanel().getBtnNoArmor()) {
 
             Armor armor = null;
             
-            if(e.getSource() == gui.getBtnLight())
+            if(e.getSource() == gui.getArmorPanel().getBtnLight())
                 armor = new Armor("Light", 20, 5);
-            else if(e.getSource() == gui.getBtnMedium())
+            else if(e.getSource() == gui.getArmorPanel().getBtnMedium())
                 armor = new Armor("Medium", 30, 15);
-            else if(e.getSource() == gui.getBtnHeavy())
+            else if(e.getSource() == gui.getArmorPanel().getBtnHeavy())
                 armor = new Armor("Heavy", 40, 25);
-            else if(e.getSource() == gui.getBtnNoArmor())
+            else if(e.getSource() == gui.getArmorPanel().getBtnNoArmor())
                 armor = new Armor("None", 0, 0);
             
             player.setArmor(armor);
@@ -158,19 +158,18 @@ public class Controller implements ActionListener {
         else if(e.getSource() == gui.getGamePanel().getBtnAttack() ||
                 e.getSource() == gui.getGamePanel().getBtnDefend() ||
                 e.getSource() == gui.getGamePanel().getBtnCharge()) {
+
             if(e.getSource() == gui.getGamePanel().getBtnAttack()) {
                 System.out.println("[LOG] Attack pressed");
                 nextTurn(1);
                 gui.revalidate();
                 gui.repaint();
-            }
-            else if(e.getSource() == gui.getGamePanel().getBtnDefend()) {
+            } else if(e.getSource() == gui.getGamePanel().getBtnDefend()) {
                 System.out.println("[LOG] Defend pressed");
                 nextTurn(2);
                 gui.revalidate();
                 gui.repaint();
-            }
-            else if(e.getSource() == gui.getGamePanel().getBtnCharge()) {
+            } else if(e.getSource() == gui.getGamePanel().getBtnCharge()) {
                 System.out.println("[LOG] Charge pressed");
                 nextTurn(3);
                 gui.revalidate();
