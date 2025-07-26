@@ -114,7 +114,7 @@ public class Controller implements ActionListener {
                 opp = new Minotaur();
 
             String oppName = opp.getName() + ".png";
-            gui.setOppFileName(oppName);
+            gui.getGamePanel().setOppFileName(oppName);
             System.out.println("[LOG] Set opponent sprite to \"" + oppName + "\"");
 
             gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
@@ -134,50 +134,50 @@ public class Controller implements ActionListener {
             System.out.println("[LOG] Set environment to \"" + env.getName() + "\"");
 
             String envName = env.getName() + ".png";
-            gui.setEnvironment(envName);
+            gui.getGamePanel().setEnvironment(envName);
             System.out.println("[LOG] Set game background to \"" + envName + "\"");
 
             moveCounter = 1;
             System.out.println("[LOG] Reset move counter");
             
-            gui.addGamePanel(player, opp);
+            gui.getGamePanel().addGamePanel(gui, player, opp);
             gui.getMainPanel().add(gui.getGamePanel(), "gamePanel");
 
             gui.getMainLayout().show(gui.getMainPanel(), "gamePanel");
             System.out.println("[LOG] Switched to main game panel");
 
-            gui.getBtnAttack().addActionListener(this);
-            gui.getBtnDefend().addActionListener(this);
-            gui.getBtnCharge().addActionListener(this);
-            gui.getBtnReturn().addActionListener(this);
+            gui.getGamePanel().getBtnAttack().addActionListener(this);
+            gui.getGamePanel().getBtnDefend().addActionListener(this);
+            gui.getGamePanel().getBtnCharge().addActionListener(this);
+            gui.getGamePanel().getBtnReturn().addActionListener(this);
 
             displayStats();
             gui.revalidate();
             gui.repaint();
         }
-        else if(e.getSource() == gui.getBtnAttack() ||
-                e.getSource() == gui.getBtnDefend() ||
-                e.getSource() == gui.getBtnCharge()) {
-            if(e.getSource() == gui.getBtnAttack()) {
+        else if(e.getSource() == gui.getGamePanel().getBtnAttack() ||
+                e.getSource() == gui.getGamePanel().getBtnDefend() ||
+                e.getSource() == gui.getGamePanel().getBtnCharge()) {
+            if(e.getSource() == gui.getGamePanel().getBtnAttack()) {
                 System.out.println("[LOG] Attack pressed");
                 nextTurn(1);
                 gui.revalidate();
                 gui.repaint();
             }
-            else if(e.getSource() == gui.getBtnDefend()) {
+            else if(e.getSource() == gui.getGamePanel().getBtnDefend()) {
                 System.out.println("[LOG] Defend pressed");
                 nextTurn(2);
                 gui.revalidate();
                 gui.repaint();
             }
-            else if(e.getSource() == gui.getBtnCharge()) {
+            else if(e.getSource() == gui.getGamePanel().getBtnCharge()) {
                 System.out.println("[LOG] Charge pressed");
                 nextTurn(3);
                 gui.revalidate();
                 gui.repaint();
             }
         }
-        else if(e.getSource() == gui.getBtnReturn()) {
+        else if(e.getSource() == gui.getGamePanel().getBtnReturn()) {
             // Remove the old frame
             gui.dispose();
             
@@ -419,7 +419,7 @@ public class Controller implements ActionListener {
             
             System.out.println("[LOG] Final stats below");
             gui.displayWinPanel(winner, moveCounter);
-            gui.getBtnReturn().addActionListener(this);
+            gui.getGamePanel().getBtnReturn().addActionListener(this);
             gui.revalidate();
             gui.repaint();
         } else {
@@ -433,8 +433,8 @@ public class Controller implements ActionListener {
         }
 
         displayStats();
-        gui.updateStats(player, opp, isGameOver(), getPrevOppAction());
-        gui.updateButtons(player);
+        gui.getGamePanel().updateStats(player, opp, isGameOver(), getPrevOppAction());
+        gui.getGamePanel().updateButtons(player);
         gui.revalidate();
         gui.repaint();
     }
