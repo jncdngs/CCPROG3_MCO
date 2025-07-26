@@ -295,6 +295,8 @@ public class GamePanel extends JPanel {
         System.out.println("[LOG] Updated game stats");
     }
 
+
+
     public JButton getBtnAttack() {
         return this.btnAttack;
     }
@@ -310,6 +312,7 @@ public class GamePanel extends JPanel {
     public JButton getBtnReturn() {
         return this.btnReturn;
     }
+
 
 
     public void setBtnReturn(JButton btnReturn) {

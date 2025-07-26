@@ -8,12 +8,13 @@ public class GUI extends JFrame {
     
     private JPanel mainPanel;
     
+    private StartPanel startPanel;
     private GamePanel gamePanel;
     private WinPanel winPanel;
-    
-    private JPanel startPanel;
-    private JPanel menuBtnPanel;
-    private JPanel namePanel;
+    private NamePanel namePanel;
+
+    // private JPanel startPanel;
+    // private JPanel namePanel;
     private JPanel armorPanel;
     private JPanel weaponPanel;
     private JPanel oppPanel;
@@ -21,15 +22,6 @@ public class GUI extends JFrame {
     // private JPanel gamePanel;
     // private JPanel winPanel;
     
-    private JLabel startBackground;
-    private JLabel nameBackground;
-    private JLabel namePrompt;
-
-    private JButton btnPlay;
-    private JButton btnQuit;
-
-    private JButton btnName;
-
     private JButton btnLight;
     private JButton btnMedium;
     private JButton btnHeavy;
@@ -47,8 +39,6 @@ public class GUI extends JFrame {
     private JButton btnArena;
     private JButton btnSwamp;
     private JButton btnColosseum;
-
-    private JTextField nameField;
 
     private ImageIcon icon;
     private ImageIcon startImg;
@@ -75,27 +65,29 @@ public class GUI extends JFrame {
     }
 
     public void addSetupPanel() {
-        startPanel = new JPanel();
+        startPanel = new StartPanel();
         gamePanel = new GamePanel();
-        namePanel = new JPanel();
+        namePanel = new NamePanel();
         armorPanel = new JPanel();
         weaponPanel = new JPanel();
         oppPanel = new JPanel();
         envPanel = new JPanel();
         winPanel = new WinPanel();
 
+        startImg = new ImageIcon("Background.png");
+
         // Main card container panel
-        mainLayout = new CardLayout(); 
+        mainLayout = new CardLayout();
         mainPanel = new JPanel(mainLayout);
 
         // Start menu panel
-        addStartPanel();
-        mainPanel.add(startPanel, "startPanel");
+        startPanel.addStartPanel(this);
+        mainPanel.add(startPanel.getStartPanel(), "startPanel");
         System.out.println("[LOG] Added start panel to container");
 
         // Name input panel
-        addNamePanel();
-        mainPanel.add(namePanel, "namePanel");
+        namePanel.addNamePanel(this);
+        mainPanel.add(namePanel.getNamePanel(), "namePanel");
         System.out.println("[LOG] Added name panel to container");
 
         // Armor selection panel
@@ -126,82 +118,6 @@ public class GUI extends JFrame {
 
         // Add to frame
         this.add(mainPanel, BorderLayout.CENTER);
-    }
-
-    private void addStartPanel() {
-        startPanel.setLayout(new BorderLayout());
-        
-        // CENTER PANEL
-        // Set background image
-        startImg = new ImageIcon("Background.png");
-        startBackground = new JLabel(startImg);
-        startBackground.setLayout(new BorderLayout());
-        
-        // SOUTH PANEL
-        // Set layout for buttons
-        menuBtnPanel = new JPanel(new FlowLayout());
-        menuBtnPanel.setOpaque(false);
-        menuBtnPanel.setPreferredSize(new Dimension(300, 300));
-
-        // Add play button
-        btnPlay = new JButton("Play");
-        btnPlay.setPreferredSize(new Dimension(200, 50));
-        btnPlay.setFont(new Font("Arial", Font.PLAIN, 20));
-        
-        // Add quit button
-        btnQuit = new JButton("Quit");
-        btnQuit.setPreferredSize(new Dimension(200, 50));
-        btnQuit.setFont(new Font("Arial", Font.PLAIN, 20));
-
-        // Add buttons to button panel
-        menuBtnPanel.add(btnPlay);
-        menuBtnPanel.add(btnQuit);
-
-        // Add buttons to background
-        startBackground.add(menuBtnPanel, BorderLayout.SOUTH);
-
-        // Add background to panel
-        startPanel.add(startBackground, BorderLayout.CENTER);
-
-        System.out.println("[LOG] Start panel created");
-    }
-
-    private void addNamePanel() {
-        namePanel.setLayout(new BorderLayout());
-        
-        // CENTER PANEL
-        // Add prompt
-        namePrompt = new JLabel("Enter your name:");
-        namePrompt.setFont(new Font("Arial", Font.PLAIN, 20));
-        
-        // Add text box
-        nameField = new JTextField(12);
-        nameField.setFont(new Font("Arial", Font.PLAIN, 20));
-        nameField.setPreferredSize(new Dimension(100, 40));
-        
-        // Add enter button
-        btnName = new JButton("Enter");
-        btnName.setFont(new Font("Arial", Font.PLAIN, 20));
-        btnName.setPreferredSize(new Dimension(100, 40));
-
-        JPanel nameMenu = new JPanel(new FlowLayout());
-        nameMenu.setOpaque(false);
-        nameMenu.setPreferredSize(new Dimension(300, 300));
-
-        // Add prompt, text box, and button to panel
-        nameMenu.add(namePrompt);
-        nameMenu.add(nameField);
-        nameMenu.add(btnName);
-
-        // Set background image
-        nameBackground = new JLabel(startImg);
-        nameBackground.setLayout(new BorderLayout());
-
-        nameBackground.add(nameMenu, BorderLayout.SOUTH);
-
-        namePanel.add(nameBackground, BorderLayout.CENTER);
-
-        System.out.println("[LOG] Name panel created");
     }
 
     private void addArmorPanel() {
@@ -886,9 +802,9 @@ public class GUI extends JFrame {
 
     public void setActionListeners(ActionListener l) {
         // Add action listeners to start and name panel buttons
-        btnPlay.addActionListener(l);
-        btnQuit.addActionListener(l);
-        btnName.addActionListener(l);
+        startPanel.getBtnPlay().addActionListener(l);
+        startPanel.getBtnQuit().addActionListener(l);
+        namePanel.getBtnName().addActionListener(l);
 
         // Add action listeners to armor panel buttons
         btnLight.addActionListener(l);
@@ -923,24 +839,20 @@ public class GUI extends JFrame {
         return this.mainPanel;
     }
 
+    public StartPanel getStartPanel() {
+        return this.startPanel;
+    }
+
+    public NamePanel getNamePanel() {
+        return this.namePanel;
+    }
+
     public GamePanel getGamePanel() {
         return this.gamePanel;
     }
 
     public WinPanel getWinPanel() {
         return this.winPanel;
-    }
-
-    public JButton getBtnPlay() {
-        return this.btnPlay;
-    }
-
-    public JButton getBtnQuit() {
-        return this.btnQuit;
-    }
-
-    public JButton getBtnName() {
-        return this.btnName;
     }
 
     public JButton getBtnLight() {
@@ -999,8 +911,8 @@ public class GUI extends JFrame {
         return this.btnColosseum;
     }
     
-    public JTextField getNameField() {
-        return this.nameField;
+    public ImageIcon getStartImg() {
+        return this.startImg;
     }
     
 }

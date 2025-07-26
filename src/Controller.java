@@ -27,13 +27,13 @@ public class Controller implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == gui.getBtnPlay()) {
+        if(e.getSource() == gui.getStartPanel().getBtnPlay()) {
             System.out.println("[LOG] Play button pressed");
 
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
             System.out.println("[LOG] Switched to name selection panel");
         }
-        else if(e.getSource() == gui.getBtnQuit()) {
+        else if(e.getSource() == gui.getStartPanel().getBtnQuit()) {
             System.out.println("[LOG] Quit button pressed");
 
             int result = JOptionPane.showConfirmDialog(
@@ -47,11 +47,11 @@ public class Controller implements ActionListener {
                 System.exit(0);
             }
         }
-        else if(e.getSource() == gui.getBtnName()) {
+        else if(e.getSource() == gui.getNamePanel().getBtnName()) {
             System.out.println("[LOG] Enter button pressed");
 
-            if(!(gui.getNameField().getText().trim().equals(""))) {
-                player = new Player(gui.getNameField().getText());
+            if(!(gui.getNamePanel().getNameField().getText().trim().equals(""))) {
+                player = new Player(gui.getNamePanel().getNameField().getText());
 
                 gui.getMainLayout().show(gui.getMainPanel(), "armorPanel");
                 System.out.println("[LOG] Switched to armor selection panel");
