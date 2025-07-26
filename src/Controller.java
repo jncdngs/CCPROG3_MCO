@@ -418,7 +418,7 @@ public class Controller implements ActionListener {
             }
             
             System.out.println("[LOG] Final stats below");
-            gui.displayWinPanel(winner, moveCounter);
+            gui.getWinPanel().displayWinPanel(gui, winner, moveCounter);
             gui.getGamePanel().getBtnReturn().addActionListener(this);
             gui.revalidate();
             gui.repaint();

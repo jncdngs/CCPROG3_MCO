@@ -4,11 +4,12 @@ import java.awt.event.*;
 
 public class GUI extends JFrame {
     
-    private GamePanel gamePanel;
-
     private CardLayout mainLayout;
-
+    
     private JPanel mainPanel;
+    
+    private GamePanel gamePanel;
+    private WinPanel winPanel;
     
     private JPanel startPanel;
     private JPanel menuBtnPanel;
@@ -18,7 +19,7 @@ public class GUI extends JFrame {
     private JPanel oppPanel;
     private JPanel envPanel;
     // private JPanel gamePanel;
-    private JPanel winPanel;
+    // private JPanel winPanel;
     
     private JLabel startBackground;
     private JLabel nameBackground;
@@ -81,7 +82,7 @@ public class GUI extends JFrame {
         weaponPanel = new JPanel();
         oppPanel = new JPanel();
         envPanel = new JPanel();
-        winPanel = new JPanel();
+        winPanel = new WinPanel();
 
         // Main card container panel
         mainLayout = new CardLayout(); 
@@ -118,7 +119,6 @@ public class GUI extends JFrame {
         System.out.println("[LOG] Added env panel to container");
 
         // Winner panel return button
-        // gamePanel.getBtnReturn() = new JButton("Return to main menu");
         gamePanel.setBtnReturn(new JButton("Return to main menu"));
         
         gamePanel.getBtnReturn().setPreferredSize(new Dimension(300, 50));
@@ -884,35 +884,6 @@ public class GUI extends JFrame {
         System.out.println("[LOG] Environment panel created");
     }
 
-    public void displayWinPanel(String winner, int moveCounter) {
-        winPanel = new JPanel();
-        winPanel.setLayout(new GridBagLayout());
-
-        JPanel winGrid = new JPanel(new GridLayout(3,1));
-        winGrid.setPreferredSize(new Dimension(1400, 200));
-
-        JLabel winnerLabel = new JLabel(winner + " won!", SwingConstants.CENTER);
-        winnerLabel.setFont(new Font("Arial", Font.BOLD, 50));
-
-        JLabel countLabel = new JLabel("The game was won in " + moveCounter + " moves", SwingConstants.CENTER);
-        countLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-
-        // Add return button to a flow panel to resize
-        JPanel btnReturnFlow = new JPanel(new FlowLayout());
-        btnReturnFlow.add(gamePanel.getBtnReturn());
-
-        // Add labels and button to panel
-        winGrid.add(winnerLabel);
-        winGrid.add(countLabel);
-        winGrid.add(btnReturnFlow);
-
-        winPanel.add(winGrid);
-        
-        // Add panel to main panel
-        mainPanel.add(winPanel, "winPanel");
-        mainLayout.show(mainPanel, "winPanel");
-    }
-
     public void setActionListeners(ActionListener l) {
         // Add action listeners to start and name panel buttons
         btnPlay.addActionListener(l);
@@ -954,6 +925,10 @@ public class GUI extends JFrame {
 
     public GamePanel getGamePanel() {
         return this.gamePanel;
+    }
+
+    public WinPanel getWinPanel() {
+        return this.winPanel;
     }
 
     public JButton getBtnPlay() {
