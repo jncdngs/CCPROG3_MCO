@@ -15,8 +15,6 @@ public class Thief extends Opponent {
     public Thief() {
         super("Thief", 150, 20, 20, 40);
     }
-
-
     
     /**
      * Determines the action of the opponent (Faux-AI).

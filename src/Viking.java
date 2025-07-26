@@ -15,8 +15,6 @@ public class Viking extends Opponent {
     public Viking() {
         super("Viking", 250, 30, 30, 30);
     }
-
-
     
     /**
      * Determines the action of the opponent (Faux-AI).
