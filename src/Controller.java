@@ -360,7 +360,7 @@ public class Controller implements ActionListener {
         // If player selected charge, set flag to true
         if(player.getIsAtkCharged()) {
             player.setAtk(player.getAtk() / 3);
-            gui.setIsAtkCharged(false);
+            // gui.setIsAtkCharged(false);
             player.setIsAtkCharged(false);
 
             if(player.getWeapon().isBattleAxe()) {
@@ -372,7 +372,7 @@ public class Controller implements ActionListener {
         }
         if(player.getIsNextCharged()) {
             player.setIsAtkCharged(true);
-            gui.setIsAtkCharged(true);
+            // gui.setIsAtkCharged(true);
             player.setIsNextCharged(false);
             
             if(player.getWeapon().isBattleAxe()) {

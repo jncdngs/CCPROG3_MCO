@@ -74,9 +74,9 @@ public class GUI extends JFrame {
 
     private String oppFileName;
     private String envFileName;
-    private String currentTurn;
+    // private String currentTurn;
 
-    private boolean isAtkCharged;
+    // private boolean isAtkCharged;
     
     public GUI() {
         // Set window name
@@ -1209,8 +1209,8 @@ public class GUI extends JFrame {
         // Update previous opponent action header
         gameHeader.setText(prevOppAction);
 
-        // Set flag to true if player picked charge
-        isAtkCharged = player.getIsAtkCharged();
+        // // Set flag to true if player picked charge
+        // isAtkCharged = player.getIsAtkCharged();
 
         System.out.println("[LOG] Updated game stats");
     }
@@ -1241,29 +1241,29 @@ public class GUI extends JFrame {
         return this.mainPanel;
     }
 
-    public JPanel getStartPanel() {
-        return this.startPanel;
-    }
+    // public JPanel getStartPanel() {
+    //     return this.startPanel;
+    // }
 
     public JPanel getGamePanel() {
         return this.gamePanel;
     }
 
-    public JPanel getWinPanel() {
-        return this.winPanel;
-    }
+    // public JPanel getWinPanel() {
+    //     return this.winPanel;
+    // }
 
-    public JPanel getMenuBtnPanel() {
-        return this.menuBtnPanel;
-    }
+    // public JPanel getMenuBtnPanel() {
+    //     return this.menuBtnPanel;
+    // }
 
-    public JPanel getPanelButtons() {
-        return this.panelButtons;
-    }
+    // public JPanel getPanelButtons() {
+    //     return this.panelButtons;
+    // }
 
-    public JLabel getStartBackground() {
-        return this.startBackground;
-    }
+    // public JLabel getStartBackground() {
+    //     return this.startBackground;
+    // }
 
     public JButton getBtnPlay() {
         return this.btnPlay;
@@ -1349,142 +1349,142 @@ public class GUI extends JFrame {
         return this.btnReturn;
     }
 
-    public String getCurrentTurn() {
-        return this.currentTurn;
-    }
+    // public String getCurrentTurn() {
+    //     return this.currentTurn;
+    // }
 
     public JTextField getNameField() {
         return this.nameField;
     }
 
-    /** 
-     * Checks if the current attack of the player is charged.
-     * 
-     * @return true if the current attack is charged,
-     *         false if the current attack is not charged
-     */
-    public boolean getIsAtkCharged() {
-        return this.isAtkCharged;
-    }
+    // /** 
+    //  * Checks if the current attack of the player is charged.
+    //  * 
+    //  * @return true if the current attack is charged,
+    //  *         false if the current attack is not charged
+    //  */
+    // public boolean getIsAtkCharged() {
+    //     return this.isAtkCharged;
+    // }
 
 
 
-    public void setMainLayout(CardLayout mainLayout) {
-        this.mainLayout = mainLayout;
-    }
+    // public void setMainLayout(CardLayout mainLayout) {
+    //     this.mainLayout = mainLayout;
+    // }
 
-    public void setMainPanel(JPanel mainPanel) {
-        this.mainPanel = mainPanel;
-    }
+    // public void setMainPanel(JPanel mainPanel) {
+    //     this.mainPanel = mainPanel;
+    // }
     
-    public void setStartPanel(JPanel startPanel) {
-        this.startPanel = startPanel;
-    }
+    // public void setStartPanel(JPanel startPanel) {
+    //     this.startPanel = startPanel;
+    // }
 
-    public void setMenuBtnPanel(JPanel menuBtnPanel) {
-        this.menuBtnPanel = menuBtnPanel;
-    }
+    // public void setMenuBtnPanel(JPanel menuBtnPanel) {
+    //     this.menuBtnPanel = menuBtnPanel;
+    // }
 
-    public void setPanelButtons(JPanel panelButtons) {
-        this.panelButtons = panelButtons;
-    }
+    // public void setPanelButtons(JPanel panelButtons) {
+    //     this.panelButtons = panelButtons;
+    // }
 
-    public void setstartBackground(JLabel startBackground) {
-        this.startBackground = startBackground;
-    }
+    // public void setstartBackground(JLabel startBackground) {
+    //     this.startBackground = startBackground;
+    // }
 
-    public void setBtnPlay(JButton btnPlay) {
-        this.btnPlay = btnPlay;
-    }
+    // public void setBtnPlay(JButton btnPlay) {
+    //     this.btnPlay = btnPlay;
+    // }
 
-    public void setBtnQuit(JButton btnQuit) {
-        this.btnQuit = btnQuit;
-    }
+    // public void setBtnQuit(JButton btnQuit) {
+    //     this.btnQuit = btnQuit;
+    // }
 
-    public void setBtnLight(JButton btnLight) {
-        this.btnLight = btnLight;
-    }
+    // public void setBtnLight(JButton btnLight) {
+    //     this.btnLight = btnLight;
+    // }
 
-    public void setBtnMedium(JButton btnMedium) {
-        this.btnMedium = btnMedium;
-    }
+    // public void setBtnMedium(JButton btnMedium) {
+    //     this.btnMedium = btnMedium;
+    // }
 
-    public void setBtnHeavy(JButton btnHeavy) {
-        this.btnHeavy = btnHeavy;
-    }
+    // public void setBtnHeavy(JButton btnHeavy) {
+    //     this.btnHeavy = btnHeavy;
+    // }
 
-    public void setBtnNoArmor(JButton btnNoArmor) {
-        this.btnNoArmor = btnNoArmor;
-    }
+    // public void setBtnNoArmor(JButton btnNoArmor) {
+    //     this.btnNoArmor = btnNoArmor;
+    // }
 
-    public void setBtnDagger(JButton btnDagger) {
-        this.btnDagger = btnDagger;
-    }
+    // public void setBtnDagger(JButton btnDagger) {
+    //     this.btnDagger = btnDagger;
+    // }
 
-    public void setBtnSword(JButton btnSword) {
-        this.btnSword = btnSword;
-    }
+    // public void setBtnSword(JButton btnSword) {
+    //     this.btnSword = btnSword;
+    // }
 
-    public void setBtnAxe(JButton btnAxe) {
-        this.btnAxe = btnAxe;
-    }
+    // public void setBtnAxe(JButton btnAxe) {
+    //     this.btnAxe = btnAxe;
+    // }
 
-    public void setBtnNoWeapon(JButton btnNoWeapon) {
-        this.btnNoWeapon = btnNoWeapon;
-    }
+    // public void setBtnNoWeapon(JButton btnNoWeapon) {
+    //     this.btnNoWeapon = btnNoWeapon;
+    // }
 
-    public void setBtnThief(JButton btnThief) {
-        this.btnThief = btnThief;
-    }
+    // public void setBtnThief(JButton btnThief) {
+    //     this.btnThief = btnThief;
+    // }
 
-    public void setBtnViking(JButton btnViking) {
-        this.btnViking = btnViking;
-    }
+    // public void setBtnViking(JButton btnViking) {
+    //     this.btnViking = btnViking;
+    // }
 
-    public void setBtnMinotaur(JButton btnMinotaur) {
-        this.btnMinotaur = btnMinotaur;
-    }
+    // public void setBtnMinotaur(JButton btnMinotaur) {
+    //     this.btnMinotaur = btnMinotaur;
+    // }
 
-    public void setBtnArena(JButton btnArena) {
-        this.btnArena = btnArena;
-    }
+    // public void setBtnArena(JButton btnArena) {
+    //     this.btnArena = btnArena;
+    // }
 
-    public void setBtnSwamp(JButton btnSwamp) {
-        this.btnSwamp = btnSwamp;
-    }
+    // public void setBtnSwamp(JButton btnSwamp) {
+    //     this.btnSwamp = btnSwamp;
+    // }
 
-    public void setBtnColosseum(JButton btnColosseum) {
-        this.btnColosseum = btnColosseum;
-    }
+    // public void setBtnColosseum(JButton btnColosseum) {
+    //     this.btnColosseum = btnColosseum;
+    // }
 
-    public void setBtnAttack(JButton btnAttack) {
-        this.btnAttack = btnAttack;
-    }
+    // public void setBtnAttack(JButton btnAttack) {
+    //     this.btnAttack = btnAttack;
+    // }
 
-    public void setBtnDefend(JButton btnDefend) {
-        this.btnDefend = btnDefend;
-    }
+    // public void setBtnDefend(JButton btnDefend) {
+    //     this.btnDefend = btnDefend;
+    // }
     
-    public void setBtnCharge(JButton btnCharge) {
-        this.btnCharge = btnCharge;
-    }
+    // public void setBtnCharge(JButton btnCharge) {
+    //     this.btnCharge = btnCharge;
+    // }
 
-    public void setCurrentTurn(String currentTurn) {
-        this.currentTurn = currentTurn;
-    }
+    // public void setCurrentTurn(String currentTurn) {
+    //     this.currentTurn = currentTurn;
+    // }
 
-    public void setNameField(JTextField nameField) {
-        this.nameField = nameField;
-    }
+    // public void setNameField(JTextField nameField) {
+    //     this.nameField = nameField;
+    // }
 
-    /** 
-     * Sets the flag indicating if the current attack of the player is charged.
-     * 
-     * @param isAtkCharged the flag to indicate if the current attack is charged
-     */
-    public void setIsAtkCharged(boolean isAtkCharged) {
-        this.isAtkCharged = isAtkCharged;
-    }
+    // /** 
+    //  * Sets the flag indicating if the current attack of the player is charged.
+    //  * 
+    //  * @param isAtkCharged the flag to indicate if the current attack is charged
+    //  */
+    // public void setIsAtkCharged(boolean isAtkCharged) {
+    //     this.isAtkCharged = isAtkCharged;
+    // }
 
     public void setOppFileName(String oppFileName) {
         this.oppFileName = oppFileName;
