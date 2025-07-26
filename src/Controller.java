@@ -80,20 +80,20 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "weaponPanel");
             System.out.println("[LOG] Switched to weapon selection panel");
         }
-        else if(e.getSource() == gui.getBtnDagger() ||
-                e.getSource() == gui.getBtnSword() ||
-                e.getSource() == gui.getBtnAxe() ||
-                e.getSource() == gui.getBtnNoWeapon()) {
+        else if(e.getSource() == gui.getWeaponPanel().getBtnDagger() ||
+                e.getSource() == gui.getWeaponPanel().getBtnSword() ||
+                e.getSource() == gui.getWeaponPanel().getBtnAxe() ||
+                e.getSource() == gui.getWeaponPanel().getBtnNoWeapon()) {
 
             Weapon weapon = null;
             
-            if(e.getSource() == gui.getBtnDagger())
+            if(e.getSource() == gui.getWeaponPanel().getBtnDagger())
                 weapon = new Dagger();
-            else if(e.getSource() == gui.getBtnSword())
+            else if(e.getSource() == gui.getWeaponPanel().getBtnSword())
                 weapon = new Sword();
-            else if(e.getSource() == gui.getBtnAxe())
+            else if(e.getSource() == gui.getWeaponPanel().getBtnAxe())
                 weapon = new BattleAxe();
-            else if(e.getSource() == gui.getBtnNoWeapon())
+            else if(e.getSource() == gui.getWeaponPanel().getBtnNoWeapon())
                 weapon = new Weapon("None", 0, 0);
             
             player.setWeapon(weapon);
