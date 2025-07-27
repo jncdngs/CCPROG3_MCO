@@ -16,15 +16,6 @@ public class GUI extends JFrame {
     private EnvPanel envPanel;
     private GamePanel gamePanel;
     private WinPanel winPanel;
-
-    // private JPanel startPanel;
-    // private JPanel namePanel;
-    // private JPanel armorPanel;
-    // private JPanel weaponPanel;
-    // private JPanel oppPanel;
-    // private JPanel envPanel;
-    // private JPanel gamePanel;
-    // private JPanel winPanel;
     
     private ImageIcon icon;
     
