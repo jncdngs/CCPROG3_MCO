@@ -1,8 +1,8 @@
 /**
- * Character controlled by the opponent.
+ * Thief opponent type.
  * <p>
- * Stores the opponent's name, armor, weapon, and stats. 
- * Handles the actions made by the opponent and adjustments to the stats
+ * Extends the Opponent class and overrides the think() method based on 
+ * predetermined sequence
  * 
  * @author Jon Chester Donguines
  */
@@ -21,6 +21,8 @@ public class Thief extends Opponent {
      * <p>
      * Checks the current move number and returns the corresponding action 
      * based on a predetermined sequence.
+     * <p>
+     * Thief attacks continuously.
      * 
      * @param moveCounter   the current move number of the game
      * @return              corresponding number for the action:
