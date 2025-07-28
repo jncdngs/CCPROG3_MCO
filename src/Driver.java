@@ -21,7 +21,7 @@ public class Driver {
     /**
      * Main method for the game.
      * <p>
-     * Displays the main panel when initializing GUI object.
+     * Instantiates a GUI object and creates a Controller using the GUI object.
      */
     public static void main(String[] args) {
         
