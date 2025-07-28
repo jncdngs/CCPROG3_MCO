@@ -1,8 +1,8 @@
 /**
- * Character controlled by the player.
+ * Character class for creating player and opponent objects.
  * <p>
  * Stores the character's name, armor, weapon, and stats. 
- * Handles the actions made by the player and adjustments to the stats
+ * Handles the actions made by the character and adjustments to the stats
  * 
  * @author Jon Chester Donguines
  */
@@ -20,13 +20,13 @@ public abstract class Character {
     protected int prevAction = 0;
 
     /**
-     * Constructs a character for the player with given base stats.
+     * Constructs a character with given base stats.
      * 
-     * @param name  the name of the player
-     * @param hp    the base hit points of the player
-     * @param atk   the base attack of the player
-     * @param def   the base defense of the player
-     * @param spd   the base speed of the player
+     * @param name  the name of the character
+     * @param hp    the base hit points of the character
+     * @param atk   the base attack of the character
+     * @param def   the base defense of the character
+     * @param spd   the base speed of the character
      */
     public Character(String name, int hp, int atk, int def, int spd) {
         this.name = name;
@@ -37,7 +37,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the name of the player.
+     * Returns the name of the character.
      * 
      * @return the name
      */
@@ -46,7 +46,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the current hit points of the player.
+     * Returns the current hit points of the character.
      * 
      * @return the current HP
      */
@@ -55,7 +55,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the current attack points of the player.
+     * Returns the current attack points of the character.
      * 
      * @return the current attack
      */
@@ -64,7 +64,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the current defense points of the player.
+     * Returns the current defense points of the character.
      * 
      * @return the current defense
      */
@@ -73,7 +73,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the current speed points of the player.
+     * Returns the current speed points of the character.
      * 
      * @return the current speed
      */
@@ -82,7 +82,7 @@ public abstract class Character {
     }
 
     /**
-     * Returns the current attack multiplier of the player.
+     * Returns the current attack multiplier of the character.
      * 
      * @return the current attack multiplier
      */
@@ -91,7 +91,7 @@ public abstract class Character {
     }
 
     /** 
-     * Checks if the current attack of the player is charged.
+     * Checks if the current attack of the character is charged.
      * 
      * @return true if the current attack is charged,
      *         false if the current attack is not charged
@@ -101,7 +101,7 @@ public abstract class Character {
     }
 
     /** 
-     * Checks if the next attack of the player is charged.
+     * Checks if the next attack of the character is charged.
      * 
      * @return true if the next attack is charged,
      *         false if the next attack is not charged
@@ -122,7 +122,7 @@ public abstract class Character {
 
 
     /** 
-     * Sets the current attack points of the player.
+     * Sets the current attack points of the character.
      * 
      * @param atk the attack points to be set
      */
@@ -131,7 +131,7 @@ public abstract class Character {
     }
 
     /** 
-     * Sets the current attack multiplier of the player.
+     * Sets the current attack multiplier of the character.
      * 
      * @param atkMult the multiplier to be applied to the current attack points
      */
@@ -140,7 +140,7 @@ public abstract class Character {
     }
 
     /** 
-     * Sets the flag indicating if the current attack of the player is charged.
+     * Sets the flag indicating if the current attack of the character is charged.
      * 
      * @param isAtkCharged the flag to indicate if the current attack is charged
      */
@@ -149,7 +149,7 @@ public abstract class Character {
     }
 
     /** 
-     * Sets the flag indicating if the next attack of the player is charged.
+     * Sets the flag indicating if the next attack of the character is charged.
      * 
      * @param isNextCharged the flag to indicate if the next attack if charged
      */
@@ -158,7 +158,7 @@ public abstract class Character {
     }
 
     /** 
-     * Sets the corresponding number for the previously chosen action by the player:
+     * Sets the corresponding number for the previously chosen action by the character:
      * 1 for Attack, 2 for Defend, 3 for Charge
      * 
      * @param prevAction the previously chosen action
@@ -170,7 +170,7 @@ public abstract class Character {
 
 
     /** 
-     * Deducts hit points from the player.
+     * Deducts hit points from the character.
      * 
      * @param hp the number of hit points to be deducted
      */
@@ -182,7 +182,7 @@ public abstract class Character {
     }
 
     /** 
-     * Adds attack points to the player.
+     * Adds attack points to the character.
      * 
      * @param atk the number of attack points to be added
      */
@@ -191,7 +191,7 @@ public abstract class Character {
     }
 
     /** 
-     * Deducts attack points from the player.
+     * Deducts attack points from the character.
      * 
      * @param atk the number of attack points to be deducted
      */
@@ -203,7 +203,7 @@ public abstract class Character {
     }
 
     /** 
-     * Adds defense points to the player.
+     * Adds defense points to the character.
      * 
      * @param def the number of defense points to be added
      */
@@ -212,7 +212,7 @@ public abstract class Character {
     }
 
     /** 
-     * Deducts defense points from the player.
+     * Deducts defense points from the character.
      * 
      * @param def the number of defense points to be deducted
      */
@@ -224,7 +224,7 @@ public abstract class Character {
     }
     
     /** 
-     * Adds speed points to the player.
+     * Adds speed points to the character.
      * 
      * @param spd the number of speed points to be added
      */
@@ -233,7 +233,7 @@ public abstract class Character {
     }
 
     /** 
-     * Deducts speed points from the player.
+     * Deducts speed points from the character.
      * 
      * @param spd the number of speed points to be deducted
      */
@@ -245,7 +245,7 @@ public abstract class Character {
     }
 
     /** 
-     * Resets the attack multiplier of the player to 1.
+     * Resets the attack multiplier of the character to 1.
      */
     public void resetAtkMult() {
         this.atkMult = 1.0;
@@ -254,7 +254,7 @@ public abstract class Character {
 
 
     /** 
-     * Charge the player's next attack.
+     * Charge the character's next attack.
      * <p>
      * Checks first if the current attack is charged. If not, the attack points 
      * are multiplied by 3 and the next attack charged flag is set to true.
@@ -271,10 +271,7 @@ public abstract class Character {
 
 
     /**
-     * Displays the current player stats.
-     * <p>
-     * Displays the player's name, armor name, weapon name, hit points, attack, 
-     * defense, and speed.
+     * Displays the current character stats.
      */
     public abstract void displayStats();
 

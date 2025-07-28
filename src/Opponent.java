@@ -1,7 +1,7 @@
 /**
  * Character controlled by the opponent.
  * <p>
- * Stores the opponent's name, armor, weapon, and stats. 
+ * Stores the opponent's name, and stats. 
  * Handles the actions made by the opponent and adjustments to the stats
  * 
  * @author Jon Chester Donguines

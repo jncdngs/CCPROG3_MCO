@@ -42,10 +42,22 @@ public class Player extends Character {
         return this.weapon;
     }
 
+    /** 
+     * Checks if the current defend of the player is an evade.
+     * 
+     * @return true if the current defend is evade,
+     *         false if the current defend is not evade
+     */
     public boolean getIsDefEvade() {
         return this.isDefEvade;
     }
 
+    /** 
+     * Checks if the next defend of the player is not an evade.
+     * 
+     * @return true if the next defend is not evade,
+     *         false if the next defend is evade
+     */
     public boolean getIsNextNotEvade() {
         return this.isNextNotEvade;
     }
@@ -74,10 +86,20 @@ public class Player extends Character {
         loseSpd(weapon.getSpdPen());
     }
 
+    /** 
+     * Sets the flag indicating if the current defend of the player is an evade.
+     * 
+     * @param isDefEvade the flag to indicate if the current defend is evade
+     */
     public void setIsDefEvade(boolean isDefEvade) {
         this.isDefEvade = isDefEvade;
     }
 
+    /** 
+     * Sets the flag indicating if the next defend of the player is not an evade.
+     * 
+     * @param isNextNotEvade the flag to indicate if the next defend is not evade.
+     */
     public void setIsNextNotEvade(boolean isNextNotEvade) {
         this.isNextNotEvade = isNextNotEvade;
     }
@@ -90,7 +112,8 @@ public class Player extends Character {
      * The damage to be dealt is calculated by multiplying the current attack
      * points of the player with the attack multiplier (0.5 if the opponent 
      * defended, 1 otherwise) and subtracting the current defense points of the 
-     * opponent.
+     * opponent. If player has sword equipped, 10 attack points will be added 
+     * to damage dealt.
      * 
      * @param opp the opponent object to be attacked
      */
@@ -112,7 +135,8 @@ public class Player extends Character {
     }
 
     /** 
-     * Multiply opponent's attack by half.
+     * Multiply opponent's attack by half when defending normally. Multiply by zero
+     * when current defense is evade from dagger ability.
      * 
      * @param opp the opponent object to defend from
      */
