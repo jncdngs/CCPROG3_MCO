@@ -1,7 +1,7 @@
 /**
- * Sword weapon equipped by the player.
+ * Sword weapon type.
  * <p>
- * Stores the weapon's name, attack buff, and speed penalty. 
+ * Extends the Sword class and overrides isSword() to return true.
  * 
  * @author Jon Chester Donguines
  */
@@ -15,6 +15,11 @@ public class Sword extends Weapon {
         super("Sword", 30, 10);
     }
 
+    /**
+     * Returns true if the instance is of type Sword.
+     * 
+     * @return true
+     */
     public boolean isSword() {
         return true;
     }

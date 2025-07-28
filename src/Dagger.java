@@ -1,7 +1,7 @@
 /**
- * Dagger weapon equipped by the player.
+ * Dagger weapon type.
  * <p>
- * Stores the weapon's name, attack buff, and speed penalty. 
+ * Extends the Dagger class and overrides isDagger() to return true.
  * 
  * @author Jon Chester Donguines
  */
@@ -15,6 +15,11 @@ public class Dagger extends Weapon {
         super("Dagger", 20, 0);
     }
 
+    /**
+     * Returns true if the instance is of type Dagger.
+     * 
+     * @return true
+     */
     public boolean isDagger() {
         return true;
     }

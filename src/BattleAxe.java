@@ -1,7 +1,7 @@
 /**
- * Battle Axe weapon equipped by the player.
+ * Battle Axe weapon type.
  * <p>
- * Stores the weapon's name, attack buff, and speed penalty.
+ * Extends the Weapon class and overrides isBattleAxe() to return true.
  * 
  * @author Jon Chester Donguines
  */
@@ -15,6 +15,11 @@ public class BattleAxe extends Weapon {
         super("Battle Axe", 40, 20);
     }
 
+    /**
+     * Returns true if the instance is of type BattleAxe.
+     * 
+     * @return true
+     */
     public boolean isBattleAxe() {
         return true;
     }

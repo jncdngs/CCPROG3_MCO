@@ -26,14 +26,29 @@ public class Weapon {
         System.out.println("[LOG] Weapon \"" + this.name + "\" created");
     }
 
+    /**
+     * Returns true if the instance is of type Dagger.
+     * 
+     * @return false
+     */
     public boolean isDagger() {
         return false;
     }
 
+    /**
+     * Returns true if the instance is of type Sword.
+     * 
+     * @return false
+     */
     public boolean isSword() {
         return false;
     }
 
+    /**
+     * Returns true if the instance is of type BattleAxe.
+     * 
+     * @return false
+     */
     public boolean isBattleAxe() {
         return false;
     }
