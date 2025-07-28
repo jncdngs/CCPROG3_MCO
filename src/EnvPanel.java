@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Environment selection panel class.
+ * <p>
+ * Initializes and manages the environment selection panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class EnvPanel {
 
     public JPanel envPanel;
@@ -9,10 +16,19 @@ public class EnvPanel {
     private JButton btnSwamp;
     private JButton btnColosseum;
 
+    /**
+     * Constructs an EnvPanel instance.
+     * <p>
+     * Initializes a new JPanel for the environment selection screen.
+     */
     public EnvPanel() {
         this.envPanel = new JPanel();
     }
 
+    /**
+     * Sets the layout of the EnvPanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addEnvPanel() {
         envPanel.setLayout(new BorderLayout());
         
@@ -169,18 +185,38 @@ public class EnvPanel {
 
 
 
+    /**
+     * Returns the environment selection panel.
+     * 
+     * @return the environment panel
+     */
     public JPanel getEnvPanel() {
         return this.envPanel;
     }
 
+    /**
+     * Returns the Arena button.
+     * 
+     * @return the Arena button
+     */
     public JButton getBtnArena() {
         return this.btnArena;
     }
 
+    /**
+     * Returns the Swamp button.
+     * 
+     * @return the Swamp button
+     */
     public JButton getBtnSwamp() {
         return this.btnSwamp;
     }
 
+    /**
+     * Returns the Colosseum button.
+     * 
+     * @return the Colosseum button
+     */
     public JButton getBtnColosseum() {
         return this.btnColosseum;
     }   

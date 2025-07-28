@@ -1,14 +1,34 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Win panel class.
+ * <p>
+ * Initializes and manages the win panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class WinPanel {
 
     private JPanel winPanel;
     
+    /**
+     * Constructs a WinPanel instance.
+     * <p>
+     * Initializes a new JPanel for the armor selection screen.
+     */
     public WinPanel() {
         this.winPanel = new JPanel();
     }
 
+    /**
+     * Sets the layout of the WinPanel and adds all necessary elements in 
+     * corresponding subpanels. The method then adds it to the main panel and shows it.
+     * 
+     * @param gui           the GUI object containing the main panel
+     * @param winner        name of the winner
+     * @param moveCounter   number of turns the game took
+     */
     public void displayWinPanel(GUI gui, String winner, int moveCounter) {
         winPanel = new JPanel();
         winPanel.setLayout(new GridBagLayout());

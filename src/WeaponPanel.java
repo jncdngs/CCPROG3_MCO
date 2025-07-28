@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Weapon selection panel class.
+ * <p>
+ * Initializes and manages the weapon selection panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class WeaponPanel {
 
     private JPanel weaponPanel;
@@ -10,10 +17,19 @@ public class WeaponPanel {
     private JButton btnAxe;
     private JButton btnNoWeapon;
 
+    /**
+     * Constructs a WeaponPanel instance.
+     * <p>
+     * Initializes a new JPanel for the weapon selection screen.
+     */
     public WeaponPanel() {
         this.weaponPanel = new JPanel();
     }
 
+    /**
+     * Sets the layout of the WeaponPanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addWeaponPanel() {
         weaponPanel.setLayout(new BorderLayout());
         
@@ -196,22 +212,47 @@ public class WeaponPanel {
 
 
 
+    /**
+     * Returns the weapon selection panel.
+     * 
+     * @return the weapon panel
+     */
     public JPanel getWeaponPanel() {
         return this.weaponPanel;
     }
     
+    /**
+     * Returns the Dagger weapon button.
+     * 
+     * @return the Dagger button
+     */
     public JButton getBtnDagger() {
         return this.btnDagger;
     }
 
+    /**
+     * Returns the Sword weapon button.
+     * 
+     * @return the Sword button
+     */
     public JButton getBtnSword() {
         return this.btnSword;
     }
 
+    /**
+     * Returns the Battle Axe weapon button.
+     * 
+     * @return the Battle Axe button
+     */
     public JButton getBtnAxe() {
         return this.btnAxe;
     }
 
+    /**
+     * Returns the No Weapon button.
+     * 
+     * @return the No Weapon button
+     */
     public JButton getBtnNoWeapon() {
         return this.btnNoWeapon;
     }

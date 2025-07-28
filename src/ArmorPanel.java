@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Armor selection panel class.
+ * <p>
+ * Initializes and manages the armor selection panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class ArmorPanel {
 
     private JPanel armorPanel;
@@ -10,10 +17,19 @@ public class ArmorPanel {
     private JButton btnHeavy;
     private JButton btnNoArmor;
 
+    /**
+     * Constructs an ArmorPanel instance.
+     * <p>
+     * Initializes a new JPanel for the armor selection screen.
+     */
     public ArmorPanel() {
         this.armorPanel = new JPanel();
     }
 
+    /**
+     * Sets the layout of the ArmorPanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addArmorPanel() {
         armorPanel.setLayout(new BorderLayout());
         
@@ -181,22 +197,47 @@ public class ArmorPanel {
 
 
 
+    /**
+     * Returns the armor selection panel.
+     * 
+     * @return the armor panel
+     */
     public JPanel getArmorPanel() {
         return this.armorPanel;
     }
     
+    /**
+     * Returns the Light Armor button.
+     * 
+     * @return the Light button
+     */
     public JButton getBtnLight() {
         return this.btnLight;
     }
 
+    /**
+     * Returns the Medium Armor button.
+     * 
+     * @return the Medium button
+     */
     public JButton getBtnMedium() {
         return this.btnMedium;
     }
 
+    /**
+     * Returns the Heavy Armor button.
+     * 
+     * @return the Heavy button
+     */
     public JButton getBtnHeavy() {
         return this.btnHeavy;
     }
 
+    /**
+     * Returns the No Armor button.
+     * 
+     * @return the No Armor button
+     */
     public JButton getBtnNoArmor() {
         return this.btnNoArmor;
     }

@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Main game panel class.
+ * <p>
+ * Initializes, manages, and updates the main game panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class GamePanel extends JPanel {
 
     private JPanel panelButtons;
@@ -29,10 +36,21 @@ public class GamePanel extends JPanel {
     private String oppFileName;
     private String envFileName;
 
+    /**
+     * Constructs a GamePanel instance.
+     */
     public GamePanel() {
         
     }
 
+    /**
+     * Sets the layout of the GamePanel and adds all necessary elements in 
+     * corresponding subpanels.
+     * 
+     * @param gui           the GUI object containing the main panel
+     * @param player        the player object in the game
+     * @param opp           the opponent object in the game
+     */
     public void addGamePanel(GUI gui, Player player, Opponent opp) {
         gui.getGamePanel().setLayout(new BorderLayout());
 
@@ -258,6 +276,14 @@ public class GamePanel extends JPanel {
         System.out.println("[LOG] Game panel created");
     }
 
+    /**
+     * Updates the gameplay buttons.
+     * <p>
+     * Removes all buttons from the panel then adds the attack and defend buttons.
+     * Only adds charge button if the player's attack is not charged for the turn.
+     * 
+     * @param player the player object in the game
+     */
     public void updateButtons(Player player) {
         // Remove all action buttons
         panelButtons.removeAll();
@@ -274,6 +300,15 @@ public class GamePanel extends JPanel {
         panelButtons.repaint();
     }
 
+    /**
+     * Updates the stat displays of the player and opponent in game header. Also 
+     * updates the previous opponent action display.
+     * 
+     * @param player        the player object in the game
+     * @param opp           the opponent object in the game
+     * @param isGameOver    flag if the game is over
+     * @param prevOppAction name and previous action of the opponent
+     */
     public void updateStats(Player player, Opponent opp, boolean isGameOver, String prevOppAction) {
         // Update values of player stats
         playerArmorValue.setText(String.valueOf(player.getArmor().getName()));
@@ -297,32 +332,67 @@ public class GamePanel extends JPanel {
 
 
 
+    /**
+     * Returns the Attack button.
+     * 
+     * @return the Attack button
+     */
     public JButton getBtnAttack() {
         return this.btnAttack;
     }
     
+    /**
+     * Returns the Defend button.
+     * 
+     * @return the Defend button
+     */
     public JButton getBtnDefend() {
         return this.btnDefend;
     }
     
+    /**
+     * Returns the Charge button.
+     * 
+     * @return the Charge button
+     */
     public JButton getBtnCharge() {
         return this.btnCharge;
     }
 
+    /**
+     * Returns the Return to Main Menu button.
+     * 
+     * @return the Return to Main Menu button
+     */
     public JButton getBtnReturn() {
         return this.btnReturn;
     }
 
 
 
+    /**
+     * Sets the Return to Main Menu button.
+     * 
+     * @param btnReturn button to set
+     */
     public void setBtnReturn(JButton btnReturn) {
         this.btnReturn = btnReturn;
     }
 
+    /**
+     * Sets the filename of the opponent sprite.
+     * 
+     * @param oppFileName filename of the sprite
+     */
     public void setOppFileName(String oppFileName) {
         this.oppFileName = oppFileName;
     }
 
+    /**
+     * Sets the filename of the environment background.
+     * 
+     * @param envFileName filename of the background
+     */
     public void setEnvironment(String envFileName) {
         this.envFileName = envFileName;
     }

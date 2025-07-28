@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Opponent selection panel class.
+ * <p>
+ * Initializes and manages the opponent selection panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class OppPanel {
 
     public JPanel oppPanel;
@@ -9,10 +16,19 @@ public class OppPanel {
     private JButton btnViking;
     private JButton btnMinotaur;
 
-    public OppPanel() {
+     /**
+     * Constructs an OppPanel instance.
+     * <p>
+     * Initializes a new JPanel for the opponent selection screen.
+     */
+   public OppPanel() {
         this.oppPanel = new JPanel();
     }
 
+    /**
+     * Sets the layout of the OppPanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addOppPanel() {
         oppPanel.setLayout(new BorderLayout());
         
@@ -196,18 +212,38 @@ public class OppPanel {
 
 
 
+    /**
+     * Returns the opponent selection panel.
+     * 
+     * @return the opponent panel
+     */
     public JPanel getOppPanel() {
         return this.oppPanel;
     }
 
+    /**
+     * Returns the Thief button.
+     * 
+     * @return the Thief button
+     */
     public JButton getBtnThief() {
         return this.btnThief;
     }
 
+    /**
+     * Returns the Viking button.
+     * 
+     * @return the Viking button
+     */
     public JButton getBtnViking() {
         return this.btnViking;
     }
 
+    /**
+     * Returns the Minotaur button.
+     * 
+     * @return the Minotaur button
+     */
     public JButton getBtnMinotaur() {
         return this.btnMinotaur;
     }

@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Start menu panel class.
+ * <p>
+ * Initializes and manages the Start menu panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class StartPanel {
 
     private JPanel startPanel;
@@ -13,11 +20,21 @@ public class StartPanel {
 
     private ImageIcon startImg;
 
+    /**
+     * Constructs a StartPanel instance.
+     * <p>
+     * Initializes a new JPanel for the start menu screen and sets the menu 
+     * background image.
+     */
     public StartPanel() {
         this.startPanel = new JPanel();
         startImg = new ImageIcon("Background.png");
     }
 
+    /**
+     * Sets the layout of the StartPanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addStartPanel() {
         startPanel.setLayout(new BorderLayout());
         
@@ -57,14 +74,29 @@ public class StartPanel {
 
 
 
+    /**
+     * Returns the start menu panel.
+     * 
+     * @return the start panel
+     */
     public JPanel getStartPanel() {
         return this.startPanel;
     }
     
+    /**
+     * Returns the Play button.
+     * 
+     * @return the Play button
+     */
     public JButton getBtnPlay() {
         return this.btnPlay;
     }
 
+    /**
+     * Returns the Quit button.
+     * 
+     * @return the Quit button
+     */
     public JButton getBtnQuit() {
         return this.btnQuit;
     }

@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Name creation panel class.
+ * <p>
+ * Initializes and manages the name creation panel and elements.
+ * 
+ * @author Jon Chester Donguines
+ */
 public class NamePanel {
 
     private JPanel namePanel;
@@ -14,11 +21,21 @@ public class NamePanel {
 
     private ImageIcon startImg;
 
+    /**
+     * Constructs a NamePanel instance.
+     * <p>
+     * Initializes a new JPanel for the name creation screen and sets the menu 
+     * background image.
+     */
     public NamePanel() {
         this.namePanel = new JPanel();
         startImg = new ImageIcon("Background.png");
     }
 
+    /**
+     * Sets the layout of the NamePanel and adds all necessary elements in 
+     * corresponding subpanels.
+     */
     public void addNamePanel() {
         namePanel.setLayout(new BorderLayout());
         
@@ -59,14 +76,29 @@ public class NamePanel {
 
 
 
+    /**
+     * Returns the name creation panel.
+     * 
+     * @return the name panel
+     */
     public JPanel getNamePanel() {
         return this.namePanel;
     }
     
+    /**
+     * Returns the Name button.
+     * 
+     * @return the Name button
+     */
     public JButton getBtnName() {
         return this.btnName;
     }
 
+    /**
+     * Returns the name input text field.
+     * 
+     * @return the name text field
+     */
     public JTextField getNameField() {
         return this.nameField;
     }
