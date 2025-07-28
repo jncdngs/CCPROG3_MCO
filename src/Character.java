@@ -158,10 +158,10 @@ public abstract class Character {
     }
 
     /** 
-     * Sets the corresponding number for the previously chosen action by the character:
-     * 1 for Attack, 2 for Defend, 3 for Charge
+     * Sets the corresponding number for the previously chosen action by the character.
      * 
-     * @param prevAction the previously chosen action
+     * @param prevAction the previously chosen action.
+     *                   1 for Attack, 2 for Defend, 3 for Charge
      */
     public void setPrevAction(int prevAction) {
         this.prevAction = prevAction;
