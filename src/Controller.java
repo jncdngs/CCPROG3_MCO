@@ -21,18 +21,41 @@ public class Controller implements ActionListener {
     private boolean isPlayersTurn;
     private String winner;
 
+    /**
+     * Constructs a Controller instance.
+     * <p>
+     * Sets the GUI object to be used and sets ActionListener to the buttons in the GUI.
+     */
     public Controller(GUI gui) {
         this.gui = gui;
         gui.setActionListeners(this);
     }
 
+    /**
+     * Handles all events triggered in the GUI.
+     * <p>
+     * This method is responsible for:
+     * <ul>
+     *     <li>Navigating between different setup panels (e.g., name, armor, weapon)</li>
+     *     <li>Creating the player, opponent, and environment objects based on user choices</li>
+     *     <li>Updating the main game panel and initiating the game loop</li>
+     *     <li>Handling gameplay actions like attack, defend, and charge</li>
+     *     <li>Resetting the GUI to the start screen on game end</li>
+     * </ul>
+     * 
+     * Transitions between panels are managed using the CardLayout show() method
+     *
+     * @param e the ActionEvent triggered by a GUI element
+     */
     public void actionPerformed(ActionEvent e) {
+        // Play button is pressed from the start panel
         if(e.getSource() == gui.getStartPanel().getBtnPlay()) {
             System.out.println("[LOG] Play button pressed");
 
             gui.getMainLayout().show(gui.getMainPanel(), "namePanel");
             System.out.println("[LOG] Switched to name selection panel");
         }
+        // Quit button is pressed from the start panel
         else if(e.getSource() == gui.getStartPanel().getBtnQuit()) {
             System.out.println("[LOG] Quit button pressed");
 
@@ -47,6 +70,7 @@ public class Controller implements ActionListener {
                 System.exit(0);
             }
         }
+        // Enter button is pressed from name panel
         else if(e.getSource() == gui.getNamePanel().getBtnName()) {
             System.out.println("[LOG] Enter button pressed");
 
@@ -58,6 +82,7 @@ public class Controller implements ActionListener {
             }
 
         }
+        // A button is pressed from armor selection panel
         else if(e.getSource() == gui.getArmorPanel().getBtnLight() ||
                 e.getSource() == gui.getArmorPanel().getBtnMedium() ||
                 e.getSource() == gui.getArmorPanel().getBtnHeavy() ||
@@ -80,6 +105,7 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "weaponPanel");
             System.out.println("[LOG] Switched to weapon selection panel");
         }
+        // A button is pressed from weapon selection panel
         else if(e.getSource() == gui.getWeaponPanel().getBtnDagger() ||
                 e.getSource() == gui.getWeaponPanel().getBtnSword() ||
                 e.getSource() == gui.getWeaponPanel().getBtnAxe() ||
@@ -102,6 +128,7 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "oppPanel");
             System.out.println("[LOG] Switched to opponent selection panel");
         }
+        // A button is pressed from opponent selection panel
         else if(e.getSource() == gui.getOppPanel().getBtnThief() ||
                 e.getSource() == gui.getOppPanel().getBtnViking() ||
                 e.getSource() == gui.getOppPanel().getBtnMinotaur()) {
@@ -120,6 +147,7 @@ public class Controller implements ActionListener {
             gui.getMainLayout().show(gui.getMainPanel(), "envPanel");
             System.out.println("[LOG] Switched to environment selection panel");
         }
+        // A button is pressed from environment selection panel
         else if(e.getSource() == gui.getEnvPanel().getBtnArena() ||
                 e.getSource() == gui.getEnvPanel().getBtnSwamp() ||
                 e.getSource() == gui.getEnvPanel().getBtnColosseum()) {
@@ -155,6 +183,7 @@ public class Controller implements ActionListener {
             gui.revalidate();
             gui.repaint();
         }
+        // A button is pressed from main game panel
         else if(e.getSource() == gui.getGamePanel().getBtnAttack() ||
                 e.getSource() == gui.getGamePanel().getBtnDefend() ||
                 e.getSource() == gui.getGamePanel().getBtnCharge()) {
@@ -176,6 +205,7 @@ public class Controller implements ActionListener {
                 gui.repaint();
             }
         }
+        // Return to main menu button is pressed from win panel
         else if(e.getSource() == gui.getGamePanel().getBtnReturn()) {
             // Remove the old frame
             gui.dispose();
@@ -225,6 +255,12 @@ public class Controller implements ActionListener {
         System.out.println("=========================================\n");
     }
 
+    /**
+     * Retrieves the previous action executed by the opponent and appends it to 
+     * its name.
+     * 
+     * @return name of the opponent and the action it previously executed
+     */
     public String getPrevOppAction() {
         String prevAction;
         String[] action = new String[] {"attacked", "defended", "charged"};
@@ -266,17 +302,21 @@ public class Controller implements ActionListener {
         opp.loseDef(env.getOppDef());
     }
 
-    /** 
-     * Starts the main game loop.
+    /**
+     * Executes a single turn in the game loop based on the player's chosen action.
      * <p>
-     * The game starts by comparing the speeds of the player and the opponent. 
-     * Afterwards, it asks them which action to execute in order. Then the game 
-     * checks if someone chose to defend. If so, the defender will have action 
-     * execution priority. If someone chose charge, their next attack will be 
-     * flagged as charged. If someone currently has a charged attack, the flag 
-     * will be set to uncharged for the next turn. The game then checks if the 
-     * game is over. If so, check for the winner. If not, apply the environmental 
-     * effects and increment move counter by 1. Repeat.
+     * This method handles:
+     * <ul>
+     *   <li>Determining turn order based on player and opponent speed (overriden when defending).</li>
+     *   <li>Executing both player and opponent actions in the correct order.</li>
+     *   <li>Applying temporary effects such as charged attacks or evade defenses.</li>
+     *   <li>Resetting temporary flags and updating character stats.</li>
+     *   <li>Checking if the game has ended, determining a winner, and updating GUI accordingly.</li>
+     *   <li>If the game continues, applying environmental effects and incrementing the turn counter.</li>
+     * </ul>
+     *
+     * @param playerAction the action selected by the player. 
+     *                     1 for Attack, 2 for Defend, 3 for Charge
      */
     public void nextTurn(int playerAction) {
         
