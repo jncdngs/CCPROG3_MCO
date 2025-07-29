@@ -17,7 +17,7 @@ public class Thief extends Opponent {
     }
     
     /**
-     * Determines the action of the opponent (Faux-AI).
+     * Determines the action of the Thief (Faux-AI).
      * <p>
      * Checks the current move number and returns the corresponding action 
      * based on a predetermined sequence.
