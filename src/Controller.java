@@ -328,7 +328,6 @@ public class Controller implements ActionListener {
         isPlayersTurn = compareSpeed(player, opp);
         
         // Determine opponent's action
-        // this.playerAction = playerAction;
         oppAction = opp.think(moveCounter);
 
         // Check if someone defended
@@ -399,9 +398,9 @@ public class Controller implements ActionListener {
         // If player selected charge, set flag to true
         if(player.getIsAtkCharged()) {
             player.setAtk(player.getAtk() / 3);
-            // gui.setIsAtkCharged(false);
             player.setIsAtkCharged(false);
 
+            // Remove atk and spd buff from Battle Axe after charging
             if(player.getWeapon().isBattleAxe()) {
                 player.loseSpd(5);
                 player.loseAtk(5);
@@ -411,9 +410,9 @@ public class Controller implements ActionListener {
         }
         if(player.getIsNextCharged()) {
             player.setIsAtkCharged(true);
-            // gui.setIsAtkCharged(true);
             player.setIsNextCharged(false);
             
+            // Add temporary 5 atk and 5 spd to player when charging with Battle Axe
             if(player.getWeapon().isBattleAxe()) {
                 player.gainSpd(5);
                 player.gainAtk(5);
